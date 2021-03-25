@@ -25,7 +25,7 @@
 
 const char* positionTextureColor_frag = R"(
 #ifdef GL_ES
-precision lowp float;
+precision highp float;
 #endif
 
 varying vec4 v_fragmentColor;
