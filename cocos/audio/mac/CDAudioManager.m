@@ -324,10 +324,16 @@ static BOOL configured = FALSE;
 }    
 
 -(BOOL) isOtherAudioPlaying {
+    // AudioSessionGetProperty removed from macOS 11
+#if __MAC_OS_X_VERSION_MAX_ALLOWED > __MAC_10_16
+    return false;
+#else
+
     UInt32 isPlaying = 0;
     UInt32 varSize = sizeof(isPlaying);
     AudioSessionGetProperty (kAudioSessionProperty_OtherAudioIsPlaying, &varSize, &isPlaying);
     return (isPlaying != 0);
+#endif
 }
 
 -(void) setMode:(tAudioManagerMode) mode {
@@ -478,6 +484,9 @@ static BOOL configured = FALSE;
 
 #if TARGET_IPHONE_SIMULATOR
     //Calling audio route stuff on the simulator causes problems
+    return NO;
+#elif __MAC_OS_X_VERSION_MAX_ALLOWED > __MAC_10_16
+    // AudioSessionGetProperty was explicitly  in macOS 11
     return NO;
 #else    
     CFStringRef newAudioRoute;

@@ -40,10 +40,13 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/NSSound.h>
 
+#if __MAC_OS_X_VERSION_MAX_ALLOWED <= __MAC_10_16
 enum AudioSessionProperties {
 	kAudioSessionProperty_OtherAudioIsPlaying,
 	kAudioSessionProperty_AudioRoute	
 };
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif	
