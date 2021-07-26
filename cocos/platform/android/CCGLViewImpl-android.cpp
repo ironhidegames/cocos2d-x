@@ -38,7 +38,7 @@ PFNGLGENVERTEXARRAYSOESPROC glGenVertexArraysOESEXT = 0;
 PFNGLBINDVERTEXARRAYOESPROC glBindVertexArrayOESEXT = 0;
 PFNGLDELETEVERTEXARRAYSOESPROC glDeleteVertexArraysOESEXT = 0;
 
-#define DEFAULT_MARGIN_ANDROID				30.0f
+#define DEFAULT_MARGIN_ANDROID				22.0f
 #define WIDE_SCREEN_ASPECT_RATIO_ANDROID	2.0f
 
 void initExtensions() {
@@ -156,7 +156,8 @@ Rect GLViewImpl::getSafeAreaRect() const {
 
             // landscape: no changes with X-coords
         }
-    } else if (deviceAspectRatio >= WIDE_SCREEN_ASPECT_RATIO_ANDROID) {
+    }
+    else if (deviceAspectRatio >= WIDE_SCREEN_ASPECT_RATIO_ANDROID) {
         // almost all devices on the market have round corners if
         // deviceAspectRatio more than 2 (@see "android.max_aspect" parameter in AndroidManifest.xml)
         float bottomMarginIfPortrait = 0;
