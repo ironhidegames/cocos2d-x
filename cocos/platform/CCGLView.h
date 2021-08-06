@@ -29,7 +29,13 @@ THE SOFTWARE.
 
 #include "base/ccTypes.h"
 #include "base/CCEventTouch.h"
-
+#ifdef CC_PLATFORM_PC
+  #ifdef WINRT
+    #include "glfw3/include/win32/glfw3.h"
+  #else
+    #include "glfw3.h"
+  #endif
+#endif
 #include <vector>
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
@@ -194,7 +200,22 @@ public:
      * @return The zoom factor for frame.
      */
     virtual float getFrameZoomFactor() const { return 1.0; }
+#ifdef CC_PLATFORM_PC
+    virtual void setCursorImage(GLFWcursor* cursor) {}
+#endif
+    /**
+     * Sets the cursor for the window with custom image.
+     *
+     * @param filename A path to image file, e.g., "cursors/custom.png".
+     * @param hotspot Cursor hotspot, as a anchor point, default is top left (0, 1)
+     */
+    virtual void setCursor(const std::string& filename, Vec2 hotspot = Vec2::ANCHOR_TOP_LEFT) {}
     
+    /**
+     * Sets the cursor for the window back to default.
+     */
+    virtual void setDefaultCursor() {}
+
     /**
      * Hide or Show the mouse cursor if there is one.
      *
@@ -363,7 +384,7 @@ public:
 
     /** Set window icon (implemented for windows and linux).
      *
-     * @param filename A path to image file, e.g., "icons/cusom.png". 
+     * @param filename A path to image file, e.g., "icons/custom.png".
      */
     virtual void setIcon(const std::string& filename) const {};
 
@@ -420,6 +441,7 @@ public:
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     virtual id getCocoaWindow() = 0;
+    virtual id getNSGLContext() = 0; // stevetranby: added
 #endif /* (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) */
 
     /**

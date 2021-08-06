@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
  
  http://www.cocos2d-x.org
@@ -22,6 +22,17 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-static void making_cmake_happy(void)
-{
-}
+//
+// pch.h
+// Header for standard system include files.
+//
+
+#pragma once
+
+#include <collection.h>
+#include <ppltasks.h>
+
+#include "cocos2d.h"
+#include "cocos-ext.h"
+
+
