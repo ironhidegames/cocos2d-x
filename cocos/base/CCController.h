@@ -25,7 +25,7 @@
 
 #ifndef __cocos2d_libs__CCController__
 #define __cocos2d_libs__CCController__
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_LINUX || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 )
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_LINUX || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
 
 #include "platform/CCPlatformMacros.h"
 #include <string>
@@ -221,7 +221,7 @@ private:
     EventController *_keyEvent;
     EventController *_axisEvent;
 
-    #if ( CC_TARGET_PLATFORM == CC_PLATFORM_LINUX || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 )
+    #if ( CC_TARGET_PLATFORM == CC_PLATFORM_LINUX || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
     //FIXME: Once GLFW 3.3 is bundled with cocos2d-x, remove these unordered
     //maps. They won't be needed. We will only need to provide a mapping from
     //the GLFW gamepad key codes to the Controller::Key.
@@ -241,6 +241,7 @@ private:
 
     friend class ControllerImpl;
     friend class EventListenerController;
+    friend class ControllerConsole;
 };
 
 // end group

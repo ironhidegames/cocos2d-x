@@ -342,6 +342,7 @@
     <ClCompile Include="..\..\base\CCConfiguration.cpp" />
     <ClCompile Include="..\..\base\CCConsole.cpp" />
     <ClCompile Include="..\..\base\CCController-android.cpp" />
+    <ClCompile Include="..\..\base\CCController-linux-win32.cpp" />
     <ClCompile Include="..\..\base\CCController.cpp" />
     <ClCompile Include="..\..\base\CCData.cpp" />
     <ClCompile Include="..\..\base\CCDataVisitor.cpp" />
@@ -556,6 +557,7 @@
     <ClCompile Include="..\..\platform\CCImage.cpp" />
     <ClCompile Include="..\..\platform\CCSAXParser.cpp" />
     <ClCompile Include="..\..\platform\CCThread.cpp" />
+    <ClCompile Include="..\..\platform\console\CCController-console.cpp" />
     <ClCompile Include="..\..\platform\winrt\CCApplication.cpp" />
     <ClCompile Include="..\..\platform\winrt\CCCommon.cpp" />
     <ClCompile Include="..\..\platform\winrt\CCDevice.cpp" />
@@ -1238,6 +1240,7 @@
     <ClInclude Include="..\..\platform\CCSAXParser.h" />
     <ClInclude Include="..\..\platform\CCStdC.h" />
     <ClInclude Include="..\..\platform\CCThread.h" />
+    <ClInclude Include="..\..\platform\console\CCController-console.h" />
     <ClInclude Include="..\..\platform\winrt\CCApplication.h" />
     <ClInclude Include="..\..\platform\winrt\CCFileUtilsWinRT.h" />
     <ClInclude Include="..\..\platform\winrt\CCFreeTypeFont.h" />
@@ -1588,7 +1591,7 @@
       <PreprocessorDefinitions>_USRDLL;_LIB;COCOS2DXWIN32_EXPORTS;_USE3DDLL;_EXPORT_DLL_;_USRSTUDIODLL;_USREXDLL;_USEGUIDLL;CC_ENABLE_CHIPMUNK_INTEGRATION=1;_DEBUG;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>false</SDLCheck>
       <DisableSpecificWarnings>4458;4459;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\platform\winrt;$(EngineRoot)external\win10-specific\zlib\include;$(EngineRoot)external\protobuf-lite\src;$(EngineRoot)external\protobuf-lite\win32;$(EngineRoot)external\win10-specific\OggDecoder\include;$(EngineRoot)external\bullet\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\platform\winrt;$(EngineRoot)external\win10-specific\zlib\include;$(EngineRoot)external\protobuf-lite\src;$(EngineRoot)external\protobuf-lite\win32;$(EngineRoot)external\win10-specific\OggDecoder\include;$(EngineRoot)external\bullet\include;$(EngineRoot)external\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/Zm384 /bigobj %(AdditionalOptions)</AdditionalOptions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -1609,7 +1612,7 @@
       <PreprocessorDefinitions>_USRDLL;_LIB;COCOS2DXWIN32_EXPORTS;_USE3DDLL;_EXPORT_DLL_;_USRSTUDIODLL;_USREXDLL;_USEGUIDLL;CC_ENABLE_CHIPMUNK_INTEGRATION=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>false</SDLCheck>
       <DisableSpecificWarnings>4458;4459;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\platform\winrt;$(EngineRoot)external\win10-specific\zlib\include;$(EngineRoot)external\protobuf-lite\src;$(EngineRoot)external\protobuf-lite\win32;$(EngineRoot)external\win10-specific\OggDecoder\include;$(EngineRoot)external\bullet\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\platform\winrt;$(EngineRoot)external\win10-specific\zlib\include;$(EngineRoot)external\protobuf-lite\src;$(EngineRoot)external\protobuf-lite\win32;$(EngineRoot)external\win10-specific\OggDecoder\include;$(EngineRoot)external\bullet\include;$(EngineRoot)external\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/Zm384 /bigobj %(AdditionalOptions)</AdditionalOptions>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>

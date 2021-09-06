@@ -284,6 +284,9 @@
     <Filter Include="external\json\msinttypes">
       <UniqueIdentifier>{079e35c5-f476-44f8-a3f0-04cf205f7260}</UniqueIdentifier>
     </Filter>
+    <Filter Include="platform\console">
+      <UniqueIdentifier>{b6841515-3e36-44bf-bab5-0aff093066f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\cocos2d.cpp" />
@@ -2029,6 +2032,12 @@
     <ClCompile Include="..\..\renderer\ccGLStateCache.cpp" />
     <ClCompile Include="..\..\renderer\KRTextureDebug.cpp">
       <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\base\CCController-linux-win32.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\platform\console\CCController-console.cpp">
+      <Filter>platform\console</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -4056,6 +4065,9 @@
     <ClInclude Include="..\..\renderer\ccGLStateCache.h" />
     <ClInclude Include="..\..\renderer\KRTextureDebug.h">
       <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\platform\console\CCController-console.h">
+      <Filter>platform\console</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

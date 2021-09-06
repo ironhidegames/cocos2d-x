@@ -132,7 +132,7 @@ public:
      *
      * @return An autoreleased Sequence object.
      */
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+#if (false && CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)  //This is apparently not needed anymore
     // VS2013 does not support nullptr in variable args lists and variadic templates are also not supported
     typedef FiniteTimeAction* M;
     static Sequence* create(M m1, std::nullptr_t listEnd) { return variadicCreate(m1, NULL); }
