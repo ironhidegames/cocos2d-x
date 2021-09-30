@@ -30,11 +30,11 @@ THE SOFTWARE.
 #include "base/ccTypes.h"
 #include "base/CCEventTouch.h"
 #ifdef CC_PLATFORM_PC
-  #ifdef WINRT
-    #include "glfw3/include/win32/glfw3.h"
-  #else
-    #include "glfw3.h"
-  #endif
+#if CC_IS_CONSOLE
+#include "SDL2/include/SDL.h"
+#else
+#include "glfw3.h"
+#endif
 #endif
 #include <vector>
 
@@ -201,7 +201,11 @@ public:
      */
     virtual float getFrameZoomFactor() const { return 1.0; }
 #ifdef CC_PLATFORM_PC
+#if CC_IS_CONSOLE
+    virtual void setCursorImage(SDL_Cursor* cursor) {}
+#else
     virtual void setCursorImage(GLFWcursor* cursor) {}
+#endif
 #endif
     /**
      * Sets the cursor for the window with custom image.

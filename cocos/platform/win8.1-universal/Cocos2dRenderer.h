@@ -19,7 +19,7 @@
 #pragma once
 
 #include <agile.h>
-
+#include <cocos2d.h>
 
 
 

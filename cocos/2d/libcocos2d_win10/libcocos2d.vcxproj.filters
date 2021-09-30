@@ -287,6 +287,9 @@
     <Filter Include="platform\console">
       <UniqueIdentifier>{b6841515-3e36-44bf-bab5-0aff093066f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="platform\win8.1-universal">
+      <UniqueIdentifier>{636e5d8e-660e-480f-8675-0fdfc2e8d19f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\cocos2d.cpp" />

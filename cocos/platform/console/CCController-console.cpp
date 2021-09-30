@@ -242,6 +242,10 @@ void Controller::startDiscoveryController()
 
 }
 
+void Controller::stopDiscoveryController() {
+
+}
+
 ControllerConsole::ControllerConsole() {
 
 }

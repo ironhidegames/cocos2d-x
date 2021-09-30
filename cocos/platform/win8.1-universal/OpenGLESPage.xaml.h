@@ -26,6 +26,7 @@
 #include <mutex>
 
 #include "Cocos2dRenderer.h"
+#include <concrt.h>
 
 namespace CocosAppWinRT
 {
