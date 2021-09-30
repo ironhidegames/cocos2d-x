@@ -672,7 +672,7 @@ void ParallaxParticle::onEnter()
 
     auto move = MoveBy::create(4, Vec2(300,0));
     auto move_back = move->reverse();
-    auto seq = Sequence::create( move, move_back, nullptr);
+    auto seq = Sequence::create( move, move_back, NULL);
     p->runAction(RepeatForever::create(seq));
 }
 
@@ -1124,7 +1124,7 @@ void ParticleDemo::onEnter(void)
 
     auto move = MoveBy::create(4, Vec2(300,0) );
     auto move_back = move->reverse();
-    auto seq = Sequence::create( move, move_back, nullptr);
+    auto seq = Sequence::create( move, move_back, NULL);
     _background->runAction( RepeatForever::create(seq) );
 
 

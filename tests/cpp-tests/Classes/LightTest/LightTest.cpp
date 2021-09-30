@@ -195,7 +195,7 @@ void LightTest::addLights()
         auto tintto2 = TintTo::create(4, 0, 255, 0);
         auto tintto3 = TintTo::create(4, 255, 0, 0);
         auto tintto4 = TintTo::create(4, 255, 255, 255);
-        auto seq = Sequence::create(tintto1,tintto2, tintto3, tintto4, nullptr);
+        auto seq = Sequence::create(tintto1,tintto2, tintto3, tintto4, NULL);
         _ambientLight->runAction(RepeatForever::create(seq));
     }
 
@@ -204,7 +204,7 @@ void LightTest::addLights()
         auto tintto2 = TintTo::create(4, 0, 255, 0);
         auto tintto3 = TintTo::create(4, 0, 0, 255);
         auto tintto4 = TintTo::create(4, 255, 255, 255);
-        auto seq = Sequence::create(tintto1,tintto2, tintto3, tintto4, nullptr);
+        auto seq = Sequence::create(tintto1,tintto2, tintto3, tintto4, NULL);
         _directionalLight->runAction(RepeatForever::create(seq));
     }
 
@@ -213,7 +213,7 @@ void LightTest::addLights()
         auto tintto2 = TintTo::create(4, 0, 255, 0);
         auto tintto3 = TintTo::create(4, 0, 0, 255);
         auto tintto4 = TintTo::create(4, 255, 255, 255);
-        auto seq = Sequence::create(tintto2, tintto1, tintto3, tintto4, nullptr);
+        auto seq = Sequence::create(tintto2, tintto1, tintto3, tintto4, NULL);
         _pointLight->runAction(RepeatForever::create(seq));
     }
 
@@ -222,7 +222,7 @@ void LightTest::addLights()
         auto tintto2 = TintTo::create(4, 0, 255, 0);
         auto tintto3 = TintTo::create(4, 0, 0, 255);
         auto tintto4 = TintTo::create(4, 255, 255, 255);
-        auto seq = Sequence::create(tintto3, tintto2, tintto1, tintto4, nullptr);
+        auto seq = Sequence::create(tintto3, tintto2, tintto1, tintto4, NULL);
         _spotLight->runAction(RepeatForever::create(seq));
     }
 }

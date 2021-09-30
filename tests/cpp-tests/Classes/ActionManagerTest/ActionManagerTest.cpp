@@ -207,7 +207,7 @@ void StopActionTest::onEnter()
 
     auto pMove = MoveBy::create(2, Vec2(200, 0));
     auto pCallback = CallFunc::create(CC_CALLBACK_0(StopActionTest::stopAction,this));
-    auto pSequence = Sequence::create(pMove, pCallback, nullptr);
+    auto pSequence = Sequence::create(pMove, pCallback, NULL);
     pSequence->setTag(kTagSequence);
 
     auto pChild = Sprite::create(s_pathGrossini);

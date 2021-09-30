@@ -111,7 +111,7 @@ IntervalTest::IntervalTest()
     auto jump = JumpBy::create(3, Vec2(s.width-80,0), 50, 4);
     
     addChild(sprite);
-    sprite->runAction( RepeatForever::create(Sequence::create(jump, jump->reverse(), nullptr) ));
+    sprite->runAction( RepeatForever::create(Sequence::create(jump, jump->reverse(), NULL) ));
     // pause button
     auto item1 = MenuItemFont::create("Pause", [&](Ref* sender) {
 		if(Director::getInstance()->isPaused())

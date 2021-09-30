@@ -300,7 +300,7 @@ Sequence* Sequence::clone() const
     // no copy constructor
     if (_actions[0] && _actions[1])
     {
-        return Sequence::create(_actions[0]->clone(), _actions[1]->clone(), nullptr);
+        return Sequence::create(_actions[0]->clone(), _actions[1]->clone(), NULL);
     } else {
         return nullptr;
     }

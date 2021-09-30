@@ -329,8 +329,8 @@ void TextureMipMap::onEnter()
     auto scale2 = scale1->clone();
     auto sc_back2 = scale2->reverse();
 
-    img0->runAction(RepeatForever::create(Sequence::create(scale1, sc_back, nullptr)));
-    img1->runAction(RepeatForever::create(Sequence::create(scale2, sc_back2, nullptr)));
+    img0->runAction(RepeatForever::create(Sequence::create(scale1, sc_back, NULL)));
+    img1->runAction(RepeatForever::create(Sequence::create(scale2, sc_back2, NULL)));
     log("%s\n", Director::getInstance()->getTextureCache()->getCachedTextureInfo().c_str());
 }
 
@@ -379,8 +379,8 @@ void TexturePVRMipMap::onEnter()
         auto scale2 = scale1->clone();
         auto sc_back2 = scale2->reverse();
         
-        imgMipMap->runAction(RepeatForever::create(Sequence::create(scale1, sc_back, nullptr)));
-        img->runAction(RepeatForever::create(Sequence::create(scale2, sc_back2, nullptr)));
+        imgMipMap->runAction(RepeatForever::create(Sequence::create(scale1, sc_back, NULL)));
+        img->runAction(RepeatForever::create(Sequence::create(scale2, sc_back2, NULL)));
     }
     log("%s\n", Director::getInstance()->getTextureCache()->getCachedTextureInfo().c_str());
 }
@@ -422,8 +422,8 @@ void TexturePVRMipMap2::onEnter()
     auto scale2 = scale1->clone();
     auto sc_back2 = scale2->reverse();
     
-    imgMipMap->runAction(RepeatForever::create(Sequence::create(scale1, sc_back, nullptr)));
-    img->runAction(RepeatForever::create(Sequence::create(scale2, sc_back2, nullptr)));
+    imgMipMap->runAction(RepeatForever::create(Sequence::create(scale1, sc_back, NULL)));
+    img->runAction(RepeatForever::create(Sequence::create(scale2, sc_back2, NULL)));
     log("%s\n", Director::getInstance()->getTextureCache()->getCachedTextureInfo().c_str());
 }
 
@@ -1320,7 +1320,7 @@ void TextureAlias::onEnter()
     // scale them to show
     auto sc = ScaleBy::create(3, 8.0f);
     auto sc_back = sc->reverse();
-    auto scaleforever = RepeatForever::create(Sequence::create(sc, sc_back, nullptr));
+    auto scaleforever = RepeatForever::create(Sequence::create(sc, sc_back, NULL));
     auto scaleToo = scaleforever->clone();
 
     sprite2->runAction(scaleforever);
@@ -1415,7 +1415,7 @@ void TexturePixelFormat::onEnter()
 
     auto fadeout = FadeOut::create(2);
     auto fadein  = FadeIn::create(2);
-    auto seq = Sequence::create(DelayTime::create(2), fadeout, fadein, nullptr);
+    auto seq = Sequence::create(DelayTime::create(2), fadeout, fadein, NULL);
     auto seq_4ever = RepeatForever::create(seq);
     auto seq_4ever2 = seq_4ever->clone();
     auto seq_4ever3 = seq_4ever->clone();
@@ -1510,7 +1510,7 @@ void TextureAsync::onEnter()
 
     auto scale = ScaleBy::create(0.3f, 2);
     auto scale_back = scale->reverse();
-    auto seq = Sequence::create(scale, scale_back, nullptr);
+    auto seq = Sequence::create(scale, scale_back, NULL);
     label->runAction(RepeatForever::create(seq));
 
     scheduleOnce(CC_SCHEDULE_SELECTOR(TextureAsync::loadImages), 1.0f);
@@ -1599,7 +1599,7 @@ void TextureGlClamp::onEnter()
     sprite->runAction(rotate);
     auto scale = ScaleBy::create(2, 0.04f);
     auto scaleBack = scale->reverse();
-    auto seq = Sequence::create(scale, scaleBack, nullptr);
+    auto seq = Sequence::create(scale, scaleBack, NULL);
     sprite->runAction(seq);
 }
 
@@ -1636,7 +1636,7 @@ void TextureGlRepeat::onEnter()
     sprite->runAction(rotate);
     auto scale = ScaleBy::create(2, 0.04f);
     auto scaleBack = scale->reverse();
-    auto seq = Sequence::create(scale, scaleBack, nullptr);
+    auto seq = Sequence::create(scale, scaleBack, NULL);
     sprite->runAction(seq);
 }
 
@@ -2007,7 +2007,7 @@ void TexturePVRv3Premult::transformSprite(cocos2d::Sprite *sprite)
     auto fade = FadeOut::create(2);
     auto dl = DelayTime::create(2);
     auto fadein = fade->reverse();
-    auto seq = Sequence::create(fade, fadein, dl, nullptr);
+    auto seq = Sequence::create(fade, fadein, dl, NULL);
     auto repeat = RepeatForever::create(seq);
     sprite->runAction(repeat);
 }

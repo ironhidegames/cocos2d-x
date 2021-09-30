@@ -156,7 +156,7 @@ LabelFNTColorAndOpacity::LabelFNTColorAndOpacity()
     addChild(label1, 0, kTagBitmapAtlas1);
     auto fade = FadeOut::create(1.0f);
     auto fade_in = fade->reverse();
-    auto seq = Sequence::create(fade, fade_in, nullptr);
+    auto seq = Sequence::create(fade, fade_in, NULL);
     auto repeat = RepeatForever::create(seq);
     label1->runAction(repeat);
     
@@ -242,7 +242,7 @@ LabelFNTSpriteActions::LabelFNTSpriteActions()
     
     auto fade_out = FadeOut::create(1);
     auto fade_in = FadeIn::create(1);
-    auto seq = Sequence::create(fade_out, fade_in, nullptr);
+    auto seq = Sequence::create(fade_out, fade_in, NULL);
     auto fade_4ever = RepeatForever::create(seq);
     
     BChar->runAction(rot_4ever);
@@ -1476,7 +1476,7 @@ LabelCharMapColorTest::LabelCharMapColorTest()
     auto fade = FadeOut::create(1.0f);
     auto fade_in = fade->reverse();
     auto cb = CallFunc::create(CC_CALLBACK_0(LabelCharMapColorTest::actionFinishCallback, this));
-    auto seq = Sequence::create(fade, fade_in, cb, nullptr);
+    auto seq = Sequence::create(fade, fade_in, cb, NULL);
     auto repeat = RepeatForever::create( seq );
     label2->runAction( repeat );    
 
@@ -2474,7 +2474,7 @@ void LabelLayoutBaseTest::valueChanged(cocos2d::Ref *sender, cocos2d::extension:
 //    auto letterSprite = _label->getLetter(1);
 //    auto moveBy = ScaleBy::create(1.0,2.0);
 //    letterSprite->stopAllActions();
-//    letterSprite->runAction(Sequence::create(moveBy, moveBy->clone()->reverse(), nullptr ));
+//    letterSprite->runAction(Sequence::create(moveBy, moveBy->clone()->reverse(), NULL ));
 //    
 //    CCLOG("label line height = %f", _label->getLineHeight());
 }

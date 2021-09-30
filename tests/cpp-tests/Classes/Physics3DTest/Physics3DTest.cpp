@@ -329,7 +329,7 @@ bool Physics3DKinematicDemo::init()
         sprite->setScale(2.0f);
         sprite->setPosition3D(Vec3(-15.0f, 0.0f, 15.0f - 15.0f * i));
         auto moveby = MoveBy::create(2.0f + i, Vec3(30.0f, 0.0f, 0.0f));
-        sprite->runAction(RepeatForever::create(Sequence::create(moveby, moveby->reverse(), nullptr)));
+        sprite->runAction(RepeatForever::create(Sequence::create(moveby, moveby->reverse(), NULL)));
     }
 
     //create Dynamic
@@ -771,7 +771,7 @@ bool Physics3DColliderDemo::init()
     sprite->addComponent(component);
     sprite->setCameraMask((unsigned short)CameraFlag::USER1);
     auto moveby = MoveBy::create(5.0f, Vec3(0.0f, 0.0f, -60.0f));
-    sprite->runAction(RepeatForever::create(Sequence::create(moveby, moveby->reverse(), nullptr)));
+    sprite->runAction(RepeatForever::create(Sequence::create(moveby, moveby->reverse(), NULL)));
     this->addChild(sprite);
 
     {

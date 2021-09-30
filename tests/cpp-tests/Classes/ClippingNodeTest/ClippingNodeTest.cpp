@@ -138,7 +138,7 @@ Action* BasicTest::actionRotate()
 Action* BasicTest::actionScale()
 {
     auto scale = ScaleBy::create(1.33f, 1.5f);
-    return RepeatForever::create(Sequence::create(scale, scale->reverse(), nullptr));
+    return RepeatForever::create(Sequence::create(scale, scale->reverse(), NULL));
 }
 
 DrawNode* BasicTest::shape()

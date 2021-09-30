@@ -313,7 +313,7 @@ void TransitionRotoZoom:: onEnter()
             nullptr
         ),
         DelayTime::create(_duration/2),
-        nullptr
+        NULL
     );
 
     _outScene->runAction(rotozoom);
@@ -323,7 +323,7 @@ void TransitionRotoZoom:: onEnter()
         (
             rotozoom->reverse(),
             CallFunc::create(CC_CALLBACK_0(TransitionScene::finish,this)),
-            nullptr
+            NULL
         )
     );
 }
@@ -364,8 +364,8 @@ void TransitionJumpZoom::onEnter()
     ActionInterval *scaleIn = ScaleTo::create(_duration/4, 1.0f);
     ActionInterval *scaleOut = ScaleTo::create(_duration/4, 0.5f);
 
-    auto jumpZoomOut = Sequence::create(scaleOut, jump, nullptr);
-    auto jumpZoomIn = Sequence::create(jump, scaleIn, nullptr);
+    auto jumpZoomOut = Sequence::create(scaleOut, jump, NULL);
+    auto jumpZoomIn = Sequence::create(jump, scaleIn, NULL);
 
     ActionInterval *delay = DelayTime::create(_duration/2);
 

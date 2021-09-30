@@ -120,7 +120,7 @@ void NodeTest2::onEnter()
     auto a1 = RotateBy::create(2, 360);
     auto a2 = ScaleBy::create(2, 2);
     
-    auto action1 = RepeatForever::create( Sequence::create(a1, a2, a2->reverse(), nullptr) );
+    auto action1 = RepeatForever::create( Sequence::create(a1, a2, a2->reverse(), NULL) );
     auto action2 = RepeatForever::create( Sequence::create(
 																	a1->clone(),
 																	a2->clone(),
@@ -197,7 +197,7 @@ NodeTest5::NodeTest5()
 
     auto rot = RotateBy::create(2, 360);
     auto rot_back = rot->reverse();
-    auto forever = RepeatForever::create(Sequence::create(rot, rot_back, nullptr));
+    auto forever = RepeatForever::create(Sequence::create(rot, rot_back, NULL));
     auto forever2 = forever->clone();
     forever->setTag(101);
     forever2->setTag(102);
@@ -252,7 +252,7 @@ NodeTest6::NodeTest6()
         
     auto rot = RotateBy::create(2, 360);
     auto rot_back = rot->reverse();
-    auto forever1 = RepeatForever::create(Sequence::create(rot, rot_back, nullptr));
+    auto forever1 = RepeatForever::create(Sequence::create(rot, rot_back, NULL));
     auto forever11 = forever1->clone();
 
     auto forever2 = forever1->clone();
@@ -365,7 +365,7 @@ StressTest2::StressTest2()
     auto move = MoveBy::create(3, Vec2(350,0));
     auto move_ease_inout3 = EaseInOut::create(move->clone(), 2.0f);
     auto move_ease_inout_back3 = move_ease_inout3->reverse();
-    auto seq3 = Sequence::create( move_ease_inout3, move_ease_inout_back3, nullptr);
+    auto seq3 = Sequence::create( move_ease_inout3, move_ease_inout_back3, NULL);
     sp1->runAction( RepeatForever::create(seq3) );
     sublayer->addChild(sp1, 1);
 
@@ -495,7 +495,7 @@ NodeToWorld::NodeToWorld()
     
     auto move = MoveBy::create(3, Vec2(200,0));
     auto move_back = move->reverse();
-    auto seq = Sequence::create( move, move_back, nullptr);
+    auto seq = Sequence::create( move, move_back, NULL);
     auto fe2 = RepeatForever::create(seq);
     back->runAction(fe2);
 }
@@ -541,7 +541,7 @@ NodeToWorld3D::NodeToWorld3D()
 
     auto move = MoveBy::create(3, Vec2(200,0));
     auto move_back = move->reverse();
-    auto seq = Sequence::create( move, move_back, nullptr);
+    auto seq = Sequence::create( move, move_back, NULL);
     auto fe2 = RepeatForever::create(seq);
     back->runAction(fe2);
 
@@ -1477,7 +1477,7 @@ void Issue16100Test::onEnter()
     sprite->setPosition(-200,s.height/3);
     auto moveby = MoveBy::create(2, Vec2(400,0));
     auto movebyback = moveby->reverse();
-    auto seq = Sequence::create(moveby, movebyback, nullptr);
+    auto seq = Sequence::create(moveby, movebyback, NULL);
     auto forever = RepeatForever::create(seq);
 
     sprite->runAction(forever);
@@ -1492,7 +1492,7 @@ void Issue16100Test::onEnter()
     sister->setPosition(-200,s.height*2/3);
     auto moveby1 = MoveBy::create(2, Vec2(400,0));
     auto movebyback1 = moveby1->reverse();
-    auto seq1 = Sequence::create(moveby1, movebyback1, nullptr);
+    auto seq1 = Sequence::create(moveby1, movebyback1, NULL);
     auto forever1 = RepeatForever::create(seq1);
 
     sister->runAction(forever1);

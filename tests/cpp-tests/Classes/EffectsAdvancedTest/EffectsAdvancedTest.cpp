@@ -73,8 +73,8 @@ void Effect1::onEnter()
 //    auto orbit = OrbitCamera::create(5, 1, 2, 0, 180, 0, -90);
 //    auto orbit_back = orbit->reverse();
 
-    //_bgNode->runAction( RepeatForever::create( Sequence::create( orbit, orbit_back, nullptr)  ) );
-    _bgNode->runAction( Sequence::create(lens, delay, reuse, waves, nullptr) );
+    //_bgNode->runAction( RepeatForever::create( Sequence::create( orbit, orbit_back, NULL)  ) );
+    _bgNode->runAction( Sequence::create(lens, delay, reuse, waves, NULL) );
 }
 
 std::string Effect1::title() const
@@ -115,7 +115,7 @@ void Effect2::onEnter()
 //    id orbit_back = [orbit reverse];
 //
 //    [target runAction: [RepeatForever::create: [Sequence actions: orbit, orbit_back, nil]]];    
-    _bgNode->runAction(Sequence::create( shaky, delay, reuse, shuffle, delay->clone(), turnoff, turnon, nullptr) );
+    _bgNode->runAction(Sequence::create( shaky, delay, reuse, shuffle, delay->clone(), turnoff, turnon, NULL) );
 }
 
 std::string Effect2::title() const
@@ -143,7 +143,7 @@ void Effect3::onEnter()
     
     // moving background. Testing issue #244
     auto move = MoveBy::create(3, Vec2(200,0) );
-    _bgNode->runAction(RepeatForever::create( Sequence::create(move, move->reverse(), nullptr) ));    
+    _bgNode->runAction(RepeatForever::create( Sequence::create(move, move->reverse(), NULL) ));    
 }
 
 std::string Effect3::title() const
@@ -195,7 +195,7 @@ void Effect4::onEnter()
     auto lens = Lens3D::create(10, Size(32,24), Vec2(100,180), 150);
     auto move = JumpBy::create(5, Vec2(380,0), 100, 4);
     auto move_back = move->reverse();
-    auto seq = Sequence::create( move, move_back, nullptr);
+    auto seq = Sequence::create( move, move_back, NULL);
 
     /* In cocos2d-iphone, the type of action's target is 'id', so it supports using the instance of 'Lens3D' as its target.
         While in cocos2d-x, the target of action only supports Node or its subclass,
@@ -264,7 +264,7 @@ void Issue631::onEnter()
 {
     EffectAdvanceBaseTest::onEnter();
         
-    auto effect = Sequence::create( DelayTime::create(2.0f), Shaky3D::create(5.0f, Size(5, 5), 16, false), nullptr);
+    auto effect = Sequence::create( DelayTime::create(2.0f), Shaky3D::create(5.0f, Size(5, 5), 16, false), NULL);
 
     // cleanup
     //auto bg = getChildByTag(kTagBackground);
@@ -329,7 +329,7 @@ void EffectAdvanceBaseTest::onEnter(void)
     _target1->setPosition(VisibleRect::left().x+VisibleRect::getVisibleRect().size.width/3.0f, VisibleRect::bottom().y+ 200);
     auto sc = ScaleBy::create(2, 5);
     auto sc_back = sc->reverse();
-    _target1->runAction( RepeatForever::create(Sequence::create(sc, sc_back, nullptr) ) );
+    _target1->runAction( RepeatForever::create(Sequence::create(sc, sc_back, NULL) ) );
 
 
     _target2 = NodeGrid::create();
@@ -340,7 +340,7 @@ void EffectAdvanceBaseTest::onEnter(void)
     _target2->setPosition(VisibleRect::left().x+2*VisibleRect::getVisibleRect().size.width/3.0f,VisibleRect::bottom().y+200);
     auto sc2 = ScaleBy::create(2, 5);
     auto sc2_back = sc2->reverse();
-    _target2->runAction( RepeatForever::create(Sequence::create(sc2, sc2_back, nullptr) ) );    
+    _target2->runAction( RepeatForever::create(Sequence::create(sc2, sc2_back, NULL) ) );    
 
 }
 

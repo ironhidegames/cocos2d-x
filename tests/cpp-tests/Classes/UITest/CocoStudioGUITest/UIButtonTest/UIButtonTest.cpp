@@ -137,7 +137,7 @@ void UIButtonTest::touchEvent(Ref *pSender, Widget::TouchEventType type)
             imageView->loadTexture("cocosui/ccicon.png");
             imageView->setOpacity(0);
             imageView->setVisible(true);
-            imageView->runAction(Sequence::create(FadeIn::create(0.5),DelayTime::create(1.0),FadeOut::create(0.5), nullptr));
+            imageView->runAction(Sequence::create(FadeIn::create(0.5),DelayTime::create(1.0),FadeOut::create(0.5), NULL));
             Button *btn = (Button*)pSender;
             btn->loadTextureNormal("cocosui/animationbuttonnormal.png");
         }
@@ -240,7 +240,7 @@ void UIButtonTest_Scale9::touchEvent(Ref *pSender, Widget::TouchEventType type)
             Button *btn = (Button*)_uiLayer->getChildByName("normal");
             btn->loadTextureNormal("cocosui/animationbuttonnormal.png");
             btn->loadTexturePressed("cocosui/animationbuttonpressed.png");
-            btn->runAction(Sequence::create(FadeIn::create(0.5),DelayTime::create(1.0),FadeOut::create(0.5), nullptr));
+            btn->runAction(Sequence::create(FadeIn::create(0.5),DelayTime::create(1.0),FadeOut::create(0.5), NULL));
         }
             break;
 
@@ -471,7 +471,7 @@ bool UIButtonTest_Title::init()
         auto label = button->getTitleRenderer();
         label->setScale(4.0);
         button->runAction(RepeatForever::create(Sequence::create(ScaleTo::create(1.0f, 1.2f),
-                                                                 ScaleTo::create(1.0f, 1.0f),nullptr)));
+                                                                 ScaleTo::create(1.0f, 1.0f),NULL)));
 
 
         TextBMFont *text = TextBMFont::create("BMFont", "cocosui/bitmapFontTest2.fnt");

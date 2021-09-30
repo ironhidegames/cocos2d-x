@@ -509,7 +509,7 @@ void SpritePolygonTest5::addSpritePolygon(const Vec2& pos)
         action = TintBy::create(2, 0, -255, -255);
     else
         action = FadeOut::create(2);
-    auto seq = Sequence::create( action, action->reverse(), nullptr );
+    auto seq = Sequence::create( action, action->reverse(), NULL );
     sprite->runAction(RepeatForever::create(seq));
 }
 

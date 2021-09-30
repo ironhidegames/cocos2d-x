@@ -135,7 +135,7 @@ TileMapTestNew::TileMapTestNew()
     auto scale = ScaleBy::create(4, 0.8f);
     auto scaleBack = scale->reverse();
 
-    auto seq = Sequence::create(scale, scaleBack, nullptr);
+    auto seq = Sequence::create(scale, scaleBack, NULL);
 
     map->runAction(RepeatForever::create(seq));
 }
@@ -231,7 +231,7 @@ TMXOrthoTestNew::TMXOrthoTestNew()
 
     auto scale = ScaleBy::create(10, 0.1f);
     auto back = scale->reverse();
-    auto seq = Sequence::create(scale, back, nullptr);
+    auto seq = Sequence::create(scale, back, NULL);
     auto repeat = RepeatForever::create(seq);
     map->runAction(repeat);
 
@@ -397,7 +397,7 @@ TMXReadWriteTestNew::TMXReadWriteTestNew()
     auto fadein = FadeIn::create(2);
     auto scaleback = ScaleTo::create(1, 1);
     auto finish = CallFuncN::create(CC_CALLBACK_1(TMXReadWriteTestNew::removeSprite, this));
-    auto seq0 = Sequence::create(move, rotate, scale, opacity, fadein, scaleback, finish, nullptr);
+    auto seq0 = Sequence::create(move, rotate, scale, opacity, fadein, scaleback, finish, NULL);
     auto seq1 = seq0->clone();
     auto seq2 = seq0->clone();
     auto seq3 = seq0->clone();

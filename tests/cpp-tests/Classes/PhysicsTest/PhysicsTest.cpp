@@ -682,9 +682,9 @@ void PhysicsDemoActions::onEnter()
     auto rotateByBack = RotateBy::create(2, -180);
     
     sp1->runAction(RepeatForever::create(actionUp));
-    sp2->runAction(RepeatForever::create(Sequence::create(actionBy, actionByBack, nullptr)));
+    sp2->runAction(RepeatForever::create(Sequence::create(actionBy, actionByBack, NULL)));
     sp3->runAction(actionTo);
-    sp4->runAction(RepeatForever::create(Sequence::create(rotateBy, rotateByBack, nullptr)));
+    sp4->runAction(RepeatForever::create(Sequence::create(rotateBy, rotateByBack, NULL)));
 }
 
 std::string PhysicsDemoActions::title() const
@@ -1834,7 +1834,7 @@ void PhysicsTransformTest::onEnter()
     
     ScaleTo* scaleTo = ScaleTo::create(2.0, 0.5);
     ScaleTo* scaleBack = ScaleTo::create(2.0, 1.0);
-    _parentSprite->runAction(RepeatForever::create(Sequence::create(scaleTo, scaleBack, nullptr)));
+    _parentSprite->runAction(RepeatForever::create(Sequence::create(scaleTo, scaleBack, NULL)));
     
     auto normal = Sprite::create("Images/YellowSquare.png");
     normal->setPosition(300, 100);
@@ -1857,8 +1857,8 @@ void PhysicsTransformTest::onEnter()
     
     RotateBy* rotate = RotateBy::create(6.0f, 360);
     
-    _rootLayer->runAction(RepeatForever::create(Sequence::create(move, move2, move3, nullptr)));
-    _rootLayer->runAction(RepeatForever::create(Sequence::create(scale, scale2, nullptr)));
+    _rootLayer->runAction(RepeatForever::create(Sequence::create(move, move2, move3, NULL)));
+    _rootLayer->runAction(RepeatForever::create(Sequence::create(scale, scale2, NULL)));
     _rootLayer->runAction(RepeatForever::create(rotate));
 }
 

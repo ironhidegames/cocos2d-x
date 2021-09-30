@@ -133,8 +133,12 @@ THE SOFTWARE.
 #if defined(WINRT)
     #undef  CC_TARGET_PLATFORM
     #define CC_TARGET_PLATFORM          CC_PLATFORM_WINRT
+    #define CC_IS_CONSOLE               true 
 #endif
 
+#ifndef CC_IS_CONSOLE
+    #define CC_IS_CONSOLE               false
+#endif
 //////////////////////////////////////////////////////////////////////////
 // post configure
 //////////////////////////////////////////////////////////////////////////

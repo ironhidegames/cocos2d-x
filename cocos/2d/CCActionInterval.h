@@ -64,7 +64,7 @@ Example:
 
 @code
 auto action = MoveBy::create(1.0f, Vec2::ONE);
-auto pingPongAction = Sequence::create(action, action->reverse(), nullptr);
+auto pingPongAction = Sequence::create(action, action->reverse(), NULL);
 @endcode
 */
 class CC_DLL ActionInterval : public FiniteTimeAction

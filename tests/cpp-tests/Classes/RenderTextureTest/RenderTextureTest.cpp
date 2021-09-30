@@ -698,7 +698,7 @@ SpriteRenderTextureBug::SimpleSprite* SpriteRenderTextureBug::addNewSpriteWithCo
 		action = FadeOut::create(2);
     
     auto action_back = action->reverse();
-    auto seq = Sequence::create(action, action_back, nullptr);
+    auto seq = Sequence::create(action, action_back, NULL);
     
     sprite->runAction(RepeatForever::create(seq));
     

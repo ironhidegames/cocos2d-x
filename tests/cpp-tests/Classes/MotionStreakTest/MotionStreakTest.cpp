@@ -73,7 +73,7 @@ void MotionStreakTest1::onEnter()
 
     auto action1 = RepeatForever::create(a1);
     auto motion = MoveBy::create(2, Vec2(100,0) );
-    _root->runAction( RepeatForever::create(Sequence::create(motion, motion->reverse(), nullptr) ) );
+    _root->runAction( RepeatForever::create(Sequence::create(motion, motion->reverse(), NULL) ) );
     _root->runAction( action1 );
 
     auto colorAction = RepeatForever::create(Sequence::create(

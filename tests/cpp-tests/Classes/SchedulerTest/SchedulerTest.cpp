@@ -815,8 +815,8 @@ void SchedulerTimeScale::onEnter()
     auto rot1 = RotateBy::create(4, 360*2);
     auto rot2 = rot1->reverse();
 
-    auto seq3_1 = Sequence::create(jump2, jump1, nullptr);
-    auto seq3_2 = Sequence::create(rot1, rot2, nullptr);
+    auto seq3_1 = Sequence::create(jump2, jump1, NULL);
+    auto seq3_2 = Sequence::create(rot1, rot2, NULL);
     auto spawn = Spawn::create(seq3_1, seq3_2, nullptr);
     auto action = Repeat::create(spawn, 50);
 
@@ -909,7 +909,7 @@ void TwoSchedulers::onEnter()
     auto jump1 = JumpBy::create(4, Vec2(0,0), 100, 4);
     auto jump2 = jump1->reverse();
 
-    auto seq = Sequence::create(jump2, jump1, nullptr);
+    auto seq = Sequence::create(jump2, jump1, NULL);
     auto action = RepeatForever::create(seq);
 
         //

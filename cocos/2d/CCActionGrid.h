@@ -368,7 +368,7 @@ private:
  @warning Don't call this action if another grid action is active.
  Call if you want to remove the grid effect. Example:
  @code
- Sequence::create(Lens3D::create(...), StopGrid::create(), nullptr);
+ Sequence::create(Lens3D::create(...), StopGrid::create(), NULL);
  @endcode
  */
 class CC_DLL StopGrid : public ActionInstant

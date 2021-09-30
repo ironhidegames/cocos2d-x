@@ -458,12 +458,12 @@ void LayerTest2::onEnter()
     
     auto actionTint = TintBy::create(2, -255, -127, 0);
     auto actionTintBack = actionTint->reverse();
-    auto seq1 = Sequence::create( actionTint, actionTintBack, nullptr);
+    auto seq1 = Sequence::create( actionTint, actionTintBack, NULL);
     layer1->runAction(seq1);
 
     auto actionFade = FadeOut::create(2.0f);
     auto actionFadeBack = actionFade->reverse();
-    auto seq2 = Sequence::create(actionFade, actionFadeBack, nullptr);        
+    auto seq2 = Sequence::create(actionFade, actionFadeBack, NULL);        
     layer2->runAction(seq2);
 }
 
@@ -618,7 +618,7 @@ void LayerIgnoreAnchorPointPos::onEnter()
 
     auto move = MoveBy::create(2, Vec2(100,2));
     auto back = (MoveBy *)move->reverse();
-    auto seq = Sequence::create(move, back, nullptr);
+    auto seq = Sequence::create(move, back, NULL);
     l->runAction(RepeatForever::create(seq));
     this->addChild(l, 0, kLayerIgnoreAnchorPoint);
 
@@ -715,7 +715,7 @@ void LayerIgnoreAnchorPointScale::onEnter()
 
     auto scale = ScaleBy::create(2, 2);
     auto back = (ScaleBy*)scale->reverse();
-    auto seq = Sequence::create(scale, back, nullptr);
+    auto seq = Sequence::create(scale, back, NULL);
 
     l->runAction(RepeatForever::create(seq));
 
