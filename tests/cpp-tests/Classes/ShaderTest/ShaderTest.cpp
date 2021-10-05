@@ -763,7 +763,7 @@ bool ShaderMultiTexture::init()
         // menu
         auto label = Label::createWithTTF(TTFConfig("fonts/arial.ttf"), "change");
         auto mi = MenuItemLabel::create(label, CC_CALLBACK_1(ShaderMultiTexture::changeTexture, this));
-        auto menu = Menu::create(mi, nullptr);
+        auto menu = Menu::create(mi, NULL);
         addChild(menu);
         menu->setPosition(s.width * 7 / 8, s.height / 2);
 

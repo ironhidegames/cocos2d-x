@@ -380,7 +380,7 @@ void js_register_spine_TrackEntry(JSContext *cx, JS::HandleObject global)
         JS_PS_END
     };
     
-    jsb_spine_TrackEntry_prototype = JS_InitClass(cx, global, JS::NullPtr(), jsb_spine_TrackEntry_class, nullptr, 0, properties, nullptr, nullptr, nullptr);
+    jsb_spine_TrackEntry_prototype = JS_InitClass(cx, global, JS::NullPtr(), jsb_spine_TrackEntry_class, nullptr, 0, properties, nullptr, nullptr, NULL);
 }
 
 jsval sptrackentry_to_jsval(JSContext* cx, spTrackEntry& v)

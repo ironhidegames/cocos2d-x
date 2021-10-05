@@ -435,7 +435,7 @@ CaptureScreenTest::CaptureScreenTest()
 
     auto label1 = Label::createWithTTF(TTFConfig("fonts/arial.ttf"), "capture all");
     auto mi1 = MenuItemLabel::create(label1, CC_CALLBACK_1(CaptureScreenTest::onCaptured, this));
-    auto menu = Menu::create(mi1, nullptr);
+    auto menu = Menu::create(mi1, NULL);
     addChild(menu);
     menu->setPosition(s.width / 2, s.height / 4);
 
@@ -508,7 +508,7 @@ CaptureNodeTest::CaptureNodeTest()
 
     auto label1 = Label::createWithTTF(TTFConfig("fonts/arial.ttf"), "capture this scene");
     auto mi1 = MenuItemLabel::create(label1, CC_CALLBACK_1(CaptureNodeTest::onCaptured, this));
-    auto menu = Menu::create(mi1, nullptr);
+    auto menu = Menu::create(mi1, NULL);
     addChild(menu);
     menu->setPosition(s.width / 2, s.height / 4);
 

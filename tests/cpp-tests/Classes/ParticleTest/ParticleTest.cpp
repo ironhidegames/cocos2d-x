@@ -1103,9 +1103,9 @@ void ParticleDemo::onEnter(void)
                                                                MenuItemFont::create( "Free Movement" ),
                                                                MenuItemFont::create( "Relative Movement" ),
                                                                MenuItemFont::create( "Grouped Movement" ),
-                                                               nullptr );
+                                                               NULL );
 
-    auto menu = Menu::create(item4, nullptr);
+    auto menu = Menu::create(item4, NULL);
 
     menu->setPosition( Vec2::ZERO );
     item4->setPosition( Vec2( VisibleRect::left().x, VisibleRect::bottom().y+ 100) );
@@ -2038,7 +2038,7 @@ void ParticleResetTotalParticles::onEnter()
     remove->setPosition(Vec2(0, -25));
     remove->setFontSizeObj(20);
     
-    auto menu = Menu::create(add, remove, nullptr);
+    auto menu = Menu::create(add, remove, NULL);
     menu->setPosition(Vec2(VisibleRect::center()));
     this->addChild(menu);
     

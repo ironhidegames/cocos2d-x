@@ -153,7 +153,7 @@ void Box2DTest::createResetButton()
         getTestSuite()->restartCurrTest();
 	});
 
-    auto menu = Menu::create(reset, nullptr);
+    auto menu = Menu::create(reset, NULL);
 
     menu->setPosition(VisibleRect::bottom().x, VisibleRect::bottom().y + 30);
     this->addChild(menu, -1);

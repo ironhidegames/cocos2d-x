@@ -1788,7 +1788,7 @@ int tolua_cocos2d_Sequence_create(lua_State* tolua_S)
                     goto tolua_lerror;
 #endif
 
-                cocos2d::FiniteTimeAction* item = static_cast<cocos2d::FiniteTimeAction*>(tolua_tousertype(tolua_S, 1 + i, nullptr));
+                cocos2d::FiniteTimeAction* item = static_cast<cocos2d::FiniteTimeAction*>(tolua_tousertype(tolua_S, 1 + i, NULL));
                 if (nullptr != item)
                 {
                     array.pushBack(item);
@@ -8060,7 +8060,7 @@ static int tolua_cocos2d_utils_findChildren(lua_State* tolua_S)
     else
 #endif
     {
-        cocos2d::Node* node = static_cast<Node*>(tolua_tousertype(tolua_S, 2, nullptr));
+        cocos2d::Node* node = static_cast<Node*>(tolua_tousertype(tolua_S, 2, NULL));
         std::string  name = tolua_tocppstring(tolua_S, 3, "");
         std::vector<Node*> children = cocos2d::utils::findChildren(*node, name);
         lua_newtable(tolua_S);
@@ -8097,7 +8097,7 @@ static int tolua_cocos2d_utils_findChild(lua_State* tolua_S)
     else
 #endif
     {
-        cocos2d::Node* node = static_cast<Node*>(tolua_tousertype(tolua_S, 1, nullptr));
+        cocos2d::Node* node = static_cast<Node*>(tolua_tousertype(tolua_S, 1, NULL));
         std::string  name = tolua_tocppstring(tolua_S, 2, "");
         auto obj = cocos2d::utils::findChild(node, name);
         int ID = (obj) ? (int)obj->_ID : -1;

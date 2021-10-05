@@ -56,7 +56,7 @@ Menu::~Menu()
 
 Menu* Menu::create()
 {
-    return Menu::create(nullptr, nullptr);
+    return Menu::create(nullptr, NULL);
 }
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
@@ -122,7 +122,7 @@ Menu* Menu::createWithItems(MenuItem* item, va_list args)
 
 Menu* Menu::createWithItem(MenuItem* item)
 {
-    return Menu::create(item, nullptr);
+    return Menu::create(item, NULL);
 }
 
 bool Menu::init()

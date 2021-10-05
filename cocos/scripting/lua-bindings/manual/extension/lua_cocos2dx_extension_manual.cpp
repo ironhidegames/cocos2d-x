@@ -969,7 +969,7 @@ static int lua_cocos2dx_Extension_EventListenerAssetsManagerEx_create(lua_State*
             !toluafix_isfunction(L,3,"LUA_FUNCTION",0,&tolua_err))
             goto tolua_lerror;
 #endif
-        cocos2d::extension::AssetsManagerEx* assetManager =  static_cast<cocos2d::extension::AssetsManagerEx*>(tolua_tousertype(L,2,nullptr));
+        cocos2d::extension::AssetsManagerEx* assetManager =  static_cast<cocos2d::extension::AssetsManagerEx*>(tolua_tousertype(L,2,NULL));
         
         LUA_FUNCTION handler = toluafix_ref_function(L,3,0);
         

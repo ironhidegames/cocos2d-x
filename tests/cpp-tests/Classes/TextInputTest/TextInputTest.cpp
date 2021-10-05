@@ -134,7 +134,7 @@ void KeyboardNotificationLayer::onTouchEnded(Touch  *touch, Event  *event)
     // decide the trackNode is clicked.
     Rect rect;
     rect.size = _trackNode->getContentSize();
-    auto clicked = isScreenPointInRect(endPos, Camera::getVisitingCamera(), _trackNode->getWorldToNodeTransform(), rect, nullptr);
+    auto clicked = isScreenPointInRect(endPos, Camera::getVisitingCamera(), _trackNode->getWorldToNodeTransform(), rect, NULL);
     this->onClickTrackNode(clicked, endPos);
     CCLOG("----------------------------------");
 }
@@ -316,9 +316,9 @@ bool TextFieldTTFActionTest::onTextFieldInsertText(TextFieldTTF * sender, const 
             MoveTo::create(duration, endPos),
             ScaleTo::create(duration, 1),
             FadeOut::create(duration),
-            nullptr),
+            NULL),
         CallFuncN::create(CC_CALLBACK_1(TextFieldTTFActionTest::callbackRemoveNodeWhenDidAction, this)),
-        nullptr);
+        NULL);
     label->runAction(seq);
     return false;
 }
@@ -350,9 +350,9 @@ bool TextFieldTTFActionTest::onTextFieldDeleteBackward(TextFieldTTF * sender, co
                 RotateBy::create(rotateDuration, (rand()%2) ? 360 : -360),
                 repeatTime),
             FadeOut::create(duration),
-        nullptr),
+        NULL),
         CallFuncN::create(CC_CALLBACK_1(TextFieldTTFActionTest::callbackRemoveNodeWhenDidAction, this)),
-        nullptr);
+        NULL);
     label->runAction(seq);
     return false;
 }

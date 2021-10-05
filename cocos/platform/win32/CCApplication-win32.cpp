@@ -353,7 +353,7 @@ static void PVRFrameEnableControlWindow(bool bEnable)
         KEY_ALL_ACCESS,
         0,
         &hKey,
-        nullptr))
+        NULL))
     {
         return;
     }

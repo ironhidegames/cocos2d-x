@@ -62,7 +62,7 @@ VRTest1::VRTest1()
         }
     });
     button->setFontSizeObj(16);
-    auto menu = Menu::create(button, nullptr);
+    auto menu = Menu::create(button, NULL);
     addChild(menu);
 
     menu->setPosition(size / 6 );

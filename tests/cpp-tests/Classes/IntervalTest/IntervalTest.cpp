@@ -119,7 +119,7 @@ IntervalTest::IntervalTest()
 		else
 			Director::getInstance()->pause();
 	});
-    auto menu = Menu::create(item1, nullptr);
+    auto menu = Menu::create(item1, NULL);
     menu->setPosition(s.width/2, s.height-50);
 
     addChild( menu );

@@ -84,7 +84,7 @@ void MotionStreakTest1::onEnter()
         TintTo::create(0.2f, 255, 255, 0),
         TintTo::create(0.2f, 255, 0, 255),
         TintTo::create(0.2f, 255, 255, 255),
-        nullptr));
+        NULL));
 
     _streak->runAction(colorAction);
 }
@@ -264,9 +264,9 @@ void MotionStreakTest::onEnter()
     auto itemMode = MenuItemToggle::createWithCallback( CC_CALLBACK_1(MotionStreakTest::modeCallback, this),
         MenuItemFont::create("Use High Quality Mode"),
         MenuItemFont::create("Use Fast Mode"),
-        nullptr);
+        NULL);
 
-    auto menuMode = Menu::create(itemMode, nullptr);
+    auto menuMode = Menu::create(itemMode, NULL);
     addChild(menuMode);
 
     menuMode->setPosition(Vec2(s.width/2, s.height/4));

@@ -406,7 +406,7 @@ void NavMesh::removeNavMeshObstacle(NavMeshObstacle *obstacle)
 
 void NavMesh::addNavMeshObstacle(NavMeshObstacle *obstacle)
 {
-    auto iter = std::find(_obstacleList.begin(), _obstacleList.end(), nullptr);
+    auto iter = std::find(_obstacleList.begin(), _obstacleList.end(), NULL);
     if (iter != _obstacleList.end()){
         obstacle->addTo(_tileCache);
         obstacle->retain();
@@ -427,7 +427,7 @@ void NavMesh::removeNavMeshAgent(NavMeshAgent *agent)
 
 void NavMesh::addNavMeshAgent(NavMeshAgent *agent)
 {
-    auto iter = std::find(_agentList.begin(), _agentList.end(), nullptr);
+    auto iter = std::find(_agentList.begin(), _agentList.end(), NULL);
     if (iter != _agentList.end()){
         agent->addTo(_crowed);
         agent->setNavMeshQuery(_navMeshQuery);

@@ -75,7 +75,7 @@ bool luaval_to_Physics3DRigidBodyDes(lua_State* L,int lo,cocos2d::Physics3DRigid
         }
         else
         {
-            outValue->shape = static_cast<cocos2d::Physics3DShape*>(tolua_tousertype(L, lua_gettop(L), nullptr));
+            outValue->shape = static_cast<cocos2d::Physics3DShape*>(tolua_tousertype(L, lua_gettop(L), NULL));
         }
         lua_pop(L, 1);
         
@@ -149,7 +149,7 @@ bool luaval_to_Physics3DWorld_HitResult(lua_State* L,int lo, cocos2d::Physics3DW
         }
         else
         {
-            outValue->hitObj = static_cast<cocos2d::Physics3DObject*>(tolua_tousertype(L, lua_gettop(L), nullptr));
+            outValue->hitObj = static_cast<cocos2d::Physics3DObject*>(tolua_tousertype(L, lua_gettop(L), NULL));
         }
         lua_pop(L, 1);
     }

@@ -503,7 +503,7 @@ void Scene3DTestScene::createUI()
 
     auto menu = Menu::create(showPlayerDlgItem,
                              descItem,
-                             nullptr);
+                             NULL);
     menu->setPosition(Vec2::ZERO);
     _ui->addChild(menu);
     

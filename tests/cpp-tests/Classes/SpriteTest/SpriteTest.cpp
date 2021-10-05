@@ -2401,7 +2401,7 @@ SpriteAnimationSplit::SpriteAnimationSplit()
 								  FlipX::create(true),
 								  animate->clone(),
 								  FlipX::create(false),
-								  nullptr);
+								  NULL);
     
     sprite->runAction(RepeatForever::create( seq ) );
 }

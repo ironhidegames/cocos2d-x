@@ -817,7 +817,7 @@ void SchedulerTimeScale::onEnter()
 
     auto seq3_1 = Sequence::create(jump2, jump1, NULL);
     auto seq3_2 = Sequence::create(rot1, rot2, NULL);
-    auto spawn = Spawn::create(seq3_1, seq3_2, nullptr);
+    auto spawn = Spawn::create(seq3_1, seq3_2, NULL);
     auto action = Repeat::create(spawn, 50);
 
     auto action2 = action->clone();

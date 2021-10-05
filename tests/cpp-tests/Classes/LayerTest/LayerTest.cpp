@@ -101,7 +101,7 @@ void LayerTestCascadingOpacityA::onEnter()
                 FadeTo::create(4, 0),
                 FadeTo::create(4, 255),
                 DelayTime::create(1),
-                nullptr)));
+                NULL)));
 
     sister1->runAction(
         RepeatForever::create(
@@ -111,7 +111,7 @@ void LayerTestCascadingOpacityA::onEnter()
                 FadeTo::create(2, 0),
                 FadeTo::create(2, 255),
                 DelayTime::create(1),
-                nullptr)));
+                NULL)));
     
     // Enable cascading in scene
     setEnableRecursiveCascading(this, true);
@@ -153,7 +153,7 @@ void LayerTestCascadingOpacityB::onEnter()
        FadeTo::create(4, 0),
        FadeTo::create(4, 255),
        DelayTime::create(1),
-       nullptr)));
+       NULL)));
     
     sister1->runAction(
      RepeatForever::create(
@@ -163,7 +163,7 @@ void LayerTestCascadingOpacityB::onEnter()
        FadeTo::create(2, 0),
        FadeTo::create(2, 255),
        DelayTime::create(1),
-       nullptr)));
+       NULL)));
     
     // Enable cascading in scene
     setEnableRecursiveCascading(this, true);
@@ -206,7 +206,7 @@ void LayerTestCascadingOpacityC::onEnter()
        FadeTo::create(4, 0),
        FadeTo::create(4, 255),
        DelayTime::create(1),
-       nullptr)));
+       NULL)));
     
     sister1->runAction(
      RepeatForever::create(
@@ -216,7 +216,7 @@ void LayerTestCascadingOpacityC::onEnter()
        FadeTo::create(2, 0),
        FadeTo::create(2, 255),
        DelayTime::create(1),
-       nullptr)));
+       NULL)));
 }
 
 std::string LayerTestCascadingOpacityC::subtitle() const
@@ -254,7 +254,7 @@ void LayerTestCascadingColorA::onEnter()
        TintTo::create(6, 255, 0, 255),
        TintTo::create(6, 255, 255, 255),
        DelayTime::create(1),
-       nullptr)));
+       NULL)));
     
     sister1->runAction(
      RepeatForever::create(
@@ -266,7 +266,7 @@ void LayerTestCascadingColorA::onEnter()
        TintTo::create(2, 255, 0, 255),
        TintTo::create(2, 255, 255, 255),
        DelayTime::create(1),
-       nullptr)));
+       NULL)));
     
     // Enable cascading in scene
     setEnableRecursiveCascading(this, true);
@@ -307,7 +307,7 @@ void LayerTestCascadingColorB::onEnter()
        TintTo::create(6, 255, 0, 255),
        TintTo::create(6, 255, 255, 255),
        DelayTime::create(1),
-       nullptr)));
+       NULL)));
     
     sister1->runAction(
      RepeatForever::create(
@@ -319,7 +319,7 @@ void LayerTestCascadingColorB::onEnter()
        TintTo::create(2, 255, 0, 255),
        TintTo::create(2, 255, 255, 255),
        DelayTime::create(1),
-       nullptr)));
+       NULL)));
     
     // Enable cascading in scene
     setEnableRecursiveCascading(this, true);
@@ -359,7 +359,7 @@ void LayerTestCascadingColorC::onEnter()
        TintTo::create(6, 255, 0, 255),
        TintTo::create(6, 255, 255, 255),
        DelayTime::create(1),
-       nullptr)));
+       NULL)));
     
     sister1->runAction(
      RepeatForever::create(
@@ -371,7 +371,7 @@ void LayerTestCascadingColorC::onEnter()
        TintTo::create(2, 255, 0, 255),
        TintTo::create(2, 255, 255, 255),
        DelayTime::create(1),
-       nullptr)));
+       NULL)));
 }
 
 std::string LayerTestCascadingColorC::subtitle() const
@@ -542,9 +542,9 @@ LayerGradientTest::LayerGradientTest()
     auto label2 = Label::createWithTTF("Compressed Interpolation: Disabled", "fonts/Marker Felt.ttf", 26);
     auto item1 = MenuItemLabel::create(label1);
     auto item2 = MenuItemLabel::create(label2);
-    auto item = MenuItemToggle::createWithCallback( CC_CALLBACK_1(LayerGradientTest::toggleItem, this), item1, item2, nullptr);
+    auto item = MenuItemToggle::createWithCallback( CC_CALLBACK_1(LayerGradientTest::toggleItem, this), item1, item2, NULL);
 
-    auto menu = Menu::create(item, nullptr);
+    auto menu = Menu::create(item, NULL);
     addChild(menu);
     auto s = Director::getInstance()->getWinSize();
     menu->setPosition(Vec2(s.width / 2, 100));
@@ -629,7 +629,7 @@ void LayerIgnoreAnchorPointPos::onEnter()
 
     auto item = MenuItemFont::create("Toggle ignore anchor point", CC_CALLBACK_1(LayerIgnoreAnchorPointPos::onToggle, this));
 
-    auto menu = Menu::create(item, nullptr);
+    auto menu = Menu::create(item, NULL);
     this->addChild(menu);
 
     menu->setPosition(Vec2(s.width/2, s.height/2));
@@ -677,7 +677,7 @@ void LayerIgnoreAnchorPointRot::onEnter()
 
     auto item = MenuItemFont::create("Toggle ignore anchor point", CC_CALLBACK_1(LayerIgnoreAnchorPointRot::onToggle, this));
 
-    auto menu = Menu::create(item, nullptr);
+    auto menu = Menu::create(item, NULL);
     this->addChild(menu);
 
     menu->setPosition(Vec2(s.width/2, s.height/2));
@@ -728,7 +728,7 @@ void LayerIgnoreAnchorPointScale::onEnter()
 
     auto item = MenuItemFont::create("Toggle ignore anchor point", CC_CALLBACK_1(LayerIgnoreAnchorPointScale::onToggle, this));
 
-    auto menu = Menu::create(item, nullptr);
+    auto menu = Menu::create(item, NULL);
     this->addChild(menu);
 
     menu->setPosition(Vec2(s.width/2, s.height/2));

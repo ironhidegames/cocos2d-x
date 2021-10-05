@@ -44,7 +44,7 @@ bool Bug1159Layer::init()
         sprite_a->runAction(RepeatForever::create(Sequence::create(
                                                         MoveTo::create(1.0f, Vec2(1024.0f, 384.0f)),
                                                         MoveTo::create(1.0f, Vec2(0.0f, 384.0f)),
-                                                        nullptr)));
+                                                        NULL)));
 
         auto sprite_b = LayerColor::create(Color4B(0, 0, 255, 255), 400, 400);
         sprite_b->setAnchorPoint(Vec2(0.5f, 0.5f));
@@ -53,7 +53,7 @@ bool Bug1159Layer::init()
         addChild(sprite_b);
 
         auto label = MenuItemLabel::create(Label::createWithSystemFont("Flip Me", "Helvetica", 24), CC_CALLBACK_1(Bug1159Layer::callBack, this) );
-        auto menu = Menu::create(label, nullptr);
+        auto menu = Menu::create(label, NULL);
         menu->setPosition(s.width - 200.0f, 50.0f);
         addChild(menu);
 

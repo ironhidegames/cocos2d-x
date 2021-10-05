@@ -335,7 +335,7 @@ void Camera3DTestDemo::onEnter()
     auto menuItem2 = MenuItemLabel::create(label2, CC_CALLBACK_1(Camera3DTestDemo::SwitchViewCallback,this,CameraType::ThirdPerson));
     auto label3 = Label::createWithTTF(ttfConfig,"first person");
     auto menuItem3 = MenuItemLabel::create(label3, CC_CALLBACK_1(Camera3DTestDemo::SwitchViewCallback,this,CameraType::FirstPerson));
-    auto menu = Menu::create(menuItem1, menuItem2, menuItem3, nullptr);
+    auto menu = Menu::create(menuItem1, menuItem2, menuItem3, NULL);
     
     menu->setPosition(Vec2::ZERO);
     
@@ -754,7 +754,7 @@ void CameraCullingDemo::onEnter()
     auto increase = MenuItemFont::create(" + ", CC_CALLBACK_1(CameraCullingDemo::addSpriteCallback, this));
     increase->setColor(Color3B(0,200,20));
     
-    menu = Menu::create(decrease, increase, nullptr);
+    menu = Menu::create(decrease, increase, NULL);
     menu->alignItemsHorizontally();
     menu->setPosition(Vec2(s.width - 60, VisibleRect::top().y -70));
     addChild(menu, 1);
@@ -1241,7 +1241,7 @@ void FogTestDemo::onEnter()
     auto menuItem2 = MenuItemLabel::create(label2, CC_CALLBACK_1(FogTestDemo::switchTypeCallback,this,1));
     auto label3 = Label::createWithTTF(ttfConfig,"Exp2");
     auto menuItem3 = MenuItemLabel::create(label3, CC_CALLBACK_1(FogTestDemo::switchTypeCallback,this,2));
-    auto menu = Menu::create(menuItem1, menuItem2, menuItem3, nullptr);
+    auto menu = Menu::create(menuItem1, menuItem2, menuItem3, NULL);
     
     menu->setPosition(Vec2::ZERO);
     

@@ -487,7 +487,7 @@ void CameraBackgroundSkyBoxBrush::drawBackground(Camera* camera)
         GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION);
         
         glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-        glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), nullptr);
+        glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), NULL);
         
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
     }
@@ -513,7 +513,7 @@ bool CameraBackgroundSkyBoxBrush::init()
 {
     auto shader = GLProgramCache::getInstance()->getGLProgram(GLProgram::SHADER_3D_SKYBOX);
     _glProgramState = GLProgramState::create(shader);
-    _glProgramState->setVertexAttribPointer(GLProgram::ATTRIBUTE_NAME_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), nullptr);
+    _glProgramState->setVertexAttribPointer(GLProgram::ATTRIBUTE_NAME_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), NULL);
     _glProgramState->retain();
     
     initBuffer();

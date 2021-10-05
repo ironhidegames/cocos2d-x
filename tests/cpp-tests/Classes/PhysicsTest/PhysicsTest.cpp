@@ -101,7 +101,7 @@ void PhysicsDemo::onEnter()
     MenuItemFont::setFontSize(18);
     auto item = MenuItemFont::create("Toggle debug", CC_CALLBACK_1(PhysicsDemo::toggleDebugCallback, this));
     
-    auto menu = Menu::create(item, nullptr);
+    auto menu = Menu::create(item, NULL);
     this->addChild(menu);
     menu->setPosition(Vec2(VisibleRect::right().x - item->getContentSize().width / 2 - 10, VisibleRect::top().y - item->getContentSize().height / 2 - 10));
 }
@@ -493,7 +493,7 @@ void PhysicsDemoRayCast::onEnter()
     MenuItemFont::setFontSize(18);
     auto item = MenuItemFont::create("Change Mode(any)", CC_CALLBACK_1(PhysicsDemoRayCast::changeModeCallback, this));
     
-    auto menu = Menu::create(item, nullptr);
+    auto menu = Menu::create(item, NULL);
     this->addChild(menu);
     menu->setPosition(Vec2(VisibleRect::left().x + 100, VisibleRect::top().y - 10));
     
@@ -1298,7 +1298,7 @@ void PhysicsContactTest::onEnter()
     decrease1->setTag(1);
     increase1->setTag(1);
     
-    auto menu1 = Menu::create(decrease1, increase1, nullptr);
+    auto menu1 = Menu::create(decrease1, increase1, NULL);
     menu1->alignItemsHorizontally();
     menu1->setPosition(Vec2(s.width / 2, s.height - 50));
     addChild(menu1, 1);
@@ -1314,7 +1314,7 @@ void PhysicsContactTest::onEnter()
     decrease2->setTag(2);
     increase2->setTag(2);
     
-    auto menu2 = Menu::create(decrease2, increase2, nullptr);
+    auto menu2 = Menu::create(decrease2, increase2, NULL);
     menu2->alignItemsHorizontally();
     menu2->setPosition(Vec2(s.width / 2, s.height - 90));
     addChild(menu2, 1);
@@ -1330,7 +1330,7 @@ void PhysicsContactTest::onEnter()
     decrease3->setTag(3);
     increase3->setTag(3);
     
-    auto menu3 = Menu::create(decrease3, increase3, nullptr);
+    auto menu3 = Menu::create(decrease3, increase3, NULL);
     menu3->alignItemsHorizontally();
     menu3->setPosition(Vec2(s.width / 2, s.height - 130));
     addChild(menu3, 1);
@@ -1346,7 +1346,7 @@ void PhysicsContactTest::onEnter()
     decrease4->setTag(4);
     increase4->setTag(4);
     
-    auto menu4 = Menu::create(decrease4, increase4, nullptr);
+    auto menu4 = Menu::create(decrease4, increase4, NULL);
     menu4->alignItemsHorizontally();
     menu4->setPosition(Vec2(s.width / 2, s.height - 170));
     addChild(menu4, 1);
@@ -1684,7 +1684,7 @@ void PhysicsDemoBug5482::onEnter()
     MenuItemFont::setFontSize(18);
     _button = MenuItemFont::create("Set Body To A", CC_CALLBACK_1(PhysicsDemoBug5482::changeBodyCallback, this));
     
-    auto menu = Menu::create(_button, nullptr);
+    auto menu = Menu::create(_button, NULL);
     this->addChild(menu);
     
     _nodeA = Sprite::create("Images/YellowSquare.png");

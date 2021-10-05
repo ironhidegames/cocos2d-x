@@ -60,7 +60,7 @@ LightTest::LightTest()
     _spotLightLabel = Label::createWithTTF(ttfConfig,"Spot Light OFF");
     _spotLightLabel->retain();
     auto menuItem3 = MenuItemLabel::create(_spotLightLabel, CC_CALLBACK_1(LightTest::SwitchLight,this,LightType::SPOT));
-    auto menu = Menu::create(menuItem0, menuItem1, menuItem2, menuItem3, nullptr);
+    auto menu = Menu::create(menuItem0, menuItem1, menuItem2, menuItem3, NULL);
     menu->setPosition(Vec2::ZERO);
     menuItem0->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
     menuItem0->setPosition( Vec2(VisibleRect::left().x, VisibleRect::top().y-50) );

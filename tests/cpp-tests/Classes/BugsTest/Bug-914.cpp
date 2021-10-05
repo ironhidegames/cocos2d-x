@@ -56,7 +56,7 @@ bool Bug914Layer::init()
         auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 64.0f);
         auto item1 = MenuItemFont::create("restart", CC_CALLBACK_1(Bug914Layer::restart, this));
 
-        auto menu = Menu::create(item1, nullptr);
+        auto menu = Menu::create(item1, NULL);
         menu->alignItemsVertically();
         menu->setPosition(size.width/2, 100);
         addChild(menu);

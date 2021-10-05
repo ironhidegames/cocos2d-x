@@ -170,7 +170,7 @@ void TestList::runThisTest()
         auto label = Label::createWithTTF(ttfConfig, "Back");
 
         auto menuItem = MenuItemLabel::create(label, std::bind(&TestBase::backsUpOneLevel, this));
-        auto menu = Menu::create(menuItem, nullptr);
+        auto menu = Menu::create(menuItem, NULL);
 
         menu->setPosition(Vec2::ZERO);
         menuItem->setPosition(Vec2(VisibleRect::right().x - 50, VisibleRect::bottom().y + 25));
@@ -193,7 +193,7 @@ void TestList::runThisTest()
         });
         autoTestItem->setPosition(Vec2(VisibleRect::left().x + 80, VisibleRect::bottom().y + 100));
 
-        auto menu = Menu::create(closeItem, autoTestItem, nullptr);
+        auto menu = Menu::create(closeItem, autoTestItem, NULL);
         menu->setPosition(Vec2::ZERO);
         scene->addChild(menu, 1);
     }
@@ -407,7 +407,7 @@ bool TestCase::init()
         auto backLabel = Label::createWithTTF(ttfConfig, "Back");
         auto backItem = MenuItemLabel::create(backLabel, CC_CALLBACK_1(TestCase::onBackCallback, this));
 
-        auto menu = Menu::create(_priorTestItem, _restartTestItem, _nextTestItem, backItem, nullptr);
+        auto menu = Menu::create(_priorTestItem, _restartTestItem, _nextTestItem, backItem, NULL);
 
         menu->setPosition(Vec2::ZERO);
         _priorTestItem->setPosition(VisibleRect::center().x - _restartTestItem->getContentSize().width * 2, VisibleRect::bottom().y + _restartTestItem->getContentSize().height / 2);

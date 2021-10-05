@@ -59,7 +59,7 @@ bool HelloWorld::init()
     closeItem->setPosition(origin + Vec2(visibleSize) - Vec2(closeItem->getContentSize() / 2));
 
     // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, nullptr);
+    auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 

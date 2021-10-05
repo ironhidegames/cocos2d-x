@@ -319,7 +319,7 @@ bool NavMeshBasicTestDemo::init()
     });
     menuItem1->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
     menuItem1->setPosition(Vec2(VisibleRect::left().x, VisibleRect::top().y - 100));
-    auto menu = Menu::create(menuItem1, nullptr);
+    auto menu = Menu::create(menuItem1, NULL);
     menu->setPosition(Vec2::ZERO);
     addChild(menu);
 
@@ -390,7 +390,7 @@ bool NavMeshAdvanceTestDemo::init()
     menuItem2->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
     menuItem2->setPosition(Vec2(VisibleRect::left().x, VisibleRect::top().y - 150));
 
-    auto menu = Menu::create(menuItem0, menuItem1, menuItem2, nullptr);
+    auto menu = Menu::create(menuItem0, menuItem1, menuItem2, NULL);
     menu->setPosition(Vec2::ZERO);
     addChild(menu);
     

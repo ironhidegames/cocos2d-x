@@ -362,7 +362,7 @@ bool TextField::hitTest(const Vec2 &pt, const Camera* camera, Vec3* /*p*/) const
 {
     if (false == _useTouchArea)
     {
-        return Widget::hitTest(pt, camera, nullptr);
+        return Widget::hitTest(pt, camera, NULL);
     }
 
     auto size = getContentSize();

@@ -64,7 +64,7 @@ RenderTextureSave::RenderTextureSave()
     MenuItemFont::setFontSize(16);
     auto item1 = MenuItemFont::create("Save Image", CC_CALLBACK_1(RenderTextureSave::saveImage, this));
     auto item2 = MenuItemFont::create("Clear", CC_CALLBACK_1(RenderTextureSave::clearImage, this));
-    auto menu = Menu::create(item1, item2, nullptr);
+    auto menu = Menu::create(item1, item2, NULL);
     this->addChild(menu);
     menu->alignItemsVertically();
     menu->setPosition(Vec2(VisibleRect::rightTop().x - 80, VisibleRect::rightTop().y - 30));
@@ -368,7 +368,7 @@ void RenderTextureZbuffer::renderScreenShot()
 
     sprite->runAction(Sequence::create(FadeTo::create(2, 0),
                                           Hide::create(),
-                                          nullptr));
+                                          NULL));
 }
 
 RenderTexturePartTest::RenderTexturePartTest()
@@ -584,7 +584,7 @@ RenderTextureTargetNode::RenderTextureTargetNode()
     
     // Toggle clear on / off
     auto item = MenuItemFont::create("Clear On/Off", CC_CALLBACK_1(RenderTextureTargetNode::touched, this));
-    auto menu = Menu::create(item, nullptr);
+    auto menu = Menu::create(item, NULL);
     addChild(menu);
 
     menu->setPosition(Vec2(s.width/2, s.height/2));
@@ -746,7 +746,7 @@ Issue16113Test::Issue16113Test()
         target->end();
         target->saveToFile("issue16113.png", Image::Format::PNG);
     });
-    auto menu = Menu::create(item1, nullptr);
+    auto menu = Menu::create(item1, NULL);
     this->addChild(menu);
     menu->setPosition(s.width/2, s.height/2);
 }

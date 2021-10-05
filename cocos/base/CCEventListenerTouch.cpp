@@ -50,7 +50,7 @@ EventListenerTouchOneByOne::~EventListenerTouchOneByOne()
 
 bool EventListenerTouchOneByOne::init()
 {
-    if (EventListener::init(Type::TOUCH_ONE_BY_ONE, LISTENER_ID, nullptr))
+    if (EventListener::init(Type::TOUCH_ONE_BY_ONE, LISTENER_ID, NULL))
     {
         return true;
     }
@@ -136,7 +136,7 @@ EventListenerTouchAllAtOnce::~EventListenerTouchAllAtOnce()
 
 bool EventListenerTouchAllAtOnce::init()
 {
-    if (EventListener::init(Type::TOUCH_ALL_AT_ONCE, LISTENER_ID, nullptr))
+    if (EventListener::init(Type::TOUCH_ALL_AT_ONCE, LISTENER_ID, NULL))
     {
         return true;
     }

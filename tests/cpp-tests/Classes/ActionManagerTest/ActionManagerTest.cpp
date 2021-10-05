@@ -89,14 +89,14 @@ void CrashTest::onEnter()
     child->runAction(Sequence::create(
                                             DelayTime::create(1.4f),
                                             FadeOut::create(1.1f),
-                                            nullptr)
+                                            NULL)
                     );
     
     //After 1.5 second, self will be removed.
     child->runAction(Sequence::create(
                                     DelayTime::create(1.4f),
                                     CallFunc::create( CC_CALLBACK_0(CrashTest::removeThis,this)),
-                                    nullptr)
+                                    NULL)
              );
 }
 
@@ -129,7 +129,7 @@ void LogicTest::onEnter()
     grossini->runAction( Sequence::create( 
                                                 MoveBy::create(1, Vec2(150,0)),
                                                 CallFuncN::create(CC_CALLBACK_1(LogicTest::bugMe,this)),
-                                                nullptr) 
+                                                NULL) 
                         );
 }
 

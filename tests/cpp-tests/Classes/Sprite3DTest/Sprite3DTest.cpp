@@ -839,7 +839,7 @@ AsyncLoadSprite3DTest::AsyncLoadSprite3DTest()
     auto s = Director::getInstance()->getWinSize();
     item1->setPosition( s.width * .5f, s.height * .8f);
     
-    auto pMenu1 = Menu::create(item1, nullptr);
+    auto pMenu1 = Menu::create(item1, NULL);
     pMenu1->setPosition(Vec2(0,0));
     this->addChild(pMenu1, 10);
     
@@ -1304,7 +1304,7 @@ Sprite3DReskinTest::Sprite3DReskinTest()
     item3->setUserData((void*)SkinType::UPPER_BODY);
     item4->setUserData((void*)SkinType::PANTS);
     item5->setUserData((void*)SkinType::SHOES);
-    auto pMenu1 = Menu::create(item1, item2, item3, item4, item5, nullptr);
+    auto pMenu1 = Menu::create(item1, item2, item3, item4, item5, NULL);
     pMenu1->setPosition(Vec2(0,0));
     this->addChild(pMenu1, 10);
     
@@ -1416,7 +1416,7 @@ Sprite3DWithOBBPerformanceTest::Sprite3DWithOBBPerformanceTest()
     auto increase = MenuItemFont::create(" + ", CC_CALLBACK_1(Sprite3DWithOBBPerformanceTest::addOBBCallback, this));
     increase->setColor(Color3B(0,200,20));
     
-    auto menu = Menu::create(decrease, increase, nullptr);
+    auto menu = Menu::create(decrease, increase, NULL);
     menu->alignItemsHorizontally();
     menu->setPosition(Vec2(s.width/2, s.height-65));
     addChild(menu, 1);
@@ -1788,7 +1788,7 @@ UseCaseSprite3D::UseCaseSprite3D()
                                               this->switchCase();
                                           });
     
-    auto menu = Menu::create(itemPrev, itemNext, nullptr);
+    auto menu = Menu::create(itemPrev, itemNext, NULL);
     menu->alignItemsHorizontally();
     menu->setScale(0.5);
     menu->setAnchorPoint(Vec2(0,0));
@@ -1893,7 +1893,7 @@ void UseCaseSprite3D::switchCase()
         item1->setPosition( Vec2(s.width * 0.5f - item1->getContentSize().width * 0.5f, s.height * 0.5f - item1->getContentSize().height ) );
         item2->setPosition( Vec2(s.width * 0.5f - item1->getContentSize().width * 0.5f, s.height * 0.5f - item1->getContentSize().height * 2.f ) );
         
-        auto pMenu1 = Menu::create(item1, item2, nullptr);
+        auto pMenu1 = Menu::create(item1, item2, NULL);
         pMenu1->setPosition(Vec2(0,0));
         layer->addChild(pMenu1);
         
@@ -1977,7 +1977,7 @@ NodeAnimationTest::NodeAnimationTest()
                                               _sprites[_vectorIndex]->setVisible(true);
                                           });
     
-    auto menu = Menu::create(itemPrev, itemNext, nullptr);
+    auto menu = Menu::create(itemPrev, itemNext, NULL);
     menu->alignItemsHorizontally();
     menu->setScale(0.5);
     menu->setAnchorPoint(Vec2(0,0));
@@ -2189,7 +2189,7 @@ Issue9767::Issue9767()
     
     item1->setPosition( Vec2(s.width * 0.9f - item1->getContentSize().width * 0.5f, s.height * 0.5f - item1->getContentSize().height ) );
     
-    auto pMenu1 = Menu::create(item1, nullptr);
+    auto pMenu1 = Menu::create(item1, NULL);
     pMenu1->setPosition(Vec2(0,0));
     addChild(pMenu1);
 }
@@ -2424,7 +2424,7 @@ CameraBackgroundClearTest::CameraBackgroundClearTest()
     
     item1->setPosition( Vec2(VisibleRect::left().x+50, VisibleRect::bottom().y+item1->getContentSize().height*4 ) );
     
-    auto pMenu1 = Menu::create(item1, nullptr);
+    auto pMenu1 = Menu::create(item1, NULL);
     pMenu1->setPosition(Vec2(0,0));
     this->addChild(pMenu1, 10);
     
@@ -2643,7 +2643,7 @@ Sprite3DPropertyTest::Sprite3DPropertyTest()
     item2->setPosition(Vec2(VisibleRect::left().x + 100, VisibleRect::bottom().y + item1->getContentSize().height * 5));
     item3->setPosition(Vec2(VisibleRect::left().x + 100, VisibleRect::bottom().y + item1->getContentSize().height * 6));
 
-    auto pMenu1 = Menu::create(item1, item2, item3,nullptr);
+    auto pMenu1 = Menu::create(item1, item2, item3,NULL);
     pMenu1->setPosition(Vec2(0, 0));
     this->addChild(pMenu1, 10);
 

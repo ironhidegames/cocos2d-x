@@ -65,7 +65,7 @@ void TexturePerformceTest::performTestsPNG(const char* filename, const char* fil
         auto dt = calculateDeltaTime(&now);
         log("  ms:%f", dt);
         if (isAutoTesting())
-            Profile::getInstance()->addTestResult(genStrVector(fileType, resolution, "RGBA8888", remark, nullptr),
+            Profile::getInstance()->addTestResult(genStrVector(fileType, resolution, "RGBA8888", remark, NULL),
                                                   genStrVector(genStr("%fms", dt).c_str(), nullptr));
     }
     else
@@ -81,7 +81,7 @@ void TexturePerformceTest::performTestsPNG(const char* filename, const char* fil
         auto dt = calculateDeltaTime(&now);
         log("  ms:%f", dt);
         if (isAutoTesting())
-            Profile::getInstance()->addTestResult(genStrVector(fileType, resolution, "RGBA4444", remark, nullptr),
+            Profile::getInstance()->addTestResult(genStrVector(fileType, resolution, "RGBA4444", remark, NULL),
                                               genStrVector(genStr("%fms", dt).c_str(), nullptr));
     }
     else
@@ -97,7 +97,7 @@ void TexturePerformceTest::performTestsPNG(const char* filename, const char* fil
         auto dt = calculateDeltaTime(&now);
         log("  ms:%f", dt);
         if (isAutoTesting())
-            Profile::getInstance()->addTestResult(genStrVector(fileType, resolution, "RGBA5551", remark, nullptr),
+            Profile::getInstance()->addTestResult(genStrVector(fileType, resolution, "RGBA5551", remark, NULL),
                                               genStrVector(genStr("%fms", dt).c_str(), nullptr));
     }
     else
@@ -113,7 +113,7 @@ void TexturePerformceTest::performTestsPNG(const char* filename, const char* fil
         auto dt = calculateDeltaTime(&now);
         log("  ms:%f", dt);
         if (isAutoTesting())
-            Profile::getInstance()->addTestResult(genStrVector(fileType, resolution, "RGB565", remark, nullptr),
+            Profile::getInstance()->addTestResult(genStrVector(fileType, resolution, "RGB565", remark, NULL),
                                               genStrVector(genStr("%fms", dt).c_str(), nullptr));
     }
     else

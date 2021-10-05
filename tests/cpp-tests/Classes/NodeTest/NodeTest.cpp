@@ -125,7 +125,7 @@ void NodeTest2::onEnter()
 																	a1->clone(),
 																	a2->clone(),
 																	a2->reverse(),
-																	nullptr)
+																	NULL)
 												);
     
     sp2->setAnchorPoint(Vec2(0,0));
@@ -331,7 +331,7 @@ void StressTest1::shouldNotCrash(float dt)
     runAction( Sequence::create(
                             RotateBy::create(2, 360),
                             CallFuncN::create(CC_CALLBACK_1(StressTest1::removeMe, this)),
-                            nullptr) );
+                            NULL) );
     
     addChild(explosion);
 }
@@ -484,7 +484,7 @@ NodeToWorld::NodeToWorld()
     auto backSize = back->getContentSize();
     
     auto item = MenuItemImage::create(s_PlayNormal, s_PlaySelect);
-    auto menu = Menu::create(item, nullptr);
+    auto menu = Menu::create(item, NULL);
     menu->alignItemsVertically();
     menu->setPosition( Vec2(backSize.width/2, backSize.height/2));
     back->addChild(menu);
@@ -530,7 +530,7 @@ NodeToWorld3D::NodeToWorld3D()
     auto backSize = back->getContentSize();
 
     auto item = MenuItemImage::create(s_PlayNormal, s_PlaySelect);
-    auto menu = Menu::create(item, nullptr);
+    auto menu = Menu::create(item, NULL);
     menu->alignItemsVertically();
     menu->setPosition( Vec2(backSize.width/2, backSize.height/2));
     back->addChild(menu);

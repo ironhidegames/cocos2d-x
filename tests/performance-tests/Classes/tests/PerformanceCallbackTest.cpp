@@ -109,7 +109,7 @@ void PerformanceCallbackScene::dumpProfilerInfo(float dt)
         auto avgStr = genStr("%ldµ", timer->_averageTime2);
         auto minStr = genStr("%ldµ", timer->minTime);
         auto maxStr = genStr("%ldµ", timer->maxTime);
-        Profile::getInstance()->addTestResult(genStrVector(_profileName.c_str(), numStr.c_str(), nullptr),
+        Profile::getInstance()->addTestResult(genStrVector(_profileName.c_str(), numStr.c_str(), NULL),
                                               genStrVector(avgStr.c_str(), minStr.c_str(), maxStr.c_str(), nullptr));
 
         this->setAutoTesting(false);

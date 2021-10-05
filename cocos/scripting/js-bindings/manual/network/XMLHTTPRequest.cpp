@@ -1178,6 +1178,6 @@ void MinXmlHttpRequest::_js_register(JSContext *cx, JS::HandleObject global)
     };
 
     MinXmlHttpRequest::js_parent = nullptr;
-    MinXmlHttpRequest::js_proto = JS_InitClass(cx, global, JS::NullPtr(), &MinXmlHttpRequest::js_class , MinXmlHttpRequest::_js_constructor, 0, props, funcs, nullptr, nullptr);
+    MinXmlHttpRequest::js_proto = JS_InitClass(cx, global, JS::NullPtr(), &MinXmlHttpRequest::js_class , MinXmlHttpRequest::_js_constructor, 0, props, funcs, nullptr, NULL);
 
 }

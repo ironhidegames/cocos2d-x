@@ -140,7 +140,7 @@ void PerformceAllocScene::initWithQuantityOfNodes(unsigned int nNodes)
 	});
     increase->setColor(Color3B(0,200,20));
 
-    auto menu = Menu::create(decrease, increase, nullptr);
+    auto menu = Menu::create(decrease, increase, NULL);
     menu->alignItemsHorizontally();
     menu->setPosition(Vec2(s.width/2, s.height/2+15));
     addChild(menu, 1);
@@ -233,7 +233,7 @@ void PerformceAllocScene::dumpProfilerInfo(float dt)
         auto avgStr = genStr("%ldµ", timer->_averageTime2);
         auto minStr = genStr("%ldµ", timer->minTime);
         auto maxStr = genStr("%ldµ", timer->maxTime);
-        Profile::getInstance()->addTestResult(genStrVector(getTestCaseName().c_str(), numStr.c_str(), nullptr),
+        Profile::getInstance()->addTestResult(genStrVector(getTestCaseName().c_str(), numStr.c_str(), NULL),
                                               genStrVector(avgStr.c_str(), minStr.c_str(), maxStr.c_str(), nullptr));
         
         auto testsSize = sizeof(autoTestNodesNums)/sizeof(int);

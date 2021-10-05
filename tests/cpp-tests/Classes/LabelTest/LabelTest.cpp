@@ -353,7 +353,7 @@ Atlas3::Atlas3()
     auto tint = Sequence::create(TintTo::create(1, 255, 0, 0),
         TintTo::create(1, 0, 255, 0),
         TintTo::create(1, 0, 0, 255),
-        nullptr);
+        NULL);
     label2->runAction( RepeatForever::create(tint) );
     
     auto label3 = LabelBMFont::create("Test", "fonts/bitmapFontTest2.fnt");
@@ -866,7 +866,7 @@ LabelTTFTest::LabelTTFTest()
 		MenuItemFont::create("Left", CC_CALLBACK_1(LabelTTFTest::setAlignmentLeft, this)),
 		MenuItemFont::create("Center", CC_CALLBACK_1(LabelTTFTest::setAlignmentCenter, this)),
 		MenuItemFont::create("Right", CC_CALLBACK_1(LabelTTFTest::setAlignmentRight, this)),
-        nullptr);
+        NULL);
     menu->alignItemsVerticallyWithPadding(4);
     menu->setPosition(Vec2(50, s.height / 2 - 20));
     this->addChild(menu);
@@ -875,7 +875,7 @@ LabelTTFTest::LabelTTFTest()
 		MenuItemFont::create("Top", CC_CALLBACK_1(LabelTTFTest::setAlignmentTop, this)),
 		MenuItemFont::create("Middle", CC_CALLBACK_1(LabelTTFTest::setAlignmentMiddle, this)),
 		MenuItemFont::create("Bottom", CC_CALLBACK_1(LabelTTFTest::setAlignmentBottom, this)),
-		nullptr);
+		NULL);
     menu->alignItemsVerticallyWithPadding(4);
     menu->setPosition(Vec2(s.width - 50, s.height / 2 - 20));
     this->addChild(menu);
@@ -1086,7 +1086,7 @@ BitmapFontMultiLineAlignment::BitmapFontMultiLineAlignment()
     auto longSentences = MenuItemFont::create("Long Flowing Sentences", CC_CALLBACK_1(BitmapFontMultiLineAlignment::stringChanged, this));
     auto lineBreaks = MenuItemFont::create("Short Sentences With Intentional Line Breaks", CC_CALLBACK_1(BitmapFontMultiLineAlignment::stringChanged, this));
     auto mixed = MenuItemFont::create("Long Sentences Mixed With Intentional Line Breaks", CC_CALLBACK_1(BitmapFontMultiLineAlignment::stringChanged, this));
-    auto stringMenu = Menu::create(longSentences, lineBreaks, mixed, nullptr);
+    auto stringMenu = Menu::create(longSentences, lineBreaks, mixed, NULL);
     stringMenu->alignItemsVertically();
 
     longSentences->setColor(Color3B::RED);
@@ -1100,7 +1100,7 @@ BitmapFontMultiLineAlignment::BitmapFontMultiLineAlignment()
     auto left = MenuItemFont::create("Left", CC_CALLBACK_1(BitmapFontMultiLineAlignment::alignmentChanged, this));
     auto center = MenuItemFont::create("Center", CC_CALLBACK_1(BitmapFontMultiLineAlignment::alignmentChanged, this));
     auto right = MenuItemFont::create("Right", CC_CALLBACK_1(BitmapFontMultiLineAlignment::alignmentChanged, this));
-    auto alignmentMenu = Menu::create(left, center, right, nullptr);
+    auto alignmentMenu = Menu::create(left, center, right, NULL);
     alignmentMenu->alignItemsHorizontallyWithPadding(alignmentItemPadding);
 
     center->setColor(Color3B::RED);
@@ -1489,7 +1489,7 @@ TTFFontShadowAndStroke::TTFFontShadowAndStroke()
     buttonBG->addChild(fontStrokeAndShadow);
     fontStrokeAndShadow->setPosition(Vec2(buttonBG->getContentSize().width/2, buttonBG->getContentSize().height/2));
     
-    auto menu = Menu::create(buttonBG, nullptr);
+    auto menu = Menu::create(buttonBG, NULL);
     menu->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
     menu->setPosition(Vec2::ZERO);
     addChild(menu);

@@ -412,7 +412,7 @@ namespace cocos2d {
       _system_control->setFontSize(_fontSize * cocos2d::Director::getInstance()->getOpenGLView()->getScaleY() /** scale.y*/);
 
       // fontFamily
-      auto font = cocos2d::FontFreeType::create(pFontName, fontSize, cocos2d::GlyphCollection::DYNAMIC, nullptr);
+      auto font = cocos2d::FontFreeType::create(pFontName, fontSize, cocos2d::GlyphCollection::DYNAMIC, NULL);
       if (font != nullptr) {
         std::string fontName = "ms-appx:///Assets/Resources/" + std::string(pFontName) +'#' + font->getFontFamily();
         _system_control->setFontFamily(PlatformStringFromString(fontName));

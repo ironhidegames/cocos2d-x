@@ -77,7 +77,7 @@ bool VideoPlayerTest::init()
     ratioSwitch->setAnchorPoint(Vec2::ANCHOR_MIDDLE_RIGHT);
     ratioSwitch->setPosition(Vec2(_visibleRect.origin.x + _visibleRect.size.width - 10,_visibleRect.origin.y + 150));
 
-    auto menu = Menu::create(resourceVideo,onlineVideo,ratioSwitch,fullSwitch,pauseItem,resumeItem,stopItem,hintItem,nullptr);
+    auto menu = Menu::create(resourceVideo,onlineVideo,ratioSwitch,fullSwitch,pauseItem,resumeItem,stopItem,hintItem,NULL);
     menu->setPosition(Vec2::ZERO);
     _uiLayer->addChild(menu);
 

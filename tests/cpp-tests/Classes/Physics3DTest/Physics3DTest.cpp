@@ -122,7 +122,7 @@ bool Physics3DTestDemo::init()
             }
         });
 
-        auto menu = Menu::create(menuItem, nullptr);
+        auto menu = Menu::create(menuItem, NULL);
         menu->setPosition(Vec2::ZERO);
         menuItem->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
         menuItem->setPosition( Vec2(VisibleRect::left().x, VisibleRect::top().y-50) );

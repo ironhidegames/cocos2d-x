@@ -970,7 +970,7 @@ bool PhysicsShape::containsPoint(const Vec2& point) const
 {
     for (auto shape : _cpShapes)
     {
-        if (cpShapePointQuery(shape, PhysicsHelper::point2cpv(point), nullptr) < 0)
+        if (cpShapePointQuery(shape, PhysicsHelper::point2cpv(point), NULL) < 0)
         {
             return true;
         }

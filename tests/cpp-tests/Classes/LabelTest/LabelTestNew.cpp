@@ -166,7 +166,7 @@ LabelFNTColorAndOpacity::LabelFNTColorAndOpacity()
     auto tint = Sequence::create(TintTo::create(1, 255, 0, 0),
         TintTo::create(1, 0, 255, 0),
         TintTo::create(1, 0, 0, 255),
-        nullptr);
+        NULL);
     label2->runAction( RepeatForever::create(tint) );
     
     auto label3 = Label::createWithBMFont("fonts/bitmapFontTest2.fnt", "Test");
@@ -609,7 +609,7 @@ bool LabelFNTMultiLineAlignment::init()
     auto longSentences = MenuItemFont::create("Long Flowing Sentences", CC_CALLBACK_1(LabelFNTMultiLineAlignment::stringChanged, this));
     auto lineBreaks    = MenuItemFont::create("Short Sentences With Intentional Line Breaks", CC_CALLBACK_1(LabelFNTMultiLineAlignment::stringChanged, this));
     auto mixed         = MenuItemFont::create("Long Sentences Mixed With Intentional Line Breaks", CC_CALLBACK_1(LabelFNTMultiLineAlignment::stringChanged, this));
-    auto stringMenu    = Menu::create(longSentences, lineBreaks, mixed, nullptr);
+    auto stringMenu    = Menu::create(longSentences, lineBreaks, mixed, NULL);
     stringMenu->alignItemsVertically();
 
     longSentences->setTag(LongSentences);
@@ -626,7 +626,7 @@ bool LabelFNTMultiLineAlignment::init()
     auto center = MenuItemFont::create("Center", CC_CALLBACK_1(LabelFNTMultiLineAlignment::alignmentChanged, this));
     auto right = MenuItemFont::create("Right", CC_CALLBACK_1(LabelFNTMultiLineAlignment::alignmentChanged, this));
 
-    auto alignmentMenu = Menu::create(left, center, right, nullptr);
+    auto alignmentMenu = Menu::create(left, center, right, NULL);
     alignmentMenu->alignItemsHorizontallyWithPadding(alignmentItemPadding);
 
     left->setTag(LeftAlign);
@@ -1002,7 +1002,7 @@ LabelTTFDynamicAlignment::LabelTTFDynamicAlignment()
                               MenuItemFont::create("Left", CC_CALLBACK_1(LabelTTFDynamicAlignment::setAlignmentLeft, this)),
                               MenuItemFont::create("Center", CC_CALLBACK_1(LabelTTFDynamicAlignment::setAlignmentCenter, this)),
                               MenuItemFont::create("Right", CC_CALLBACK_1(LabelTTFDynamicAlignment::setAlignmentRight, this)),
-                              nullptr);
+                              NULL);
     
     menu->alignItemsHorizontallyWithPadding(20);
     menu->setPosition(winSize.width / 2, winSize.height * 0.25f);
@@ -1220,7 +1220,7 @@ LabelTTFDistanceField::LabelTTFDistanceField()
         DelayTime::create(1.0f),
         ScaleTo::create(6.0f,5.0f,5.0f),
         ScaleTo::create(6.0f,1.0f,1.0f),
-        nullptr);
+        NULL);
     label1->runAction(RepeatForever::create(action));
 
     // Draw the label border
@@ -1634,7 +1634,7 @@ LabelAlignmentTest::LabelAlignmentTest()
         MenuItemFont::create("Left", CC_CALLBACK_1(LabelAlignmentTest::setAlignmentLeft, this)),
         MenuItemFont::create("Center", CC_CALLBACK_1(LabelAlignmentTest::setAlignmentCenter, this)),
         MenuItemFont::create("Right", CC_CALLBACK_1(LabelAlignmentTest::setAlignmentRight, this)),
-        nullptr);
+        NULL);
     menu->alignItemsVerticallyWithPadding(4);
     menu->setPosition(Vec2(50, s.height / 2 - 20));
     this->addChild(menu);
@@ -1643,7 +1643,7 @@ LabelAlignmentTest::LabelAlignmentTest()
         MenuItemFont::create("Top", CC_CALLBACK_1(LabelAlignmentTest::setAlignmentTop, this)),
         MenuItemFont::create("Middle", CC_CALLBACK_1(LabelAlignmentTest::setAlignmentMiddle, this)),
         MenuItemFont::create("Bottom", CC_CALLBACK_1(LabelAlignmentTest::setAlignmentBottom, this)),
-        nullptr);
+        NULL);
     menu->alignItemsVerticallyWithPadding(4);
     menu->setPosition(Vec2(s.width - 50, s.height / 2 - 20));
     this->addChild(menu);
@@ -2132,7 +2132,7 @@ LabelIssue11585Test::LabelIssue11585Test()
     label->getLetter(1)->setColor(Color3B::GREEN);
     label->getLetter(2)->setColor(Color3B::BLUE);
     auto action = RepeatForever::create(Sequence::create( 
-        FadeOut::create(2), FadeIn::create(2),nullptr));
+        FadeOut::create(2), FadeIn::create(2),NULL));
     label->runAction(action);
 }
 
@@ -2336,7 +2336,7 @@ void LabelLayoutBaseTest::initAlignmentOption(const cocos2d::Size& size)
         MenuItemFont::create("Left", CC_CALLBACK_1(LabelLayoutBaseTest::setAlignmentLeft, this)),
         MenuItemFont::create("Center", CC_CALLBACK_1(LabelLayoutBaseTest::setAlignmentCenter, this)),
         MenuItemFont::create("Right", CC_CALLBACK_1(LabelLayoutBaseTest::setAlignmentRight, this)),
-        nullptr);
+        NULL);
     menu->alignItemsVerticallyWithPadding(4);
     menu->setPosition(Vec2(50, size.height / 2 - 20));
     this->addChild(menu);
@@ -2345,7 +2345,7 @@ void LabelLayoutBaseTest::initAlignmentOption(const cocos2d::Size& size)
         MenuItemFont::create("Top", CC_CALLBACK_1(LabelLayoutBaseTest::setAlignmentTop, this)),
         MenuItemFont::create("Middle", CC_CALLBACK_1(LabelLayoutBaseTest::setAlignmentMiddle, this)),
         MenuItemFont::create("Bottom", CC_CALLBACK_1(LabelLayoutBaseTest::setAlignmentBottom, this)),
-        nullptr);
+        NULL);
     menu->alignItemsVerticallyWithPadding(4);
     menu->setPosition(Vec2(size.width - 50, size.height / 2 - 20));
     this->addChild(menu);

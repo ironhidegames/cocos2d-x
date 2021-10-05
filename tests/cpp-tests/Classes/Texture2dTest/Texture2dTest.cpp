@@ -1888,14 +1888,14 @@ void TextureMemoryAlloc::onEnter()
     auto item5 = MenuItemFont::create("A8", CC_CALLBACK_1(TextureMemoryAlloc::updateImage, this));
     item5->setTag(4);
     
-    auto menu = Menu::create(item1, item2, item3, item4, item5, nullptr);
+    auto menu = Menu::create(item1, item2, item3, item4, item5, NULL);
     menu->alignItemsHorizontally();
     
     addChild(menu);
     
     auto warmup = MenuItemFont::create("warm up texture", CC_CALLBACK_1(TextureMemoryAlloc::changeBackgroundVisible, this));
     
-    auto menu2 = Menu::create(warmup, nullptr);
+    auto menu2 = Menu::create(warmup, NULL);
 
     menu2->alignItemsHorizontally();
     

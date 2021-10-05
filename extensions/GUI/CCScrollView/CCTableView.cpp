@@ -53,7 +53,7 @@ TableView* TableView::create()
 
 TableView* TableView::create(TableViewDataSource* dataSource, Size size)
 {
-    return TableView::create(dataSource, size, nullptr);
+    return TableView::create(dataSource, size, NULL);
 }
 
 TableView* TableView::create(TableViewDataSource* dataSource, Size size, Node *container)

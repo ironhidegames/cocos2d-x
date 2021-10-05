@@ -480,7 +480,7 @@ PhysicsShape* PhysicsWorld::getShape(const Vec2& point) const
                                     PhysicsHelper::point2cpv(point),
                                     0,
                                     CP_SHAPE_FILTER_ALL,
-                                    nullptr);
+                                    NULL);
     return shape == nullptr ? nullptr : static_cast<PhysicsShape*>(cpShapeGetUserData(shape));
 }
 

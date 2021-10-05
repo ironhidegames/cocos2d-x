@@ -1062,7 +1062,7 @@ void AudioPlayInFinishedCB::onEnter()
 
     item->setPosition(VisibleRect::center());
 
-    auto menu = Menu::create(item, nullptr);
+    auto menu = Menu::create(item, NULL);
     menu->setPosition(Vec2::ANCHOR_BOTTOM_LEFT);
     addChild(menu);
 }

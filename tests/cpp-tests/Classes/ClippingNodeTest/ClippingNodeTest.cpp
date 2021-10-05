@@ -959,7 +959,7 @@ void ClippingToRenderTextureTest::setup()
 
     auto s = Director::getInstance()->getWinSize();
     // create menu, it's an autorelease object
-    auto menu = Menu::create(button, nullptr);
+    auto menu = Menu::create(button, NULL);
     menu->setPosition(Point(s.width/2, s.height/2));
     this->addChild(menu, 1);
 

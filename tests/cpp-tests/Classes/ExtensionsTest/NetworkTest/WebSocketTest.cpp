@@ -96,7 +96,7 @@ WebSocketTest::WebSocketTest()
     auto startTestLabel = Label::createWithTTF("Start Test WebSocket", "fonts/arial.ttf", 16);
     auto startTestItem = MenuItemLabel::create(startTestLabel, CC_CALLBACK_1(WebSocketTest::startTestCallback, this));
     startTestItem->setPosition(Vec2(VisibleRect::center().x - 150, VisibleRect::bottom().y + 150));
-    _startTestMenu = Menu::create(startTestItem, nullptr);
+    _startTestMenu = Menu::create(startTestItem, NULL);
     _startTestMenu->setPosition(Vec2::ZERO);
     this->addChild(_startTestMenu, 1);
 }
@@ -349,7 +349,7 @@ WebSocketCloseTest::WebSocketCloseTest()
     });
     closeItem->setPosition(VisibleRect::right().x / 2, VisibleRect::top().y * 2 / 3);
 
-    auto menu = Menu::create(closeItem, nullptr);
+    auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
     addChild(menu, 1);
 

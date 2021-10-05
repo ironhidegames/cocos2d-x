@@ -479,7 +479,7 @@ bool EffectSpriteTest::init()
                                               _sprite->setEffect(_effects.at(_vectorIndex));
                                           });
 
-        auto menu = Menu::create(itemPrev, itemNext, nullptr);
+        auto menu = Menu::create(itemPrev, itemNext, NULL);
         menu->alignItemsHorizontally();
         menu->setScale(0.5);
         menu->setAnchorPoint(Vec2(0,0));
@@ -492,7 +492,7 @@ bool EffectSpriteTest::init()
 
         auto jump = JumpBy::create(4, Vec2(s.width,0), 100, 4);
         auto rot = RotateBy::create(4, 720);
-        auto spawn = Spawn::create(jump, rot, nullptr);
+        auto spawn = Spawn::create(jump, rot, NULL);
         auto rev = spawn->reverse();
         auto seq = Sequence::create(spawn, rev, NULL);
         auto repeat = RepeatForever::create(seq);

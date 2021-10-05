@@ -58,7 +58,7 @@ ClickAndMoveTestCase::ClickAndMoveTestCase()
                                 Sequence::create(
                                         FadeIn::create(1),
                                         FadeOut::create(1),
-                                        nullptr)
+                                        NULL)
                       )); 
 }
 

@@ -720,7 +720,7 @@ void ActionSequence::onEnter()
     auto action = Sequence::create(
         MoveBy::create( 2, Vec2(240,0)),
         RotateBy::create( 2,  540),
-        nullptr);
+        NULL);
 
     _grossini->runAction(action);
 }
@@ -750,7 +750,7 @@ void ActionSequence2::onEnter()
 		CallFunc::create( CC_CALLBACK_0(ActionSequence2::callback1,this)),
 		CallFunc::create( CC_CALLBACK_0(ActionSequence2::callback2,this,_grossini)),
 		CallFunc::create( CC_CALLBACK_0(ActionSequence2::callback3,this,_grossini,0xbebabeba)),
-		nullptr);
+		NULL);
 
     _grossini->runAction(action);
 }
@@ -832,7 +832,7 @@ void ActionCallFuncN::onEnter()
     auto action = Sequence::create(
         MoveBy::create(2.0f, Vec2(150,0)),
         CallFuncN::create( CC_CALLBACK_1(ActionCallFuncN::callback, this)),
-        nullptr);
+        NULL);
 
     _grossini->runAction(action);
 }
@@ -867,7 +867,7 @@ void ActionCallFuncND::onEnter()
     auto action = Sequence::create(
         MoveBy::create(2.0f, Vec2(200,0)),
         CallFuncN::create( CC_CALLBACK_1(ActionCallFuncND::doRemoveFromParentAndCleanup, this, true)),
-        nullptr);
+        NULL);
 
     _grossini->runAction(action);
 }
@@ -910,19 +910,19 @@ void ActionCallFunction::onEnter()
                                  label->setPosition(s.width/4*1,s.height/2-40);
                                  this->addChild(label);
                              }  ),
-                        nullptr);
+                        NULL);
 
     auto action2 = Sequence::create(
                         ScaleBy::create(2 ,  2),
                         FadeOut::create(2),
                         CallFunc::create( std::bind(&ActionCallFunction::callback2, this, _tamara) ),
-                        nullptr);
+                        NULL);
 
     auto action3 = Sequence::create(
                         RotateBy::create(3 , 360),
                         FadeOut::create(2),
                         CallFunc::create( std::bind(&ActionCallFunction::callback3, this, _kathia, 42) ),
-                        nullptr);
+                        NULL);
 
     _grossini->runAction(action1);
     _tamara->runAction(action2);
@@ -979,7 +979,7 @@ void ActionSpawn::onEnter()
     auto action = Spawn::create(
         JumpBy::create(2, Vec2(300,0), 50, 4),
         RotateBy::create( 2,  720),
-        nullptr);
+        NULL);
 
     _grossini->runAction(action);
 }
@@ -1031,7 +1031,7 @@ void ActionRepeatForever::onEnter()
     auto action = Sequence::create(
         DelayTime::create(1),
         CallFunc::create( std::bind( &ActionRepeatForever::repeatForever, this, _grossini) ),
-        nullptr);
+        NULL);
 
     _grossini->runAction(action);
 }
@@ -1229,19 +1229,19 @@ void ActionOrbit::onEnter()
     auto action1 = Sequence::create(
         orbit1,
         orbit1->reverse(),
-        nullptr);
+        NULL);
 
     auto orbit2 = OrbitCamera::create(2,1, 0, 0, 180, -45, 0);
     auto action2 = Sequence::create(
         orbit2,
         orbit2->reverse(),
-        nullptr);
+        NULL);
 
     auto orbit3 = OrbitCamera::create(2,1, 0, 0, 180, 90, 0);
     auto action3 = Sequence::create(
         orbit3,
         orbit3->reverse(),
-        nullptr);
+        NULL);
 
     _kathia->runAction(RepeatForever::create(action1));
     _tamara->runAction(RepeatForever::create(action2));
@@ -1471,7 +1471,7 @@ void ActionMoveStacked::runActionsInSprite(Sprite *sprite)
                 Sequence::create(
                 MoveBy::create(0.05f, Vec2(10,10)),
                 MoveBy::create(0.05f, Vec2(-10,-10)),
-       nullptr)));
+       NULL)));
     
     auto action = MoveBy::create(2.0f, Vec2(400,0));
     auto action_back = action->reverse();
@@ -1497,7 +1497,7 @@ void ActionMoveJumpStacked::runActionsInSprite(Sprite *sprite)
             Sequence::create(
              MoveBy::create(0.05f, Vec2(10,2)),
              MoveBy::create(0.05f, Vec2(-10,-2)),
-             nullptr)));
+             NULL)));
     
     auto jump = JumpBy::create(2.0f, Vec2(400,0), 100, 5);
     auto jump_back = jump->reverse();
@@ -1536,7 +1536,7 @@ void ActionMoveBezierStacked::runActionsInSprite(Sprite *sprite)
       Sequence::create(
        MoveBy::create(0.05f, Vec2(10,0)),
        MoveBy::create(0.05f, Vec2(-10,0)),
-       nullptr)));
+       NULL)));
 }
 
 std::string ActionMoveBezierStacked::title() const
@@ -1586,7 +1586,7 @@ void ActionCatmullRomStacked::onEnter()
             Sequence::create(
                 MoveBy::create(0.05f, Vec2(10,0)),
                 MoveBy::create(0.05f, Vec2(-10,0)),
-                nullptr)));
+                NULL)));
     
     auto drawNode1 = DrawNode::create();
     drawNode1->setPosition(Vec2(50,50));
@@ -1620,7 +1620,7 @@ void ActionCatmullRomStacked::onEnter()
             Sequence::create(
                 MoveBy::create(0.05f, Vec2(10,0)),
                 MoveBy::create(0.05f, Vec2(-10,0)),
-                nullptr)));
+                NULL)));
     
     auto drawNode2 = DrawNode::create();
     drawNode2->drawCatmullRom(array2, 50, Color4F(1.0, 0.0, 0.0, 0.5));
@@ -1680,7 +1680,7 @@ void ActionCardinalSplineStacked::onEnter()
             Sequence::create(
                 MoveBy::create(0.05f, Vec2(10,0)),
                 MoveBy::create(0.05f, Vec2(-10,0)),
-                nullptr)));
+                NULL)));
     
     auto drawNode1 = DrawNode::create();
     drawNode1->setPosition(Vec2(50,50));
@@ -1707,7 +1707,7 @@ void ActionCardinalSplineStacked::onEnter()
             Sequence::create(
                 MoveBy::create(0.05f, Vec2(10,0)),
                 MoveBy::create(0.05f, Vec2(-10,0)),
-                nullptr)));
+                NULL)));
     
     auto drawNode2 = DrawNode::create();
     drawNode2->setPosition(Vec2(s.width/2,50));
@@ -1955,7 +1955,7 @@ void Issue1398::onEnter()
 			CallFunc::create( std::bind(&Issue1398::incrementIntegerCallback, this, (void*)"6")),
 			CallFunc::create( std::bind(&Issue1398::incrementIntegerCallback, this, (void*)"7")),
 			CallFunc::create( std::bind(&Issue1398::incrementIntegerCallback, this, (void*)"8")),
-            nullptr));
+            NULL));
 }
 
 void Issue1398::incrementIntegerCallback(void* data)
@@ -2288,7 +2288,7 @@ void ActionRemoveSelf::onEnter()
 		RotateBy::create( 2,  540),
 		ScaleTo::create(1,0.1f),
 		RemoveSelf::create(),
-		nullptr);
+		NULL);
 
 	_grossini->runAction(action);
 }
@@ -2351,7 +2351,7 @@ void Issue14936_1::onEnter() {
         counterLabel->setString(os.str());
     });
 
-    runAction(Spawn::create(func, func, nullptr));
+    runAction(Spawn::create(func, func, NULL));
 }
 
 std::string Issue14936_1::subtitle() const {
@@ -2427,7 +2427,7 @@ void SequenceWithFinalInstant::onEnter()
       cocos2d::Sequence::create
       (cocos2d::DelayTime::create(0.05),
        cocos2d::CallFunc::create(f),
-       nullptr);
+       NULL);
 
     _target->runAction(action);
     _manager->update(0);

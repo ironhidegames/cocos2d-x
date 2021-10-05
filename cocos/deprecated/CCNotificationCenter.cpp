@@ -157,7 +157,7 @@ void __NotificationCenter::registerScriptObserver(Ref *target, int handler,const
     if (this->observerExisted(target, name, nullptr))
         return;
     
-    NotificationObserver *observer = new (std::nothrow) NotificationObserver(target, nullptr, name, nullptr);
+    NotificationObserver *observer = new (std::nothrow) NotificationObserver(target, nullptr, name, NULL);
     if (!observer)
         return;
     

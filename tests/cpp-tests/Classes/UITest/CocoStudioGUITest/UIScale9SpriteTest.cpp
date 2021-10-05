@@ -703,7 +703,7 @@ bool UIS9CascadeOpacityAndColor::init()
                                             rgba->setCascadeColorEnabled(false);
                                             rgba->setCascadeOpacityEnabled(false);
                                         }),
-                                        nullptr);
+                                        NULL);
         auto repeat = RepeatForever::create(actions);
         rgba->runAction(repeat);
         return true;

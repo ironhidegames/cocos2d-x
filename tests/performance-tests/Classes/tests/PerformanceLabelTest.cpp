@@ -100,7 +100,7 @@ bool LabelMainScene::init()
     auto increase = MenuItemFont::create(" + ", CC_CALLBACK_1(LabelMainScene::onIncrease, this));
     increase->setColor(Color3B(0,200,20));
 
-    auto menu = Menu::create(decrease, increase, nullptr);
+    auto menu = Menu::create(decrease, increase, NULL);
     menu->alignItemsHorizontally();
     menu->setPosition(Vec2(s.width/2, s.height-65));
     addChild(menu, 1);
@@ -370,7 +370,7 @@ void LabelMainScene::endStat(float dt)
             break;
     }
     auto avgStr = genStr("%.2f", (float) statCount / totalStatTime);
-    Profile::getInstance()->addTestResult(genStrVector(tf.c_str(), genStr("%d", _quantityNodes).c_str(), nullptr),
+    Profile::getInstance()->addTestResult(genStrVector(tf.c_str(), genStr("%d", _quantityNodes).c_str(), NULL),
                                           genStrVector(avgStr.c_str(), genStr("%.2f", minFrameRate).c_str(),
                                                        genStr("%.2f", maxFrameRate).c_str(), nullptr));
 

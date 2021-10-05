@@ -296,7 +296,7 @@ bool UILayoutTest_BackGroundImage::init()
         auto label1 = Label::createWithTTF(ttfConfig, "Print Resources");
         auto item1 = MenuItemLabel::create(label1, CC_CALLBACK_1(UILayoutTest_BackGroundImage::printWidgetResources, this));
         item1->setPosition(Vec2(VisibleRect::left().x + 60, VisibleRect::bottom().y + item1->getContentSize().height * 3));
-        auto pMenu1 = Menu::create(item1, nullptr);
+        auto pMenu1 = Menu::create(item1, NULL);
         pMenu1->setPosition(Vec2(0, 0));
         this->addChild(pMenu1, 10);
         

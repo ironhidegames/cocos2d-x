@@ -95,7 +95,7 @@ void TransitionProgress::onEnter()
     auto layerAction = Sequence::create(
         ProgressFromTo::create(_duration, _from, _to),
         CallFunc::create(CC_CALLBACK_0(TransitionScene::finish,this)),
-        nullptr);
+        NULL);
     // run the blend action
     node->runAction(layerAction);
 

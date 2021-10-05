@@ -361,7 +361,7 @@ bool GameControllerTest::init()
     auto closeItem = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(GameControllerTest::menuCloseCallback, this));
     closeItem->setPosition(_visibleOrigin + _visibleSize - closeItem->getContentSize() / 2);
 
-    auto menu = Menu::create(closeItem,nullptr);
+    auto menu = Menu::create(closeItem,NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu);
     

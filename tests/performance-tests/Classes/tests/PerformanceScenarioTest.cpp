@@ -100,7 +100,7 @@ void ScenarioTest::performTests()
                                                     MenuItemFont::create( "Add/Remove Sprite" ),
                                                     MenuItemFont::create( "Add/Remove Particle"),
                                                     MenuItemFont::create( "Add/Remove Particle System"),
-                                                    nullptr);
+                                                    NULL);
     _itemToggle->setAnchorPoint(Vec2(0.0f, 0.5f));
     _itemToggle->setPosition(Vec2(origin.x, origin.y + s.height / 2));
 
@@ -143,7 +143,7 @@ void ScenarioTest::performTests()
     increase->setColor(Color3B(0,200,20));
     increase->setPosition(Vec2(origin.x + s.width / 2 + 80, origin.y + 80));
     
-    auto menu = Menu::create(_itemToggle, decrease, increase, nullptr);
+    auto menu = Menu::create(_itemToggle, decrease, increase, NULL);
     menu->setPosition(Vec2(0.0f, 0.0f));
     addChild(menu, 10);
 
@@ -387,7 +387,7 @@ void ScenarioTest::endStat(float dt)
     Profile::getInstance()->addTestResult(genStrVector(genStr("%d", _spriteArray.size()).c_str(),
                                                        genStr("%d", _particleNumber).c_str(),
                                                        genStr("%d", _parsysArray.size()).c_str(),
-                                                       nullptr),
+                                                       NULL),
                                           genStrVector(avgStr.c_str(), genStr("%.2f", minFrameRate).c_str(),
                                                        genStr("%.2f", maxFrameRate).c_str(), nullptr));
 

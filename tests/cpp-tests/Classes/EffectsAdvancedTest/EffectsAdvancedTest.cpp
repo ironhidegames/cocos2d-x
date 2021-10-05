@@ -237,7 +237,7 @@ void Effect5::onEnter()
                                          StopGrid::create(),
                     //                     [DelayTime::create:2],
                     //                     [[effect copy] autorelease],
-                                         nullptr);
+                                         NULL);
     
     //auto bg = getChildByTag(kTagBackground);
     _bgNode->runAction(stopEffect);

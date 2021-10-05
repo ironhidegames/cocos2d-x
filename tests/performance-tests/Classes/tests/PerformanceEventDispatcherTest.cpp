@@ -138,7 +138,7 @@ void PerformanceEventDispatcherScene::initWithQuantityOfNodes(unsigned int nNode
     increase->setColor(Color3B(0,200,20));
     _increase = increase;
     
-    auto menu = Menu::create(decrease, increase, nullptr);
+    auto menu = Menu::create(decrease, increase, NULL);
     menu->alignItemsHorizontally();
     menu->setPosition(Vec2(s.width/2, s.height/2+15));
     addChild(menu, 1);
@@ -212,7 +212,7 @@ void PerformanceEventDispatcherScene::initWithQuantityOfNodes(unsigned int nNode
     stop->setPosition(VisibleRect::right() + Vec2(0, -40));
     _stopItem = stop;
     
-    auto menu2 = Menu::create(toggle, start, stop, nullptr);
+    auto menu2 = Menu::create(toggle, start, stop, NULL);
     menu2->setPosition(Vec2::ZERO);
     addChild(menu2);
     
@@ -337,7 +337,7 @@ void PerformanceEventDispatcherScene::dumpProfilerInfo(float dt)
         auto avgStr = genStr("%ldµ", timer->_averageTime2);
         auto minStr = genStr("%ldµ", timer->minTime);
         auto maxStr = genStr("%ldµ", timer->maxTime);
-        Profile::getInstance()->addTestResult(genStrVector(_testFunctions[_type].name, numStr.c_str(), nullptr),
+        Profile::getInstance()->addTestResult(genStrVector(_testFunctions[_type].name, numStr.c_str(), NULL),
                                               genStrVector(avgStr.c_str(), minStr.c_str(), maxStr.c_str(), nullptr));
 
         auto testsSize = sizeof(autoTestNodesNums)/sizeof(int);
