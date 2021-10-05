@@ -569,7 +569,7 @@ BugAutoCulling::BugAutoCulling()
     this->scheduleOnce([=](float){
         auto camera = Director::getInstance()->getRunningScene()->getCameras().front();
         auto move  = MoveBy::create(2.0, Vec2(2 * s.width, 0));
-        camera->runAction(Sequence::create(move, move->reverse(),nullptr));
+        camera->runAction(Sequence::create(move, move->reverse(),NULL));
     }, 1.0f, "lambda-autoculling-bug");
 }
 

@@ -229,7 +229,7 @@ void TestFacebookShare::eventMenuCallback(Ref* sender)
                 }
             });
             
-            auto seq = Sequence::create(delay, share, nullptr);
+            auto seq = Sequence::create(delay, share, NULL);
             runAction(seq);
         }
         break;
@@ -300,7 +300,7 @@ void TestFacebookShare::eventMenuCallback(Ref* sender)
                 }
             });
             
-            auto seq = Sequence::create(delay, share, nullptr);
+            auto seq = Sequence::create(delay, share, NULL);
             runAction(seq);
         }
         break;

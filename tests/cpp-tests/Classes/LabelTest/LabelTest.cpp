@@ -436,7 +436,7 @@ Atlas4::Atlas4()
     
     auto scale = ScaleBy::create(2, 1.5f);
     auto scale_back = scale->reverse();
-    auto scale_seq = Sequence::create(scale, scale_back,nullptr);
+    auto scale_seq = Sequence::create(scale, scale_back,NULL);
     auto scale_4ever = RepeatForever::create(scale_seq);
     
     auto jump = JumpBy::create(0.5f, Vec2::ZERO, 60, 1);

@@ -921,7 +921,7 @@ TMXIsoZorder::TMXIsoZorder()
     
     auto move = MoveBy::create(10, Vec2(300,250));
     auto back = move->reverse();
-    auto seq = Sequence::create(move, back,nullptr);
+    auto seq = Sequence::create(move, back,NULL);
     _tamara->runAction( RepeatForever::create(seq) );
     
     schedule( CC_SCHEDULE_SELECTOR(TMXIsoZorder::repositionSprite) );
@@ -987,7 +987,7 @@ TMXOrthoZorder::TMXOrthoZorder()
     
     auto move = MoveBy::create(10, Vec2(400,450));
     auto back = move->reverse();
-    auto seq = Sequence::create(move, back,nullptr);
+    auto seq = Sequence::create(move, back,NULL);
     _tamara->runAction( RepeatForever::create(seq));
     
     schedule( CC_SCHEDULE_SELECTOR(TMXOrthoZorder::repositionSprite));
@@ -1049,7 +1049,7 @@ TMXIsoVertexZ::TMXIsoVertexZ()
     
     auto move = MoveBy::create(10, Vec2(300,250) * (1/CC_CONTENT_SCALE_FACTOR()));
     auto back = move->reverse();
-    auto seq = Sequence::create(move, back,nullptr);
+    auto seq = Sequence::create(move, back,NULL);
     _tamara->runAction( RepeatForever::create(seq) );
     
     schedule( CC_SCHEDULE_SELECTOR(TMXIsoVertexZ::repositionSprite));
@@ -1121,7 +1121,7 @@ TMXOrthoVertexZ::TMXOrthoVertexZ()
 
     auto move = MoveBy::create(10, Vec2(400,450) * (1/CC_CONTENT_SCALE_FACTOR()));
     auto back = move->reverse();
-    auto seq = Sequence::create(move, back,nullptr);
+    auto seq = Sequence::create(move, back,NULL);
     _tamara->runAction( RepeatForever::create(seq));
     
     schedule(CC_SCHEDULE_SELECTOR(TMXOrthoVertexZ::repositionSprite));

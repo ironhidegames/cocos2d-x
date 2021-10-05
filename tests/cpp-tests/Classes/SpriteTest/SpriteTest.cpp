@@ -478,19 +478,19 @@ SpriteBatchNodeColorOpacity::SpriteBatchNodeColorOpacity()
 
     auto action = FadeIn::create(2);
     auto action_back = action->reverse();
-    auto fade = RepeatForever::create( Sequence::create( action, action_back,nullptr) );
+    auto fade = RepeatForever::create( Sequence::create( action, action_back,NULL) );
 
     auto tintred = TintBy::create(2, 0, -255, -255);
     auto tintred_back = tintred->reverse();
-    auto red = RepeatForever::create( Sequence::create( tintred, tintred_back,nullptr) );
+    auto red = RepeatForever::create( Sequence::create( tintred, tintred_back,NULL) );
 
     auto tintgreen = TintBy::create(2, -255, 0, -255);
     auto tintgreen_back = tintgreen->reverse();
-    auto green = RepeatForever::create( Sequence::create( tintgreen, tintgreen_back,nullptr) );
+    auto green = RepeatForever::create( Sequence::create( tintgreen, tintgreen_back,NULL) );
 
     auto tintblue = TintBy::create(2, -255, -255, 0);
     auto tintblue_back = tintblue->reverse();
-    auto blue = RepeatForever::create( Sequence::create( tintblue, tintblue_back,nullptr) );
+    auto blue = RepeatForever::create( Sequence::create( tintblue, tintblue_back,NULL) );
     
     
     sprite5->runAction(red);
@@ -2562,8 +2562,8 @@ SpriteBatchNodeChildren::SpriteBatchNodeChildren()
     sprite2->runAction( RepeatForever::create(seq2) );
     
     sprite1->runAction( RepeatForever::create(action_rot));
-    sprite1->runAction( RepeatForever::create(Sequence::create(action, action_back,nullptr)) );
-    sprite1->runAction( RepeatForever::create(Sequence::create(action_s, action_s_back,nullptr)) );
+    sprite1->runAction( RepeatForever::create(Sequence::create(action, action_back,NULL)) );
+    sprite1->runAction( RepeatForever::create(Sequence::create(action_s, action_s_back,NULL)) );
 
 }
 
