@@ -58,7 +58,7 @@ void Cocos2dRenderer::Resume()
 
     if (!glview)
     {
-        GLViewImpl* glview = GLViewImpl::create("Test Cpp");
+        GLViewImpl* glview = GLViewImpl::create("kingdomrush-x");
         glview->setDispatcher(m_dispatcher.Get());
         glview->setPanel(m_panel.Get());
         glview->Create(static_cast<float>(m_width), static_cast<float>(m_height), m_dpi, m_orientation);

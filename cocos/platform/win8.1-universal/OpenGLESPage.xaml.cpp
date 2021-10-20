@@ -435,6 +435,7 @@ void OpenGLESPage::SetVisibility(bool isVisible)
     }
 }
 
+
 void OpenGLESPage::OnVisibilityChanged(Windows::UI::Core::CoreWindow^ sender, Windows::UI::Core::VisibilityChangedEventArgs^ args)
 {
     if (args->Visible && mRenderSurface != EGL_NO_SURFACE)
