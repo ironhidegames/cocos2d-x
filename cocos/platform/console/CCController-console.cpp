@@ -53,7 +53,9 @@ void ControllerImpl::init()
 	controllers[1] = NULL;
 	// TODO - cleanup 
 	int controllerIndex = 0;
-	for (int i = 0; i < SDL_NumJoysticks(); ++i)
+	auto joysticks = SDL_NumJoysticks();
+	auto error = SDL_GetError();
+	for (int i = 0; i < joysticks; ++i)
 	{
 		if (SDL_IsGameController(i))
 		{
@@ -239,7 +241,8 @@ Controller::~Controller() {
 
 void Controller::startDiscoveryController()
 {
-
+	auto cont = new cocos2d::Controller();
+	cont->_impl->init();
 }
 
 void Controller::stopDiscoveryController() {
