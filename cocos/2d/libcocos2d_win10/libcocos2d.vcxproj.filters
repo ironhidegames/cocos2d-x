@@ -2039,7 +2039,7 @@
     <ClCompile Include="..\..\base\CCController-linux-win32.cpp">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\platform\console\CCController-console.cpp">
+    <ClCompile Include="..\..\platform\console\CCController-xbox.cpp">
       <Filter>platform\console</Filter>
     </ClCompile>
   </ItemGroup>
@@ -4069,7 +4069,7 @@
     <ClInclude Include="..\..\renderer\KRTextureDebug.h">
       <Filter>renderer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\platform\console\CCController-console.h">
+    <ClInclude Include="..\..\platform\console\CCController-xbox.h">
       <Filter>platform\console</Filter>
     </ClInclude>
   </ItemGroup>

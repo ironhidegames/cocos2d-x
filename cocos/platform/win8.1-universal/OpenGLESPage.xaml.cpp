@@ -118,7 +118,7 @@ void OpenGLESPage::CreateInput()
             Windows::UI::Core::CoreInputDeviceTypes::Touch |
             Windows::UI::Core::CoreInputDeviceTypes::Pen
             );
-
+       
         // Register for pointer events, which will be raised on the background thread.
         mCoreInput->PointerPressed += ref new TypedEventHandler<Object^, PointerEventArgs^>(this, &OpenGLESPage::OnPointerPressed);
         mCoreInput->PointerMoved += ref new TypedEventHandler<Object^, PointerEventArgs^>(this, &OpenGLESPage::OnPointerMoved);

@@ -34,7 +34,11 @@
 
 NS_CC_BEGIN
 
+#ifdef WINRT
+ref class ControllerImpl;
+#else
 class ControllerImpl;
+#endif
 class EventListenerController;
 class EventController;
 class EventDispatcher;
@@ -49,15 +53,13 @@ class EventDispatcher;
  * @brief A Controller object represents a connected physical game controller.
  * @js NA
  */
-class CC_DLL Controller
-{
+class CC_DLL Controller {
 public:
     /**
      * Controllers' standard  key
      * Controller receives only standard key which contained within enum Key by default.
      */
-    enum Key
-    {
+    enum Key {
         KEY_NONE = 0,
 
         JOYSTICK_LEFT_X = 1000,
@@ -98,8 +100,7 @@ public:
      * @struct KeyStatus
      *
      */
-    typedef struct _keyStatus
-    {
+    typedef struct _keyStatus {
         /** A Boolean value that indicates whether the key is considered pressed. */
         bool isPressed;
         /** The value of key.This value is used in conjunction with the isPressed parameter. */
@@ -116,7 +117,7 @@ public:
     /**
      * Gets all Controller objects.
      */
-    static const std::vector<Controller*>& getAllController(){ return s_allController;}
+    static const std::vector<Controller*>& getAllController() { return s_allController; }
 
     /**
      * Gets a Controller object with tag.
@@ -151,12 +152,12 @@ public:
     /**
      * Gets the name of this Controller object.
      */
-    const std::string& getDeviceName() const { return _deviceName;}
+    const std::string& getDeviceName() const { return _deviceName; }
 
     /**
      * Gets the Controller id.
      */
-    int getDeviceId() const { return _deviceId;}
+    int getDeviceId() const { return _deviceId; }
 
     /**
      * Indicates whether the Controller is connected.
@@ -177,20 +178,20 @@ public:
      * @param externalKeyCode   External key code.
      * @param receive   True if external key event on this controller should be receive, false otherwise.
      */
-    void receiveExternalKeyEvent(int externalKeyCode,bool receive);
+    void receiveExternalKeyEvent(int externalKeyCode, bool receive);
 
     /**
      * Changes the tag that is used to identify the controller easily.
      * @param tag   A integer that identifies the controller.
      */
-    void setTag(int tag) { _controllerTag = tag;}
+    void setTag(int tag) { _controllerTag = tag; }
 
     /**
      * Returns a tag that is used to identify the controller easily.
      *
      * @return An integer that identifies the controller.
      */
-    int getTag() const { return _controllerTag;}
+    int getTag() const { return _controllerTag; }
 
 private:
     static std::vector<Controller*> s_allController;
@@ -214,7 +215,11 @@ private:
 
     int _controllerTag;
 
+#ifdef WINRT
+    ControllerImpl^ _impl;
+#else
     ControllerImpl* _impl;
+#endif
 
     EventDispatcher* _eventDispatcher;
     EventController *_connectEvent;
@@ -239,9 +244,14 @@ private:
     std::unordered_map<int,int> _axisInputMap;
     #endif
 
-    friend class ControllerImpl;
     friend class EventListenerController;
-    friend class ControllerConsole;
+#ifdef WINRT
+    friend ref class ControllerImpl;
+    friend class ControllerXBox;
+#else
+    friend class ControllerImpl;
+#endif
+
 };
 
 // end group
