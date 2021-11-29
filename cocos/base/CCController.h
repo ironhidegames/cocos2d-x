@@ -34,7 +34,7 @@
 
 NS_CC_BEGIN
 
-#ifdef WINRT
+#ifdef CC_XBOX
 ref class ControllerImpl;
 #else
 class ControllerImpl;
@@ -215,7 +215,7 @@ private:
 
     int _controllerTag;
 
-#ifdef WINRT
+#ifdef CC_XBOX
     ControllerImpl^ _impl;
 #else
     ControllerImpl* _impl;
@@ -226,7 +226,7 @@ private:
     EventController *_keyEvent;
     EventController *_axisEvent;
 
-    #if ( CC_TARGET_PLATFORM == CC_PLATFORM_LINUX || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+    #if ( CC_TARGET_PLATFORM == CC_PLATFORM_LINUX || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     //FIXME: Once GLFW 3.3 is bundled with cocos2d-x, remove these unordered
     //maps. They won't be needed. We will only need to provide a mapping from
     //the GLFW gamepad key codes to the Controller::Key.
@@ -245,7 +245,7 @@ private:
     #endif
 
     friend class EventListenerController;
-#ifdef WINRT
+#ifdef CC_XBOX
     friend ref class ControllerImpl;
     friend class ControllerXBox;
 #else

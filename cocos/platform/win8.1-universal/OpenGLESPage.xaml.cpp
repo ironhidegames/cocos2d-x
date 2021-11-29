@@ -64,11 +64,11 @@ OpenGLESPage::OpenGLESPage(OpenGLES* openGLES) :
     window->VisibilityChanged +=
         ref new Windows::Foundation::TypedEventHandler<Windows::UI::Core::CoreWindow^, Windows::UI::Core::VisibilityChangedEventArgs^>(this, &OpenGLESPage::OnVisibilityChanged);
 
-	window->KeyDown += ref new TypedEventHandler<CoreWindow^, KeyEventArgs^>(this, &OpenGLESPage::OnKeyPressed);
+	/*window->KeyDown += ref new TypedEventHandler<CoreWindow^, KeyEventArgs^>(this, &OpenGLESPage::OnKeyPressed);
 
 	window->KeyUp += ref new TypedEventHandler<CoreWindow^, KeyEventArgs^>(this, &OpenGLESPage::OnKeyReleased);
 
-	window->CharacterReceived += ref new TypedEventHandler<CoreWindow^, CharacterReceivedEventArgs^>(this, &OpenGLESPage::OnCharacterReceived);
+	window->CharacterReceived += ref new TypedEventHandler<CoreWindow^, CharacterReceivedEventArgs^>(this, &OpenGLESPage::OnCharacterReceived);*/
 
 
     DisplayInformation^ currentDisplayInformation = DisplayInformation::GetForCurrentView();
@@ -114,6 +114,7 @@ void OpenGLESPage::CreateInput()
     {
         // The CoreIndependentInputSource will raise pointer events for the specified device types on whichever thread it's created on.
         mCoreInput = swapChainPanel->CreateCoreIndependentInputSource(
+            //Windows::UI::Core::CoreInputDeviceTypes::None
             Windows::UI::Core::CoreInputDeviceTypes::Mouse |
             Windows::UI::Core::CoreInputDeviceTypes::Touch |
             Windows::UI::Core::CoreInputDeviceTypes::Pen
@@ -131,7 +132,7 @@ void OpenGLESPage::CreateInput()
         }
 
 		// Begin processing input messages as they're delivered.
-        mCoreInput->Dispatcher->ProcessEvents(CoreProcessEventsOption::ProcessUntilQuit);
+         mCoreInput->Dispatcher->ProcessEvents(CoreProcessEventsOption::ProcessUntilQuit);
     });
 
     // Run task on a dedicated high priority background thread.

@@ -30,7 +30,8 @@ THE SOFTWARE.
 #include "base/ccTypes.h"
 #include "base/CCEventTouch.h"
 #ifdef CC_PLATFORM_PC
-#if CC_IS_CONSOLE
+#if CC_XBOX
+#elif CC_IS_CONSOLE
 #include "SDL2/include/SDL.h"
 #else
 #include "glfw3.h"
@@ -201,7 +202,9 @@ public:
      */
     virtual float getFrameZoomFactor() const { return 1.0; }
 #ifdef CC_PLATFORM_PC
-#if CC_IS_CONSOLE
+#if CC_XBOX
+    virtual void setCursorImage(int cursor) {}
+#elif CC_IS_CONSOLE
     virtual void setCursorImage(SDL_Cursor* cursor) {}
 #else
     virtual void setCursorImage(GLFWcursor* cursor) {}

@@ -18,9 +18,9 @@ ControllerXBox::~ControllerXBox() {
 
 void ControllerXBox::pollActions() {
 	//for some reason this can't be done at instance level, it's better to handle it this way also so if the gamepad
-	//changes, you're always listening to any gamepad that is first
-	if (Gamepad::Gamepads->Size > 0) {
-		auto gp = Gamepad::Gamepads->GetAt(0);
+	//changes, you're always listening to any gamepad
+	for (int i = 0; i < Gamepad::Gamepads->Size; i++) {
+		auto gp = Gamepad::Gamepads->GetAt(i);
 		auto reading = gp->GetCurrentReading();
 
 		auto controller = (ControllerXBox*)Controller::getControllerByDeviceId(gp->GetHashCode());
@@ -111,6 +111,8 @@ Controller::~Controller() {
 void Controller::startDiscoveryController() {
 	auto cont = new cocos2d::Controller(); //We should improve this as it is keeping a "root" reference
 	//to a controller with no events, just to keep the tracking implementation.
+	//The rationale behind this for now is that the controllers are managed objects on the dispatching thread
+	//and marshalling errors occur if this is not kept there
 	Gamepad::GamepadAdded +=
 		ref new EventHandler<Gamepad^>(cont->_impl, &ControllerImpl::OnGamepadAdded);
 

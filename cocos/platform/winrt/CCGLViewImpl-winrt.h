@@ -67,6 +67,7 @@ public:
     * @param isVisible Hide or Show the mouse cursor if there is one.
     */
     virtual void setCursorVisible(bool isVisible) override;
+    virtual void setCursorImage(int cursor) override;
 
     bool isCursorVisible() { return _isCursorVisible; }
 

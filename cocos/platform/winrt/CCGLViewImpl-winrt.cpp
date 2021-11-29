@@ -135,6 +135,16 @@ void cocos2d::GLViewImpl::setCursorVisible(bool isVisible)
     _isCursorVisible = isVisible;
 }
 
+void cocos2d::GLViewImpl::setCursorImage(int cursor) {
+    if (m_dispatcher.Get()) {
+        m_dispatcher.Get()->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([cursor]() {
+            auto crs = ref new Windows::UI::Core::CoreCursor(Windows::UI::Core::CoreCursorType::Hand, cursor);
+            Windows::UI::Core::CoreWindow::GetForCurrentThread()->PointerCursor = crs;     
+        }));
+    }
+}
+
+
 void GLViewImpl::setDispatcher(Windows::UI::Core::CoreDispatcher^ dispatcher)
 {
     m_dispatcher = dispatcher;

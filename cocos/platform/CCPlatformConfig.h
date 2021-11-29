@@ -134,6 +134,7 @@ THE SOFTWARE.
     #undef  CC_TARGET_PLATFORM
     #define CC_TARGET_PLATFORM          CC_PLATFORM_WINRT
     #define CC_IS_CONSOLE               true 
+    #define CC_XBOX                     true
 #endif
 
 #ifndef CC_IS_CONSOLE
