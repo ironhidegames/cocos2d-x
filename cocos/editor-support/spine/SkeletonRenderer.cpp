@@ -32,7 +32,6 @@
 #include <spine/AttachmentVertices.h>
 #include <algorithm>
 
-USING_NS_CC;
 
 
 namespace spine {
@@ -43,10 +42,10 @@ namespace spine {
 		int computeTotalCoordCount(Skeleton& skeleton, int startSlotIndex, int endSlotIndex);
 		cocos2d::Rect computeBoundingRect(const float* coords, int vertexCount);
 		void interleaveCoordinates(float* dst, const float* src, int vertexCount, int dstStride);
-		BlendFunc makeBlendFunc(BlendMode blendMode, bool premultipliedAlpha);
+    cocos2d::BlendFunc makeBlendFunc(BlendMode blendMode, bool premultipliedAlpha);
 		void transformWorldVertices(float* dstCoord, int coordCount, Skeleton& skeleton, int startSlotIndex, int endSlotIndex);
-		bool cullRectangle(Renderer* renderer, const Mat4& transform, const cocos2d::Rect& rect);
-			Color4B ColorToColor4B(const Color& color);
+		bool cullRectangle(cocos2d::Renderer* renderer, const cocos2d::Mat4& transform, const cocos2d::Rect& rect);
+    cocos2d::Color4B ColorToColor4B(const Color& color);
 		bool slotIsOutRange(Slot& slot, int startSlotIndex, int endSlotIndex);
 	}
 
@@ -90,7 +89,7 @@ namespace spine {
 	void SkeletonRenderer::initialize () {
 		_clipper = new (__FILE__, __LINE__) SkeletonClipping();
 
-		_blendFunc = BlendFunc::ALPHA_PREMULTIPLIED;
+		_blendFunc = cocos2d::BlendFunc::ALPHA_PREMULTIPLIED;
 		setOpacityModifyRGB(true);
 
 		setTwoColorTint(false);
@@ -107,7 +106,7 @@ namespace spine {
 			return;
 		}
 
-		Texture2D *texture = nullptr;
+        cocos2d::Texture2D *texture = nullptr;
 		for (int i = 0, n = _skeleton->getSlots().size(); i < n; i++) {
 			Slot* slot = _skeleton->getDrawOrder()[i];
 			Attachment* const attachment = slot->getAttachment();
@@ -253,7 +252,7 @@ namespace spine {
 		if (_ownsSkeleton) _skeleton->update(deltaTime * _timeScale);
 	}
 
-	void SkeletonRenderer::draw (Renderer* renderer, const Mat4& transform, uint32_t transformFlags) {
+	void SkeletonRenderer::draw (cocos2d::Renderer* renderer, const cocos2d::Mat4& transform, uint32_t transformFlags) {
 		// Early exit if the skeleton is invisible
 		if (getDisplayedOpacity() == 0 || _skeleton->getColor().a == 0) {
 			return;
@@ -286,7 +285,7 @@ namespace spine {
 			_effect->begin(*_skeleton);
 		}
 
-		const Color3B displayedColor = getDisplayedColor();
+		const cocos2d::Color3B displayedColor = getDisplayedColor();
 		Color nodeColor;
 		nodeColor.r = displayedColor.r / 255.f;
 		nodeColor.g = displayedColor.g / 255.f;
@@ -339,7 +338,7 @@ namespace spine {
 					triangles.vertCount = attachmentVertices->_triangles->vertCount;
 					assert(triangles.vertCount == 4);
 					memcpy(triangles.verts, attachmentVertices->_triangles->verts, sizeof(cocos2d::V3F_C4B_T2F) * attachmentVertices->_triangles->vertCount);
-					dstStride = sizeof(V3F_C4B_T2F) / sizeof(float);
+					dstStride = sizeof(cocos2d::V3F_C4B_T2F) / sizeof(float);
 					dstTriangleVertices = reinterpret_cast<float*>(triangles.verts);
 				} else {
 					trianglesTwoColor.indices = attachmentVertices->_triangles->indices;
@@ -373,7 +372,7 @@ namespace spine {
 					triangles.vertCount = attachmentVertices->_triangles->vertCount;
 					memcpy(triangles.verts, attachmentVertices->_triangles->verts, sizeof(cocos2d::V3F_C4B_T2F) * attachmentVertices->_triangles->vertCount);
 					dstTriangleVertices = (float*)triangles.verts;
-					dstStride = sizeof(V3F_C4B_T2F) / sizeof(float);
+					dstStride = sizeof(cocos2d::V3F_C4B_T2F) / sizeof(float);
 					dstVertexCount = triangles.vertCount;
 				} else {
 					trianglesTwoColor.indices = attachmentVertices->_triangles->indices;
@@ -431,7 +430,7 @@ namespace spine {
 
 			const cocos2d::Color4B color4B = ColorToColor4B(color);
 			const cocos2d::Color4B darkColor4B = ColorToColor4B(darkColor);
-			const BlendFunc blendFunc = makeBlendFunc(slot->getData().getBlendMode(), attachmentVertices->_texture->hasPremultipliedAlpha());
+			const cocos2d::BlendFunc blendFunc = makeBlendFunc(slot->getData().getBlendMode(), attachmentVertices->_texture->hasPremultipliedAlpha());
 			_blendFunc = blendFunc;
 
 			if (hasSingleTint) {
@@ -460,7 +459,7 @@ namespace spine {
 					const float* verts = _clipper->getClippedVertices().buffer();
 					const float* uvs = _clipper->getClippedUVs().buffer();
 					if (_effect) {
-						V3F_C4B_T2F* vertex = batchedTriangles->getTriangles().verts;
+                        cocos2d::V3F_C4B_T2F* vertex = batchedTriangles->getTriangles().verts;
 						Color darkTmp;
 						for (int v = 0, vn = batchedTriangles->getTriangles().vertCount, vv = 0; v < vn; ++v, vv+=2, ++vertex) {
 							Color lightCopy = color;
@@ -472,7 +471,7 @@ namespace spine {
 							vertex->colors = ColorToColor4B(lightCopy);
 						}
 					} else {
-						V3F_C4B_T2F* vertex = batchedTriangles->getTriangles().verts;
+                        cocos2d::V3F_C4B_T2F* vertex = batchedTriangles->getTriangles().verts;
 						for (int v = 0, vn = batchedTriangles->getTriangles().vertCount, vv = 0; v < vn; ++v, vv+=2, ++vertex) {
 							vertex->vertices.x = verts[vv];
 							vertex->vertices.y = verts[vv + 1];
@@ -490,7 +489,7 @@ namespace spine {
 #endif
 
 					if (_effect) {
-						V3F_C4B_T2F* vertex = batchedTriangles->getTriangles().verts;
+                        cocos2d::V3F_C4B_T2F* vertex = batchedTriangles->getTriangles().verts;
 						Color darkTmp;
 						for (int v = 0, vn = batchedTriangles->getTriangles().vertCount; v < vn; ++v, ++vertex) {
 							Color lightCopy = color;
@@ -498,7 +497,7 @@ namespace spine {
 							vertex->colors = ColorToColor4B(lightCopy);
 						}
 					} else {
-						V3F_C4B_T2F* vertex = batchedTriangles->getTriangles().verts;
+                        cocos2d::V3F_C4B_T2F* vertex = batchedTriangles->getTriangles().verts;
 						for (int v = 0, vn = batchedTriangles->getTriangles().vertCount; v < vn; ++v, ++vertex) {
 							vertex->colors = color4B;
 						}
@@ -632,15 +631,15 @@ namespace spine {
 	}
 
 
-	void SkeletonRenderer::drawDebug (Renderer* renderer, const Mat4 &transform, uint32_t transformFlags) {
+	void SkeletonRenderer::drawDebug (cocos2d::Renderer* renderer, const cocos2d::Mat4 &transform, uint32_t transformFlags) {
 
 #if !defined(USE_MATRIX_STACK_PROJECTION_ONLY)
-		Director* director = Director::getInstance();
-		director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
-		director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, transform);
+        cocos2d::Director* director = cocos2d::Director::getInstance();
+		director->pushMatrix(cocos2d::MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+		director->loadMatrix(cocos2d::MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, transform);
 #endif
 
-		DrawNode* drawNode = DrawNode::create();
+        cocos2d::DrawNode* drawNode = cocos2d::DrawNode::create();
 
 		// Draw bounding rectangle
 		if (_debugBoundingRect) {
@@ -650,14 +649,14 @@ namespace spine {
 			drawNode->setLineWidth(2.0f);
 #endif
 			const cocos2d::Rect brect = getBoundingBox();
-			const Vec2 points[4] =
+			const cocos2d::Vec2 points[4] =
 			{
 				brect.origin,
 				{ brect.origin.x + brect.size.width, brect.origin.y },
 				{ brect.origin.x + brect.size.width, brect.origin.y + brect.size.height },
 				{ brect.origin.x, brect.origin.y + brect.size.height }
 			};
-			drawNode->drawPoly(points, 4, true, Color4F::GREEN);
+			drawNode->drawPoly(points, 4, true, cocos2d::Color4F::GREEN);
 		}
 
 		if (_debugSlots) {
@@ -668,7 +667,7 @@ namespace spine {
 #else
 			drawNode->setLineWidth(2.0f);
 #endif
-			V3F_C4B_T2F_Quad quad;
+            cocos2d::V3F_C4B_T2F_Quad quad;
 			for (int i = 0, n = _skeleton->getSlots().size(); i < n; i++) {
 				Slot* slot = _skeleton->getDrawOrder()[i];
 
@@ -682,14 +681,14 @@ namespace spine {
 				RegionAttachment* attachment = (RegionAttachment*)slot->getAttachment();
 				float worldVertices[8];
 				attachment->computeWorldVertices(slot->getBone(), worldVertices, 0, 2);
-				const Vec2 points[4] =
+				const cocos2d::Vec2 points[4] =
 				{
 					{ worldVertices[0], worldVertices[1] },
 					{ worldVertices[2], worldVertices[3] },
 					{ worldVertices[4], worldVertices[5] },
 					{ worldVertices[6], worldVertices[7] }
 				};
-				drawNode->drawPoly(points, 4, true, Color4F::BLUE);
+				drawNode->drawPoly(points, 4, true, cocos2d::Color4F::BLUE);
 			}
 		}
 
@@ -705,15 +704,15 @@ namespace spine {
 				if (!bone->isActive()) continue;
 				float x = bone->getData().getLength() * bone->getA() + bone->getWorldX();
 				float y = bone->getData().getLength() * bone->getC() + bone->getWorldY();
-				drawNode->drawLine(Vec2(bone->getWorldX(), bone->getWorldY()), Vec2(x, y), Color4F::RED);
+				drawNode->drawLine(cocos2d::Vec2(bone->getWorldX(), bone->getWorldY()), cocos2d::Vec2(x, y), cocos2d::Color4F::RED);
 			}
 			// Bone origins.
-			auto color = Color4F::BLUE; // Root bone is blue.
+			auto color = cocos2d::Color4F::BLUE; // Root bone is blue.
 			for (int i = 0, n = _skeleton->getBones().size(); i < n; i++) {
 				Bone *bone = _skeleton->getBones()[i];
 				if (!bone->isActive()) continue;
-				drawNode->drawPoint(Vec2(bone->getWorldX(), bone->getWorldY()), 4, color);
-				if (i == 0) color = Color4F::GREEN;
+				drawNode->drawPoint(cocos2d::Vec2(bone->getWorldX(), bone->getWorldY()), 4, color);
+				if (i == 0) color = cocos2d::Color4F::GREEN;
 			}
 		}
 
@@ -736,13 +735,13 @@ namespace spine {
 					const int idx0 = mesh->getTriangles()[t + 0];
 					const int idx1 = mesh->getTriangles()[t + 1];
 					const int idx2 = mesh->getTriangles()[t + 2];
-					const Vec2 v[3] =
+					const cocos2d::Vec2 v[3] =
 					{
 						worldCoord + (idx0 * 2),
 						worldCoord + (idx1 * 2),
 						worldCoord + (idx2 * 2)
 					};
-					drawNode->drawPoly(v, 3, true, Color4F::YELLOW);
+					drawNode->drawPoly(v, 3, true, cocos2d::Color4F::YELLOW);
 				}
 				VLA_FREE(worldCoord);
 			}
@@ -750,7 +749,7 @@ namespace spine {
 
 		drawNode->draw(renderer, transform, transformFlags);
 #if !defined(USE_MATRIX_STACK_PROJECTION_ONLY)
-		director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+		director->popMatrix(cocos2d::MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
 #endif
 	}
 
@@ -875,7 +874,7 @@ namespace spine {
 
 	void SkeletonRenderer::onEnter () {
 #if CC_ENABLE_SCRIPT_BINDING
-		if (_scriptType == kScriptTypeJavascript && ScriptEngineManager::sendNodeEventToJSExtended(this, kNodeOnEnter)) return;
+		if (_scriptType == cocos2d::kScriptTypeJavascript && cocos2d::ScriptEngineManager::sendNodeEventToJSExtended(this, cocos2d::kNodeOnEnter)) return;
 #endif
 		Node::onEnter();
 		scheduleUpdate();
@@ -883,7 +882,7 @@ namespace spine {
 
 	void SkeletonRenderer::onExit () {
 #if CC_ENABLE_SCRIPT_BINDING
-		if (_scriptType == kScriptTypeJavascript && ScriptEngineManager::sendNodeEventToJSExtended(this, kNodeOnExit)) return;
+		if (_scriptType == cocos2d::kScriptTypeJavascript && cocos2d::ScriptEngineManager::sendNodeEventToJSExtended(this, cocos2d::kNodeOnExit)) return;
 #endif
 		Node::onExit();
 		unscheduleUpdate();
@@ -891,11 +890,11 @@ namespace spine {
 
 	// --- CCBlendProtocol
 
-	const BlendFunc& SkeletonRenderer::getBlendFunc () const {
+	const cocos2d::BlendFunc& SkeletonRenderer::getBlendFunc () const {
 		return _blendFunc;
 	}
 
-	void SkeletonRenderer::setBlendFunc (const BlendFunc &blendFunc) {
+	void SkeletonRenderer::setBlendFunc (const cocos2d::BlendFunc &blendFunc) {
 		_blendFunc = blendFunc;
 	}
 
@@ -1007,8 +1006,8 @@ namespace spine {
 
 		}
 
-		BlendFunc makeBlendFunc(BlendMode blendMode, bool premultipliedAlpha) {
-			BlendFunc blendFunc;
+    cocos2d::BlendFunc makeBlendFunc(BlendMode blendMode, bool premultipliedAlpha) {
+        cocos2d::BlendFunc blendFunc;
 			
 #if COCOS2D_VERSION < 0x00040000
 			switch (blendMode) {
@@ -1032,44 +1031,44 @@ namespace spine {
 #else
 			switch (blendMode) {
 				case BlendMode_Additive:
-					blendFunc.src = premultipliedAlpha ? backend::BlendFactor::ONE : backend::BlendFactor::SRC_ALPHA;
-					blendFunc.dst = backend::BlendFactor::ONE;
+					blendFunc.src = premultipliedAlpha ? cocos2d::backend::BlendFactor::ONE : cocos2d::backend::BlendFactor::SRC_ALPHA;
+					blendFunc.dst = cocos2d::backend::BlendFactor::ONE;
 					break;
 				case BlendMode_Multiply:
-					blendFunc.src = backend::BlendFactor::DST_COLOR;
-					blendFunc.dst = backend::BlendFactor::ONE_MINUS_SRC_ALPHA;
+					blendFunc.src = cocos2d::backend::BlendFactor::DST_COLOR;
+					blendFunc.dst = cocos2d::backend::BlendFactor::ONE_MINUS_SRC_ALPHA;
 					break;
 				case BlendMode_Screen:
-					blendFunc.src = backend::BlendFactor::ONE;
-					blendFunc.dst = backend::BlendFactor::ONE_MINUS_SRC_COLOR;
+					blendFunc.src = cocos2d::backend::BlendFactor::ONE;
+					blendFunc.dst = cocos2d::backend::BlendFactor::ONE_MINUS_SRC_COLOR;
 					break;
 				default:
-					blendFunc.src = premultipliedAlpha ? backend::BlendFactor::ONE : backend::BlendFactor::SRC_ALPHA;
-					blendFunc.dst = backend::BlendFactor::ONE_MINUS_SRC_ALPHA;
+					blendFunc.src = premultipliedAlpha ? cocos2d::backend::BlendFactor::ONE : cocos2d::backend::BlendFactor::SRC_ALPHA;
+					blendFunc.dst = cocos2d::backend::BlendFactor::ONE_MINUS_SRC_ALPHA;
 			}
 #endif
 			return blendFunc;
 		}
 
 
-		bool cullRectangle(Renderer* renderer, const Mat4& transform, const cocos2d::Rect& rect) {
-			if (Camera::getVisitingCamera() == nullptr)
+		bool cullRectangle(cocos2d::Renderer* renderer, const cocos2d::Mat4& transform, const cocos2d::Rect& rect) {
+			if (cocos2d::Camera::getVisitingCamera() == nullptr)
 				return false;
 			
-			auto director = Director::getInstance();
+			auto director = cocos2d::Director::getInstance();
 			auto scene = director->getRunningScene();
 						
-			if (!scene || (scene && Camera::getDefaultCamera() != Camera::getVisitingCamera()))
+			if (!scene || (scene && cocos2d::Camera::getDefaultCamera() != cocos2d::Camera::getVisitingCamera()))
 				return false;
 
-			Rect visibleRect(director->getVisibleOrigin(), director->getVisibleSize());
+            cocos2d::Rect visibleRect(director->getVisibleOrigin(), director->getVisibleSize());
 			
 			// transform center point to screen space
 			float hSizeX = rect.size.width/2;
 			float hSizeY = rect.size.height/2;
-			Vec3 v3p(rect.origin.x + hSizeX, rect.origin.y + hSizeY, 0);
+            cocos2d::Vec3 v3p(rect.origin.x + hSizeX, rect.origin.y + hSizeY, 0);
 			transform.transformPoint(&v3p);
-			Vec2 v2p = Camera::getVisitingCamera()->projectGL(v3p);
+            cocos2d::Vec2 v2p = cocos2d::Camera::getVisitingCamera()->projectGL(v3p);
 
 			// convert content size to world coordinates
 			float wshw = std::max(fabsf(hSizeX * transform.m[0] + hSizeY * transform.m[4]), fabsf(hSizeX * transform.m[0] - hSizeY * transform.m[4]));
@@ -1084,7 +1083,7 @@ namespace spine {
 		}
 
 
-		Color4B ColorToColor4B(const Color& color) {
+    cocos2d::Color4B ColorToColor4B(const Color& color) {
 			return { (uint8_t)(color.r * 255.f), (uint8_t)(color.g * 255.f), (uint8_t)(color.b * 255.f), (uint8_t)(color.a * 255.f) };
 		}
 	}
