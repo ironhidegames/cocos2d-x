@@ -87,7 +87,8 @@ public:
         LEFT,
         RIGHT,
         UP,
-        DOWN
+        DOWN,
+        NONE
     };
     
     /**
