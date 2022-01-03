@@ -253,6 +253,18 @@ void Controller::registerListeners()
             {
                 onAxisEvent(Key::AXIS_RIGHT_TRIGGER, gamepad.rightTrigger.value, gamepad.rightTrigger.isAnalog);
             }
+            else if (@available(macOS 10.14.1, *)) {
+                if (element == gamepad.leftThumbstickButton)
+                {
+                    onButtonEvent(Key::BUTTON_LEFT_THUMBSTICK, gamepad.leftThumbstickButton.isPressed, gamepad.leftThumbstickButton.value, gamepad.leftThumbstickButton.isAnalog);
+                }
+                else if (element == gamepad.rightThumbstickButton)
+                {
+                    onButtonEvent(Key::BUTTON_RIGHT_THUMBSTICK, gamepad.rightThumbstickButton.isPressed, gamepad.rightThumbstickButton.value, gamepad.rightThumbstickButton.isAnalog);
+                }
+            } else {
+                // Fallback on earlier versions
+            }
         };
     }
     else if (_impl->_gcController.gamepad != nil)
