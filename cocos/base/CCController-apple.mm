@@ -107,6 +107,8 @@ static GCControllerConnectionEventHandler* __instance = nil;
 
 NS_CC_BEGIN
 
+static int _lastControllerAppleDeviceId = 0;
+
 class ControllerImpl
 {
 public:
@@ -133,6 +135,8 @@ void Controller::startDiscoveryController()
         auto controller = new (std::nothrow) Controller();
         controller->_impl->_gcController = gcController;
         controller->_deviceName = [gcController.vendorName UTF8String];
+        controller->_deviceId = _lastControllerAppleDeviceId;
+        _lastControllerAppleDeviceId++;
         
         s_allController.push_back(controller);
         
@@ -252,18 +256,27 @@ void Controller::registerListeners()
             else if (element == gamepad.rightTrigger)
             {
                 onAxisEvent(Key::AXIS_RIGHT_TRIGGER, gamepad.rightTrigger.value, gamepad.rightTrigger.isAnalog);
-            }
-            else if (@available(macOS 10.14.1, *)) {
-                if (element == gamepad.leftThumbstickButton)
-                {
-                    onButtonEvent(Key::BUTTON_LEFT_THUMBSTICK, gamepad.leftThumbstickButton.isPressed, gamepad.leftThumbstickButton.value, gamepad.leftThumbstickButton.isAnalog);
-                }
-                else if (element == gamepad.rightThumbstickButton)
-                {
-                    onButtonEvent(Key::BUTTON_RIGHT_THUMBSTICK, gamepad.rightThumbstickButton.isPressed, gamepad.rightThumbstickButton.value, gamepad.rightThumbstickButton.isAnalog);
-                }
             } else {
-                // Fallback on earlier versions
+                if (@available(macOS 10.15, *)) {
+                    //if (element == gamepad.buttonMenu) // right button (also sends BUTTON_PAUSE below)
+                    //{
+                    //    onButtonEvent(Key::BUTTON_START, gamepad.buttonMenu.isPressed, gamepad.buttonMenu.value, gamepad.buttonMenu.isAnalog);
+                    //}
+                    if (element == gamepad.buttonOptions) // left button
+                    {
+                        onButtonEvent(Key::BUTTON_SELECT, gamepad.buttonOptions.isPressed, gamepad.buttonOptions.value, gamepad.buttonOptions.isAnalog);
+                    }
+                }
+                if (@available(macOS 10.14.1, *)) {
+                    if (element == gamepad.leftThumbstickButton)
+                    {
+                        onButtonEvent(Key::BUTTON_LEFT_THUMBSTICK, gamepad.leftThumbstickButton.isPressed, gamepad.leftThumbstickButton.value, gamepad.leftThumbstickButton.isAnalog);
+                    }
+                    else if (element == gamepad.rightThumbstickButton)
+                    {
+                        onButtonEvent(Key::BUTTON_RIGHT_THUMBSTICK, gamepad.rightThumbstickButton.isPressed, gamepad.rightThumbstickButton.value, gamepad.rightThumbstickButton.isAnalog);
+                    }
+                }
             }
         };
     }
@@ -345,7 +358,7 @@ void Controller::registerListeners()
         };
     }
 #endif
-    
+        
     _impl->_gcController.controllerPausedHandler = ^(GCController* gcCon){
         
         auto iter = std::find_if(s_allController.begin(), s_allController.end(), [gcCon](Controller* c){ return c->_impl->_gcController == gcCon; });

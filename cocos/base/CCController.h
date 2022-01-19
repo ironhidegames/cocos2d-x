@@ -72,7 +72,7 @@ public:
         BUTTON_Y,
         BUTTON_Z,
 
-        BUTTON_DPAD_UP,
+        BUTTON_DPAD_UP,  // 10
         BUTTON_DPAD_DOWN,
         BUTTON_DPAD_LEFT,
         BUTTON_DPAD_RIGHT,
@@ -85,7 +85,7 @@ public:
         AXIS_RIGHT_TRIGGER,
 
         BUTTON_LEFT_THUMBSTICK,
-        BUTTON_RIGHT_THUMBSTICK,
+        BUTTON_RIGHT_THUMBSTICK,  // 20
 
         BUTTON_START,
         BUTTON_SELECT,
