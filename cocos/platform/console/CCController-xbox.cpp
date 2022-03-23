@@ -23,13 +23,13 @@ void ControllerXBox::pollActions() {
 		auto gp = Gamepad::Gamepads->GetAt(i);
 		auto reading = gp->GetCurrentReading();
 
-		auto controller = (ControllerXBox*)Controller::getControllerByDeviceId(gp->GetHashCode());
-		if (controller) {
+		ControllerXBox* controller = (ControllerXBox*)Controller::getControllerByDeviceId(gp->GetHashCode());
+		if (controller != nullptr) {
 			//AXES
 			controller->handleAxis(Controller::Key::JOYSTICK_LEFT_X, static_cast<float>(reading.LeftThumbstickX));
-			controller->handleAxis(Controller::Key::JOYSTICK_LEFT_Y, static_cast<float>(reading.LeftThumbstickY));
+			controller->handleAxis(Controller::Key::JOYSTICK_LEFT_Y, static_cast<float>(-reading.LeftThumbstickY));
 			controller->handleAxis(Controller::Key::JOYSTICK_RIGHT_X, static_cast<float>(reading.RightThumbstickX));
-			controller->handleAxis(Controller::Key::JOYSTICK_RIGHT_Y, static_cast<float>(reading.RightThumbstickY));
+			controller->handleAxis(Controller::Key::JOYSTICK_RIGHT_Y, static_cast<float>(-reading.RightThumbstickY));
 
 			//DPAD Buttons
 			controller->handleButton(Controller::Key::BUTTON_DPAD_UP, reading.Buttons, GamepadButtons::DPadUp);
@@ -61,8 +61,14 @@ void ControllerXBox::pollActions() {
 }
 
 void ControllerXBox::handleAxis(Controller::Key key, float val) {
-	if (val > AXIS_DEADZONE || val < -AXIS_DEADZONE) {
-
+	if (this->m_axisValues.count(key) == 0 || std::abs(this->m_axisValues[key] - val) > AXIS_DEADZONE) {
+		if (this->m_axisValues.count(key) > 0) {
+			this->m_axisValues.erase(key);
+		}
+		if (std::abs(val) < AXIS_DEADZONE) {
+			val = 0.f;
+		}
+		this->m_axisValues[key] = val;
 		this->onAxisEvent(key, val, true);
 	}
 }

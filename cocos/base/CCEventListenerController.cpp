@@ -67,7 +67,7 @@ bool EventListenerController::init()
             break;
         case EventController::ControllerEventType::BUTTON_STATUS_CHANGED:
             {
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT)
+//#if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT)
 
                 const auto&  keyStatus = evtController->_controller->_allKeyStatus[evtController->_keyCode];
                 const auto&  keyPrevStatus = evtController->_controller->_allKeyPrevStatus[evtController->_keyCode];
@@ -84,7 +84,7 @@ bool EventListenerController::init()
                 {
                     this->onKeyRepeat(evtController->_controller, evtController->_keyCode, event);
                 }
-#endif
+//#endif
             }
             break;
         case EventController::ControllerEventType::AXIS_STATUS_CHANGED:

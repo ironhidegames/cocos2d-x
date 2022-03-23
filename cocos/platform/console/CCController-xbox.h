@@ -24,6 +24,7 @@ namespace cocos2d {
 		Gamepad^ m_gamepad;
 
 		std::set<Controller::Key> m_pressedButtons;
+		std::map<Controller::Key, float> m_axisValues;
 
 		void handleAxis(Controller::Key key, float val);
 		void handleTrigger(Controller::Key key, float val);
