@@ -121,6 +121,8 @@ public:
 
     void SetDPI(float dpi) { m_dpi = dpi; }
     float GetDPI() { return m_dpi; }
+    Vec2 GetMousePosition();
+    void SetMousePosition(Vec2 pos);
 
     // static function
     /**
@@ -155,7 +157,8 @@ private:
 
 	void OnRendering();
 	void UpdateWindowSize();
- 
+    
+    cocos2d::Vec2 m_cursorPosition;
     cocos2d::Vec2 TransformToOrientation(Windows::Foundation::Point point);
  	cocos2d::Vec2  GetPoint(Windows::UI::Core::PointerEventArgs^ args);
     cocos2d::Vec2  GetPointMouse(Windows::UI::Core::PointerEventArgs^ args);

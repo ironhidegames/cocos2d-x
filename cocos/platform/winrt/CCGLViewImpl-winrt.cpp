@@ -253,8 +253,8 @@ void GLViewImpl::BackButtonListener(EventKeyboard::KeyCode keyCode, Event* event
 		CCLOG("");
 		CCLOG("You MUST call event->stopPropagation() if you don't want your app to quit!");
 		CCLOG("*********************************************************************");
-
-		Director::getInstance()->end();
+        event->stopPropagation();
+		//Director::getInstance()->end();
     }
 }
 
@@ -511,6 +511,14 @@ void GLViewImpl::UpdateForWindowSizeChange(float width, float height)
         m_height = height;
         UpdateWindowSize();
     }
+}
+
+Vec2 GLViewImpl::GetMousePosition() {
+    return m_cursorPosition;
+}
+
+void GLViewImpl::SetMousePosition(Vec2 pos) {
+    this->m_cursorPosition = pos;
 }
 
 #if 0

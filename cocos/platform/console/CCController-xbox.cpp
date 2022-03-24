@@ -61,16 +61,8 @@ void ControllerXBox::pollActions() {
 }
 
 void ControllerXBox::handleAxis(Controller::Key key, float val) {
-	if (this->m_axisValues.count(key) == 0 || std::abs(this->m_axisValues[key] - val) > AXIS_DEADZONE) {
-		if (this->m_axisValues.count(key) > 0) {
-			this->m_axisValues.erase(key);
-		}
-		if (std::abs(val) < AXIS_DEADZONE) {
-			val = 0.f;
-		}
-		this->m_axisValues[key] = val;
-		this->onAxisEvent(key, val, true);
-	}
+	//Storage of value isn't needed, just normalization
+	this->onAxisEvent(key, std::abs(val) > AXIS_DEADZONE ? val : 0.f, true);
 }
 
 void ControllerXBox::handleTrigger(Controller::Key key, float val) {
