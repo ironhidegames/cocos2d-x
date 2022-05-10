@@ -10,3 +10,7 @@
 [submodule "web"]
         path = web
         url = git://github.com/cocos2d/cocos2d-html5.git
+[submodule "external"]
+	path = external
+	url = https://github.com/ironhidegames/cocos2d-x-3rd-party-libs-bin.git
+	branch = v3-kr4-xbox
