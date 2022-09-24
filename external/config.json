@@ -1,6 +1,6 @@
 {
-    "version": "v3-kr4-pc-1.9.9.4.8",
-    "zip_file_size": "336322754",
+    "version": "v3-kr4-pc-1.14.0.2",
+    "zip_file_size": "336205299",
     "repo_name": "cocos2d-x-3rd-party-libs-bin",
     "repo_parent": "https://github.com/ironhidegames/",
     "move_dirs": {
