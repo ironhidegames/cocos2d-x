@@ -556,6 +556,11 @@ bool AudioEngineImpl::resume(int audioID)
 
 void AudioEngineImpl::stop(int audioID)
 {
+    if (_audioPlayers.count(audioID) < 1) {
+        ALOGE("%s: audioID=%d not found, skipping stop", __PRETTY_FUNCTION__, audioID);
+        return;
+    }
+    
     auto player = _audioPlayers[audioID];
     player->destroy();
 
