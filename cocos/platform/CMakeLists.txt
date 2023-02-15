@@ -80,6 +80,28 @@ elseif(APPLE)
             platform/mac/CCDevice-mac.mm
            # platform/desktop/CCGLViewImpl-desktop.cpp
             )
+    elseif(TVOS)
+        set(COCOS_PLATFORM_SPECIFIC_HEADER
+            ${COCOS_PLATFORM_SPECIFIC_HEADER}
+            platform/ios/CCApplication-ios.h
+            platform/ios/CCDirectorCaller-ios.h
+            platform/ios/CCEAGLView-ios.h
+            platform/ios/CCGLViewImpl-ios.h
+            platform/ios/CCPlatformDefine-ios.h
+            platform/ios/CCStdC-ios.h
+            platform/ios/CCInputView-ios.h
+            )
+        set(COCOS_PLATFORM_SPECIFIC_SRC
+            ${COCOS_PLATFORM_SPECIFIC_SRC}
+            platform/ios/CCApplication-ios.mm
+            platform/ios/CCCommon-ios.mm
+            platform/ios/CCDevice-ios.mm
+            platform/ios/CCDirectorCaller-ios.mm
+            platform/ios/CCEAGLView-ios.mm
+            platform/ios/CCGLViewImpl-ios.mm
+            platform/ios/CCImage-ios.mm
+            platform/ios/CCInputView-ios.mm
+            )
     elseif(IOS)
         set(COCOS_PLATFORM_SPECIFIC_HEADER
             ${COCOS_PLATFORM_SPECIFIC_HEADER}

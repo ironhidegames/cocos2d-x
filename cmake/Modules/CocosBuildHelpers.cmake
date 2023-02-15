@@ -277,7 +277,7 @@ endmacro()
 
 # custom Xcode property for iOS target
 macro(cocos_config_target_xcode_property cocos_target)
-    if(IOS)
+    if(IOS OR TVOS)
         set_xcode_property(${cocos_target} ENABLE_BITCODE "NO")
         set_xcode_property(${cocos_target} ONLY_ACTIVE_ARCH "YES")
     endif()

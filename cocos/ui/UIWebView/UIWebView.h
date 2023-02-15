@@ -24,6 +24,9 @@
  ****************************************************************************/
 #pragma once
 
+#if (!defined(CC_PLATFORM_OS_TVOS))
+
+
 #include "ui/UIWidget.h"
 #include "ui/GUIExport.h"
 #include "base/CCData.h"
@@ -255,3 +258,5 @@ private:
 
 // end group
 /// @}
+#endif
+

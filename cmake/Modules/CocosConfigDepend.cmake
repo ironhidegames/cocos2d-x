@@ -61,34 +61,37 @@ macro(cocos2dx_depend)
 		${Z_LIBRARY}
 		${BZIP2_LIBRARY}
                  )
-        elseif(IOS)
+        elseif(IOS OR TVOS)
             # Locate system libraries on iOS
             find_library(UIKIT_LIBRARY UIKit)
             find_library(OPENGLES_LIBRARY OpenGLES)
-            find_library(CORE_MOTION_LIBRARY CoreMotion)
             find_library(AVKIT_LIBRARY AVKit)
             find_library(CORE_MEDIA_LIBRARY CoreMedia)
             find_library(CORE_TEXT_LIBRARY CoreText)
             find_library(SECURITY_LIBRARY Security)
             find_library(CORE_GRAPHICS_LIBRARY CoreGraphics)
             find_library(AV_FOUNDATION_LIBRARY AVFoundation)
-            find_library(WEBKIT_LIBRARY WebKit)
-find_library(ICONV_LIBRARY iconv)
-find_library(Z_LIBRARY z)
-list(APPEND PLATFORM_SPECIFIC_LIBS
-    ${UIKIT_LIBRARY}
-    ${OPENGLES_LIBRARY}
-    ${CORE_MOTION_LIBRARY}
-    ${AVKIT_LIBRARY}
-    ${CORE_MEDIA_LIBRARY}
-    ${CORE_TEXT_LIBRARY}
-    ${SECURITY_LIBRARY}
-    ${CORE_GRAPHICS_LIBRARY}
-    ${AV_FOUNDATION_LIBRARY}
-    ${WEBKIT_LIBRARY}
-    ${COCOS_APPLE_LIBS}
-    ${ICONV_LIBRARY}
-    ${Z_LIBRARY})
+            find_library(ICONV_LIBRARY iconv)
+            find_library(Z_LIBRARY z)
+            list(APPEND PLATFORM_SPECIFIC_LIBS
+              ${UIKIT_LIBRARY}
+              ${OPENGLES_LIBRARY}
+              ${AVKIT_LIBRARY}
+              ${CORE_MEDIA_LIBRARY}
+              ${CORE_TEXT_LIBRARY}
+              ${SECURITY_LIBRARY}
+              ${CORE_GRAPHICS_LIBRARY}
+              ${AV_FOUNDATION_LIBRARY}
+              ${COCOS_APPLE_LIBS}
+              ${ICONV_LIBRARY}
+              ${Z_LIBRARY})
+            if(IOS)
+              find_library(CORE_MOTION_LIBRARY CoreMotion)
+              find_library(WEBKIT_LIBRARY WebKit)
+              list(APPEND PLATFORM_SPECIFIC_LIBS
+                ${WEBKIT_LIBRARY}
+                ${CORE_MOTION_LIBRARY})
+            endif()
         endif()
     endif()
 endmacro()

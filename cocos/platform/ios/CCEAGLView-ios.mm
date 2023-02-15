@@ -438,6 +438,7 @@ namespace {
 #endif
 }
 
+#if !defined(CC_TARGET_OS_TVOS)
 - (void)onUIKeyboardNotification:(NSNotification *)notif
 {
     NSString * type = notif.name;
@@ -548,6 +549,7 @@ namespace {
         dispatcher->dispatchKeyboardDidHide(notiInfo);
     }
 }
+#endif
 
 // Close the keyboard opened by EditBox
 -(void) closeKeyboardOpenedByEditBox
