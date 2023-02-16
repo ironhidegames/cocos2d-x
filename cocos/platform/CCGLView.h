@@ -29,7 +29,9 @@ THE SOFTWARE.
 
 #include "base/ccTypes.h"
 #include "base/CCEventTouch.h"
-
+#ifdef CC_PLATFORM_PC
+#include "glfw3.h"
+#endif
 #include <vector>
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
@@ -187,7 +189,24 @@ public:
      * @return The zoom factor for frame.
      */
     virtual float getFrameZoomFactor() const { return 1.0; }
+
+#ifdef CC_PLATFORM_PC    
+    virtual void setCursorImage(GLFWcursor* cursor) {}
+#endif
+
+    /**
+     * Sets the cursor for the window with custom image.
+     *
+     * @param filename A path to image file, e.g., "cursors/custom.png".
+     * @param hotspot Cursor hotspot, as a anchor point, default is top left (0, 1)
+     */
+    virtual void setCursor(const std::string& filename, Vec2 hotspot = Vec2::ANCHOR_TOP_LEFT) {}
     
+    /**
+     * Sets the cursor for the window back to default.
+     */
+    virtual void setDefaultCursor() {}
+
     /**
      * Hide or Show the mouse cursor if there is one.
      *
