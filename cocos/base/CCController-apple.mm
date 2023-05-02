@@ -107,6 +107,8 @@ static GCControllerConnectionEventHandler* __instance = nil;
 
 NS_CC_BEGIN
 
+static int _lastControllerAppleDeviceId = 0;
+
 class ControllerImpl
 {
 public:
@@ -133,6 +135,8 @@ void Controller::startDiscoveryController()
         auto controller = new (std::nothrow) Controller();
         controller->_impl->_gcController = gcController;
         controller->_deviceName = [gcController.vendorName UTF8String];
+        controller->_deviceId = _lastControllerAppleDeviceId;
+        _lastControllerAppleDeviceId++;
         
         s_allController.push_back(controller);
         
