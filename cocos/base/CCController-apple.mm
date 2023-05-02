@@ -256,6 +256,24 @@ void Controller::registerListeners()
             else if (element == gamepad.rightTrigger)
             {
                 onAxisEvent(Key::AXIS_RIGHT_TRIGGER, gamepad.rightTrigger.value, gamepad.rightTrigger.isAnalog);
+            } else {
+                if (@available(macOS 10.15, *)) {
+                    //if (element == gamepad.buttonMenu) // right button (also sends BUTTON_PAUSE below)
+                    //{
+                    //    onButtonEvent(Key::BUTTON_START, gamepad.buttonMenu.isPressed, gamepad.buttonMenu.value, gamepad.buttonMenu.isAnalog);
+                    //}
+                    if (element == gamepad.buttonOptions) { // left button
+                        onButtonEvent(Key::BUTTON_SELECT, gamepad.buttonOptions.isPressed, gamepad.buttonOptions.value, gamepad.buttonOptions.isAnalog);
+                    }
+                }
+                if (@available(macOS 10.14.1, *)) {
+                    if (element == gamepad.leftThumbstickButton) {
+                        onButtonEvent(Key::BUTTON_LEFT_THUMBSTICK, gamepad.leftThumbstickButton.isPressed, gamepad.leftThumbstickButton.value, gamepad.leftThumbstickButton.isAnalog);
+                    }
+                    else if (element == gamepad.rightThumbstickButton) {
+                        onButtonEvent(Key::BUTTON_RIGHT_THUMBSTICK, gamepad.rightThumbstickButton.isPressed, gamepad.rightThumbstickButton.value, gamepad.rightThumbstickButton.isAnalog);
+                    }
+                }
             }
         };
     }
