@@ -65,14 +65,14 @@ public:
         JOYSTICK_RIGHT_X,
         JOYSTICK_RIGHT_Y,
 
-        BUTTON_A,
+        BUTTON_A,                 // 1004
         BUTTON_B,
         BUTTON_C,
         BUTTON_X,
         BUTTON_Y,
         BUTTON_Z,
 
-        BUTTON_DPAD_UP,
+        BUTTON_DPAD_UP,           // 1010
         BUTTON_DPAD_DOWN,
         BUTTON_DPAD_LEFT,
         BUTTON_DPAD_RIGHT,
@@ -85,7 +85,7 @@ public:
         AXIS_RIGHT_TRIGGER,
 
         BUTTON_LEFT_THUMBSTICK,
-        BUTTON_RIGHT_THUMBSTICK,
+        BUTTON_RIGHT_THUMBSTICK,  // 1020
 
         BUTTON_START,
         BUTTON_SELECT,

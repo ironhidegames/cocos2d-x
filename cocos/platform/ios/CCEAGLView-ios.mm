@@ -338,6 +338,58 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
     glview->handleTouchesCancel(i, (intptr_t*)ids, xs, ys);
 }
 
+#ifdef CC_TARGET_OS_TVOS
+// capture buttons, do not allow default behaviour
+
+- (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
+{
+    //CCLOG("pressesBegan");
+    //NSMutableSet<UIPress*>* filtered = [NSMutableSet set];
+    //for (UIPress* press in presses) {
+    //    if (press.type == UIPressTypeMenu)
+    //        [filtered addObject:press];
+    //}
+    //if (filtered.count > 0)
+    //    [super pressesBegan:filtered withEvent:event];
+}
+
+- (void)pressesChanged:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
+{
+    //CCLOG("pressesChanged");
+    //NSMutableSet<UIPress*>* filtered = [NSMutableSet set];
+    //for (UIPress* press in presses) {
+    //    if (press.type == UIPressTypeMenu)
+    //        [filtered addObject:press];
+    //}
+    //if (filtered.count > 0)
+    //    [super pressesChanged:filtered withEvent:event];
+}
+
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
+{
+    //CCLOG("pressesEnded");
+    //NSMutableSet<UIPress*>* filtered = [NSMutableSet set];
+    //for (UIPress* press in presses) {
+    //    if (press.type == UIPressTypeMenu)
+    //        [filtered addObject:press];
+    //}
+    //if (filtered.count > 0)
+    //    [super pressesEnded:filtered withEvent:event];
+}
+
+- (void)pressesCancelled:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
+{
+    //CCLOG("pressesCancelled");
+    //NSMutableSet<UIPress*>* filtered = [NSMutableSet set];
+    //for (UIPress* press in presses) {
+    //    if (press.type == UIPressTypeMenu)
+    //        [filtered addObject:press];
+    //}
+    //if (filtered.count > 0)
+    //    [super pressesCancelled:filtered withEvent:event];
+}
+#endif
+
 - (void) showKeyboard
 {
     [self addSubview:self.textInputView];
