@@ -135,7 +135,6 @@ void Controller::startDiscoveryController()
 #if defined(CC_TARGET_OS_TVOS)
         // append microgamepad to the device name of Siri Remote controllers
         if (gcController.microGamepad != nil
-            && gcController.motion != nil
             && gcController.extendedGamepad == nil)
             [devName appendString:@" microgamepad"];
 #endif
