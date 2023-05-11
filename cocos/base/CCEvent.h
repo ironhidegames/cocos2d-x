@@ -74,6 +74,7 @@ public:
     /** Stops propagation for current event.
      */
     void stopPropagation() { _isStopped = true; }
+    void continuePropagation() { _isStopped = false; }
     
     /** Checks whether the event has been stopped.
      *
