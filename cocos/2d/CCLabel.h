@@ -133,6 +133,12 @@ public:
         STRING_TEXTURE
     };
     
+    enum class TextDirection {
+        NONE = 0, // undefined
+        LTR,      // left to right
+        RTL       // right to left
+    };
+
     /// @name Creators
     /// @{
 
@@ -638,6 +644,16 @@ public:
      */
     float getAdditionalKerning() const;
 
+    /** 
+     * Text direction (RTL support)
+     */
+    static void setDefaultTextDirection(TextDirection dir) { _defaultTextDirection = dir; };
+    static TextDirection getDefaultTextDirection() { return _defaultTextDirection; };
+
+    void setTextDirection(TextDirection dir) { _textDirection = dir; };
+    TextDirection getTextDirection() { return (_textDirection != TextDirection::NONE ? _textDirection : _defaultTextDirection); };
+    std::string rtlWrapAndNormalize(std::string raw);
+
     /**
     * set ProgramState of current render command
     */
@@ -806,6 +822,8 @@ protected:
     TextHAlignment _hAlignment;
     TextVAlignment _vAlignment;
 
+    TextDirection _textDirection = TextDirection::NONE;
+
     float _textDesiredHeight;
     std::vector<float> _linesWidth;
     std::vector<float> _linesOffsetX;
@@ -875,6 +893,8 @@ protected:
     
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(Label);
+
+    static TextDirection _defaultTextDirection;  // system defaults
 };
 
 // end group

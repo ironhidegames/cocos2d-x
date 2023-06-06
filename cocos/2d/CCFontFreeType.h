@@ -58,6 +58,7 @@ public:
     FT_Encoding getEncoding() const { return _encoding; }
 
     int* getHorizontalKerningForTextUTF32(const std::u32string& text, int &outNumLetters) const override;
+    int getHorizontalKerningForChars(uint64_t firstChar, uint64_t secondChar) const override;
     
     unsigned char* getGlyphBitmap(uint64_t theChar, long &outWidth, long &outHeight, Rect &outRect,int &xAdvance);
     
@@ -84,7 +85,6 @@ private:
     bool initFreeType();
     FT_Library getFTLibrary();
     
-    int getHorizontalKerningForChars(uint64_t firstChar, uint64_t secondChar) const;
     unsigned char* getGlyphBitmapWithOutline(uint64_t code, FT_BBox &bbox);
 
     void setGlyphCollection(GlyphCollection glyphs, const char* customGlyphs = nullptr);

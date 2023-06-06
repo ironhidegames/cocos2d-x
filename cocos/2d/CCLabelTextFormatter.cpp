@@ -30,6 +30,7 @@
 #include "base/CCDirector.h"
 #include "2d/CCFontAtlas.h"
 #include "2d/CCFontFNT.h"
+#include "fribidi.h"
 
 NS_CC_BEGIN
 
@@ -172,6 +173,7 @@ bool Label::multilineTextWrap(const std::function<int(const std::u32string&, int
         char32_t character = _utf32Text[index];
         if (character == StringUtils::UnicodeCharacters::NewLine)
         {
+            //CCLOG(" ACTUAL breaking at char:%i nextTokenX:%f", index, nextTokenX);
             _linesWidth.push_back(letterRight);
             letterRight = 0.f;
             lineIndex++;
@@ -210,11 +212,12 @@ bool Label::multilineTextWrap(const std::function<int(const std::u32string&, int
             if (!getFontLetterDef(character, letterDef))
             {
                 recordPlaceholderInfo(letterIndex, character);
-                CCLOG("LabelTextFormatter error: can't find letter definition in font file for letter: 0x%x", character);
+                //CCLOG("LabelTextFormatter error: can't find letter definition in font file for letter: 0x%x", character);
                 continue;
             }
 
             auto letterX = (nextLetterX + letterDef.offsetX * _bmfontScale) / contentScaleFactor;
+            //CCLOG("    ACTUAL char:%x x:%f", character, letterX);
             if (_enableWrap && _maxLineWidth > 0.f && nextTokenX > 0.f && letterX + letterDef.width * _bmfontScale > _maxLineWidth
                 && !StringUtils::isUnicodeSpace(character) && nextChangeSize)
             {
@@ -389,6 +392,16 @@ void Label::shrinkLabelToContentSize(const std::function<bool(void)>& lambda)
         std::swap(_fontAtlas->_letterDefinitions, tempLetterDefinition);
         _fontAtlas->scaleFontLetterDefinition(scale);
         this->setLineHeight(originalLineHeight * scale);
+
+        if (getTextDirection() == TextDirection::RTL) {
+            // replace string with a pre-wrapped and normalized one, with newlines
+            auto nText = rtlWrapAndNormalize(_utf8Text);
+            std::u32string utf32String;
+            if (StringUtils::UTF8ToUTF32(nText, utf32String)) {
+                _utf32Text  = utf32String;
+            }
+        }
+
         if (_maxLineWidth > 0.f && !_lineBreakWithoutSpaces)
         {
             multilineTextWrapByWord();
@@ -434,6 +447,191 @@ void Label::recordPlaceholderInfo(int letterIndex, char32_t utf32Char)
     }
     _lettersInfo[letterIndex].utf32Char = utf32Char;
     _lettersInfo[letterIndex].valid = false;
+}
+
+// ------------------------------------------------------------
+// -- RTL functions
+// 
+
+std::string Label::rtlWrapAndNormalize(std::string input)
+{
+    bool wordWrap = (_maxLineWidth > 0.f && !_lineBreakWithoutSpaces);
+
+    this->updateBMFontScale();
+
+    std::u32string input32;
+    StringUtils::UTF8ToUTF32(input, input32);
+    
+    FriBidiChar* shaped_str = NULL;
+    FriBidiCharType* bidi_types = NULL;
+    FriBidiBracketType* bracket_types = NULL;
+    FriBidiLevel* embedding_levels = NULL;
+    FriBidiArabicProp* ar_props = NULL;
+    FriBidiParType pbase_dir = FRIBIDI_PAR_RTL;
+    FriBidiFlags flags = FRIBIDI_FLAGS_DEFAULT | FRIBIDI_FLAGS_ARABIC;
+
+    FriBidiChar* str = (FriBidiChar*)input32.data();
+    FriBidiStrIndex len = input32.size();
+
+    shaped_str = new FriBidiChar[len];
+    bidi_types = new FriBidiCharType[len];
+    bracket_types = new FriBidiBracketType[len];
+    embedding_levels = new FriBidiLevel[len];
+
+    // shapes the arabic string without reordering it, so we can
+    // calculate the width of the lines in the original character order
+    fribidi_get_bidi_types (str, len, bidi_types);
+    fribidi_get_bracket_types(str, len, bidi_types, bracket_types);
+    FriBidiLevel max_level = fribidi_get_par_embedding_levels_ex(bidi_types, bracket_types, len, &pbase_dir, embedding_levels) - 1;
+
+    memcpy(shaped_str, str, len * sizeof (*shaped_str));
+    ar_props = new FriBidiArabicProp[len];
+
+    fribidi_get_joining_types(str, len, ar_props);
+    fribidi_join_arabic(bidi_types, len, embedding_levels, ar_props);
+    fribidi_shape(flags, embedding_levels, len, ar_props, shaped_str);
+
+    std::u32string shaped((char32_t*)shaped_str);
+    _fontAtlas->prepareLetterDefinitions(shaped);  // load with the contextual forms
+
+    // walk the shaped string and break it into lines, reversting each line in the process
+    std::vector<std::u32string> lines32;
+    auto contentScaleFactor = CC_CONTENT_SCALE_FACTOR();
+    float curWidth = 0;
+    int lineStart = 0;
+    FontLetterDefinition letterDef;
+
+    // ---------------------------------------- 
+    auto PUSH = [=,&lines32](int lstart, int llen) {
+        fribidi_reorder_line(flags, bidi_types, llen, lstart, pbase_dir, embedding_levels, shaped_str, NULL);
+        std::u32string str32 = std::u32string(shaped_str + lstart, shaped_str + lstart + llen);
+        lines32.push_back(str32);
+    };
+
+    auto WORD_LEN = [=](int startIndex) {
+        int wlen = 0;
+        auto nextLetterX = 0;
+        FontLetterDefinition letterDef;
+        auto contentScaleFactor = CC_CONTENT_SCALE_FACTOR();
+        for (int index = startIndex; index < len; ++index) {
+                char32_t character = shaped_str[index];
+                if (character == StringUtils::UnicodeCharacters::NewLine
+                    || (!StringUtils::isUnicodeNonBreaking(character)
+                        && (StringUtils::isUnicodeSpace(character)
+                            || StringUtils::isCJKUnicode(character)))) {
+                    break;
+                }
+                if (!getFontLetterDef(character, letterDef)) {
+                    break;
+                }
+                if (_maxLineWidth > 0.f) {
+                    auto letterX = (nextLetterX + letterDef.offsetX * _bmfontScale) / contentScaleFactor;
+                    if (letterX + letterDef.width * _bmfontScale > _maxLineWidth)
+                        break;
+                }
+                nextLetterX += letterDef.xAdvance * _bmfontScale + _additionalKerning;
+                wlen++;
+        }
+        if (wlen == 0 && len)
+            wlen = 1;
+        return wlen;
+    };
+    // ---------------------------------------- 
+
+    CCLOG("Break starts for %s", shaped.c_str());
+    for (int idx=0; idx<len;) {
+        char32_t character = shaped_str[idx];
+        if (character == StringUtils::UnicodeCharacters::NewLine) {
+            PUSH(lineStart, idx-lineStart);
+            curWidth = 0;
+            idx++; // skip the newline
+            lineStart = idx;
+            continue;
+        }
+
+        auto tokenWidth = 0.f;
+        auto tokenLen = wordWrap ? WORD_LEN(idx) : 1;
+        for (int tmp = 0; tmp < tokenLen; ++tmp)
+        {
+            int letterIndex = idx + tmp;
+            character = shaped_str[letterIndex];
+
+            if (character == StringUtils::UnicodeCharacters::CarriageReturn) {
+                continue;
+            }
+            if (character == StringUtils::UnicodeCharacters::NextCharNoChangeX) {
+                continue;
+            }
+            if (character == 0xFEFF) {
+                continue;
+            }
+            
+            if (!getFontLetterDef(character, letterDef)) {
+                CCLOG("rtlWrapAndNormalize error: can't find letter definition in font file for letter: 0x%x", character);
+                continue;
+            }
+        
+            auto letterWidth = (letterDef.xAdvance * _bmfontScale + _additionalKerning) / contentScaleFactor;
+            if (letterIndex < len - 1)
+                letterWidth += _fontAtlas->getFont()->getHorizontalKerningForChars(shaped_str[letterIndex],shaped_str[letterIndex+1]) / contentScaleFactor;
+        
+            if (_enableWrap 
+                && curWidth > 0  // prevents case where maxLineWidth is < character width
+                && _maxLineWidth > 0.f 
+                && curWidth + tokenWidth + letterWidth >= _maxLineWidth) {
+
+                CCLOG(" -break at idx:%i tmp:%i  x:%f actual-x:%f", idx, tmp, curWidth+tokenWidth+letterWidth, curWidth);
+                PUSH(lineStart, idx-lineStart); // push up to the prev token
+                curWidth = 0;
+                lineStart = idx;
+                goto NEXT_TOKEN;
+
+            } else {
+                CCLOG("  adding char:%x at idx:%i tmp:%i x:%f", character, idx, tmp, curWidth+tokenWidth+letterWidth);
+                tokenWidth += letterWidth;
+            }
+        }
+        idx += tokenLen;
+        curWidth += tokenWidth;
+
+        NEXT_TOKEN:
+        {}
+    }    
+    // add the last line
+    if (curWidth > 0) {
+        PUSH(lineStart, len-lineStart);
+    }
+
+    delete[] shaped_str;        
+    delete[] bidi_types;
+    delete[] bracket_types;
+    delete[] embedding_levels;
+    delete[] ar_props;
+
+    // concatenate the lines with \n
+    std::string out;
+    for (const auto& line32 : lines32) {
+        // convert to utf8
+        std::string line;
+        StringUtils::UTF32ToUTF8(line32, line);        
+        out += line;
+        if (line32 != lines32.back())
+            out += StringUtils::UnicodeCharacters::NewLine;
+    }
+
+    // remove ZWNBSP char 0xFEFF
+    auto replace_all = [](std::string& str, const std::string& from, const std::string& to) {
+        if (from.empty ())
+            return;
+        size_t start_pos = 0;
+        while ((start_pos = str.find(from, start_pos)) != std::string::npos) {
+            str.replace(start_pos, from.length(), to);
+            start_pos += to.length (); // for the case where 'to' contains 'from'
+        }
+    };
+    replace_all(out, "\uFEFF", "");
+
+    return out;
 }
 
 NS_CC_END

@@ -51,6 +51,7 @@
 
 NS_CC_BEGIN
 
+Label::TextDirection Label::_defaultTextDirection = Label::TextDirection::NONE;
 
 namespace {
     void updateBlend(backend::BlendDescriptor &blendDescriptor, BlendFunc blendFunc)
@@ -1639,6 +1640,18 @@ void Label::updateContent()
         if (StringUtils::UTF8ToUTF32(_utf8Text, utf32String))
         {
             _utf32Text = utf32String;
+        }
+
+        if (getTextDirection() == TextDirection::RTL) {
+
+            _fontAtlas->prepareLetterDefinitions(_utf32Text);  // with the old text
+        
+            // replace string with a pre-wrapped and normalized one, with newlines
+            auto nText = rtlWrapAndNormalize(_utf8Text);
+            std::u32string utf32String;
+            if (StringUtils::UTF8ToUTF32(nText, utf32String)) {
+                _utf32Text  = utf32String;
+            }
         }
 
         computeHorizontalKernings(_utf32Text);
