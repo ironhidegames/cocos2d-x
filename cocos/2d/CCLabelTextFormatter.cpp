@@ -538,7 +538,7 @@ std::string Label::rtlWrapAndNormalize(std::string input)
     };
     // ---------------------------------------- 
 
-    CCLOG("Break starts for %s", shaped.c_str());
+    //CCLOG("Break starts for %s", shaped.c_str());
     for (int idx=0; idx<len;) {
         char32_t character = shaped_str[idx];
         if (character == StringUtils::UnicodeCharacters::NewLine) {
@@ -580,14 +580,14 @@ std::string Label::rtlWrapAndNormalize(std::string input)
                 && _maxLineWidth > 0.f 
                 && curWidth + tokenWidth + letterWidth >= _maxLineWidth) {
 
-                CCLOG(" -break at idx:%i tmp:%i  x:%f actual-x:%f", idx, tmp, curWidth+tokenWidth+letterWidth, curWidth);
+                //CCLOG(" -break at idx:%i tmp:%i  x:%f actual-x:%f", idx, tmp, curWidth+tokenWidth+letterWidth, curWidth);
                 PUSH(lineStart, idx-lineStart); // push up to the prev token
                 curWidth = 0;
                 lineStart = idx;
                 goto NEXT_TOKEN;
 
             } else {
-                CCLOG("  adding char:%x at idx:%i tmp:%i x:%f", character, idx, tmp, curWidth+tokenWidth+letterWidth);
+                //CCLOG("  adding char:%x at idx:%i tmp:%i x:%f", character, idx, tmp, curWidth+tokenWidth+letterWidth);
                 tokenWidth += letterWidth;
             }
         }
