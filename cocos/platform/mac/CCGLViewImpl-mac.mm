@@ -23,6 +23,17 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+#ifndef GLFW_EXPOSE_NATIVE_NSGL
+#define GLFW_EXPOSE_NATIVE_NSGL
+#endif
+#ifndef GLFW_EXPOSE_NATIVE_COCOA
+#define GLFW_EXPOSE_NATIVE_COCOA
+#endif
+#include "glfw3native.h"
+#endif
+
 #include "platform/desktop/CCGLViewImpl-desktop.h"
 
 #include <cmath>
@@ -942,5 +953,17 @@ void GLViewImpl::onGLFWWindowFocusCallback(GLFWwindow* /*window*/, int focused)
         Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(GLViewImpl::EVENT_WINDOW_UNFOCUSED, nullptr);
     }
 }
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+id GLViewImpl::getCocoaWindow()
+{
+    return glfwGetCocoaWindow(_mainWindow);
+}
+id GLViewImpl::getNSGLContext()
+{
+    return glfwGetNSGLContext(_mainWindow);
+} 
+#endif // #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+
 
 NS_CC_END // end of namespace cocos2d;

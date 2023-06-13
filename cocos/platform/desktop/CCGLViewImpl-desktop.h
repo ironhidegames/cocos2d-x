@@ -42,16 +42,6 @@ THE SOFTWARE.
 #include "glfw3native.h"
 #endif /* (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) */
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-#ifndef GLFW_EXPOSE_NATIVE_NSGL
-#define GLFW_EXPOSE_NATIVE_NSGL
-#endif
-#ifndef GLFW_EXPOSE_NATIVE_COCOA
-#define GLFW_EXPOSE_NATIVE_COCOA
-#endif
-#include "glfw3native.h"
-#endif // #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-
 NS_CC_BEGIN
 
 
@@ -134,8 +124,8 @@ public:
 #endif /* (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) */
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-    id getCocoaWindow() override { return glfwGetCocoaWindow(_mainWindow); }
-    id getNSGLContext() override { return glfwGetNSGLContext(_mainWindow); } // stevetranby: added
+    id getCocoaWindow() override;
+    id getNSGLContext() override;
 #endif // #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
 
 protected:
