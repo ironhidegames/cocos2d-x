@@ -599,6 +599,17 @@ void TextureCache::removeTextureForKey(const std::string &textureKeyName)
     }
 
     if (it != _textures.end()) {
+        
+        if (it->second->getReferenceCount() > 1)
+        {
+            size_t found = key.find_last_of("/");
+            if (found != std::string::npos)
+            {
+                auto fileName = key.substr(found + 1);
+                CCLOG("TEXTURE NOT DEALLOCATED: %s - RefCount : %i", fileName.c_str(), it->second->getReferenceCount());
+            }
+        }
+        
         it->second->release();
         _textures.erase(it);
     }
