@@ -53,9 +53,9 @@ Configuration::Configuration()
 , _supportsOESMapBuffer(false)
 , _supportsOESDepth24(false)
 , _supportsOESPackedDepthStencil(false)
-, _maxDirLightInShader(1)
-, _maxPointLightInShader(1)
-, _maxSpotLightInShader(1)
+, _maxDirLightInShader(0)
+, _maxPointLightInShader(0)
+, _maxSpotLightInShader(0)
 , _animate3DQuality(Animate3DQuality::QUALITY_LOW)
 {
     _loadedEvent = new (std::nothrow) EventCustom(CONFIG_FILE_LOADED);
