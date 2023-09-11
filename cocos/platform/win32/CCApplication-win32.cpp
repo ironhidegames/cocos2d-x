@@ -298,7 +298,7 @@ std::string Application::getVersion()
         }
         delete[] verData;
     }
-    return verString;
+	return std::string(verString);
 }
 
 bool Application::openURL(const std::string &url)
