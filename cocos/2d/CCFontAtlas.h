@@ -36,6 +36,7 @@
 #include "base/CCRef.h"
 #include "platform/CCStdC.h" // ssize_t on windows
 #include "renderer/CCTexture2D.h"
+#include <iconv.h>
 
 NS_CC_BEGIN
 
@@ -139,7 +140,8 @@ protected:
     float _lineHeight = 0.f;
     Font* _font = nullptr;
     FontFreeType* _fontFreeType = nullptr;
-    void* _iconv = nullptr;
+    //void* _iconv = nullptr;
+    iconv_t _iconv = nullptr;
 
     // Dynamic GlyphCollection related stuff
     int _currentPage = 0;
