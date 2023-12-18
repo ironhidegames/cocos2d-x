@@ -35,6 +35,9 @@
 #include "platform/CCPlatformMacros.h"
 #include "base/CCRef.h"
 #include "platform/CCStdC.h" // ssize_t on windows
+#if CC_TARGET_PLATFORM != CC_PLATFORM_WIN32 && CC_TARGET_PLATFORM != CC_PLATFORM_WINRT && CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
+#include <iconv.h>
+#endif
 
 NS_CC_BEGIN
 
@@ -132,7 +135,7 @@ protected:
     float _lineHeight;
     Font* _font;
     FontFreeType* _fontFreeType;
-    void* _iconv;
+    iconv_t _iconv;
 
     // Dynamic GlyphCollection related stuff
     int _currentPage;
