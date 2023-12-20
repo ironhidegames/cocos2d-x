@@ -135,8 +135,11 @@ protected:
     float _lineHeight;
     Font* _font;
     FontFreeType* _fontFreeType;
+#if CC_TARGET_PLATFORM != CC_PLATFORM_WIN32 && CC_TARGET_PLATFORM != CC_PLATFORM_WINRT && CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
     iconv_t _iconv;
-
+#else
+    void* _iconv;
+#endif
     // Dynamic GlyphCollection related stuff
     int _currentPage;
     unsigned char *_currentPageData;
