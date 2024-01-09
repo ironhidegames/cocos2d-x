@@ -1242,7 +1242,7 @@ public:
     /**
      * Stops and removes all actions from the running action list .
      */
-    void stopAllActions();
+    virtual void stopAllActions();
 
     /**
      * Stops and removes an action from the running action list.
