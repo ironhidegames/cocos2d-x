@@ -39,6 +39,10 @@ THE SOFTWARE.
 #include <windows.h>
 #include "ui/UIHelper.h"
 
+#ifdef _WIN64
+#define GWL_WNDPROC GWLP_WNDPROC
+#define GWL_USERDATA GWLP_USERDATA
+#endif
 
 NS_CC_BEGIN
 
@@ -441,5 +445,10 @@ namespace ui {
 }
 
 NS_CC_END
+
+#ifdef _WIN64
+#undef GWL_WNDPROC
+#undef GWL_USERDATA
+#endif
 
 #endif /* (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) */
