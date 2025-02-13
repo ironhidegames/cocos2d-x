@@ -240,7 +240,7 @@ bool KRTextureDebug::sortTextureDebugData(const TextureDebugData &lhs, const Tex
     if(lhs.format < rhs.format)
         return true;
     
-    if(lhs.format < rhs.format)
+    if(lhs.format > rhs.format)
         return false;
     
     return false;
