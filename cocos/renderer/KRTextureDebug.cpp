@@ -216,9 +216,6 @@ void KRTextureDebug::printExtendedMemoryInfo(TextureDebugData texData, std::vect
 
 bool KRTextureDebug::sortTextureDebugData(const TextureDebugData &lhs, const TextureDebugData &rhs)
 {
-    if (rhs.path.empty())
-        return false;
-    
     if(lhs.width<rhs.width)
         return true;
     
@@ -243,6 +240,9 @@ bool KRTextureDebug::sortTextureDebugData(const TextureDebugData &lhs, const Tex
     if(lhs.format > rhs.format)
         return false;
     
+    if (lhs.textureId < rhs.textureId)
+        return false;
+
     return false;
 }
 
