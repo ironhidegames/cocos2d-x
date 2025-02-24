@@ -111,6 +111,7 @@ void Controller::onButtonEvent(int keyCode, bool isPressed, float value, bool is
     _allKeyStatus[keyCode].isAnalog = isAnalog;
 
     _keyEvent->setKeyCode(keyCode);
+    _keyEvent->continuePropagation();  // event is reused, so reset it
     _eventDispatcher->dispatchEvent(_keyEvent);
 }
 
