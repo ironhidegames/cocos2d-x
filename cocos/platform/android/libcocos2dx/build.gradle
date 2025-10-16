@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
+    namespace "org.cocos2dx.lib"
     compileSdkVersion PROP_COMPILE_SDK_VERSION.toInteger()
 
     defaultConfig {
@@ -20,10 +21,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '30.0.3'
+    buildFeatures {
+        aidl true
+    }
 }
 
 dependencies {
-    //implementation fileTree(dir: '../java/libs', include: ['*.jar'])
     implementation fileTree(include: ['*.jar'], dir: '../java/libs')
 }
