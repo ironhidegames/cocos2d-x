@@ -347,7 +347,7 @@ bool GLViewImpl::initWithRect(const std::string& viewName, Rect rect, float fram
         return false;
     }
 
-    NSView* contentView = [getCocoaWindow() contentView];
+    NSView* contentView = (NSView*)glfwGetCocoaView(_mainWindow);
     [contentView setWantsLayer: YES];
     CAMetalLayer* layer = [CAMetalLayer layer];
     [layer setDevice:device];
