@@ -29,9 +29,6 @@ THE SOFTWARE.
 
 #include "base/ccTypes.h"
 #include "base/CCEventTouch.h"
-#ifdef CC_PLATFORM_PC
-#include "glfw3.h"
-#endif
 #include <vector>
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
@@ -191,7 +188,7 @@ public:
     virtual float getFrameZoomFactor() const { return 1.0; }
 
 #ifdef CC_PLATFORM_PC    
-    virtual void setCursorImage(GLFWcursor* cursor) {}
+    virtual void setCursorImage(void* cursor) {}
 #endif
 
     /**

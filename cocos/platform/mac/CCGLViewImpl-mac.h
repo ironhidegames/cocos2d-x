@@ -104,7 +104,7 @@ public:
      */
     void setFrameZoomFactor(float zoomFactor) override;
 
-    virtual void setCursorImage(GLFWcursor* cursor) override;
+    virtual void setCursorImage(void* cursor) override;
     
     virtual void setCursor(const std::string& filename, Vec2 hotspot = Vec2::ANCHOR_TOP_LEFT) override;
     
