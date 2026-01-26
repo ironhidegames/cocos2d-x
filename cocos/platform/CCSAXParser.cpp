@@ -90,13 +90,20 @@ bool SAXParser::parse(const char* xmlData, size_t dataLength)
 bool SAXParser::parse(const std::string& filename)
 {
     bool ret = false;
-    Data data = FileUtils::getInstance()->getDataFromFile(filename);
-    if (!data.isNull())
-    {
-        ret = parseIntrusive((char*)data.getBytes(), data.getSize());
-    }
+        
+        // CAMBIO: Usamos getStringFromFile en lugar de getDataFromFile
+        // Esto asegura que el buffer tenga un terminador nulo '\0' al final.
+        std::string dataStr = FileUtils::getInstance()->getStringFromFile(filename);
+        
+        // Verificamos si el string no está vacío
+        if (!dataStr.empty())
+        {
+            // &dataStr[0] nos da el puntero directo al buffer de memoria del string.
+            // Es seguro y tiene el \0 al final.
+            ret = parseIntrusive(&dataStr[0], dataStr.size());
+        }
 
-    return ret;
+        return ret;
 }
 
 bool SAXParser::parseIntrusive(char* xmlData, size_t dataLength)
