@@ -39,6 +39,7 @@ THE SOFTWARE.
 #include <cmath>
 #include <unordered_map>
 #include <Metal/Metal.h>
+#import <AppKit/AppKit.h>
 
 #include "platform/CCApplication.h"
 #include "base/CCDirector.h"
@@ -395,29 +396,86 @@ bool GLViewImpl::initWithRect(const std::string& viewName, Rect rect, float fram
 
 bool GLViewImpl::initWithFullScreen(const std::string& viewName)
 {
-    //Create fullscreen window on primary monitor at its current video mode.
-    _monitor = glfwGetPrimaryMonitor();
-    if (nullptr == _monitor)
+    GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+    if (nullptr == monitor)
         return false;
 
-    const GLFWvidmode* videoMode = glfwGetVideoMode(_monitor);
+    const GLFWvidmode* videoMode = glfwGetVideoMode(monitor);
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+    // --- FIX MACOS STARTUP ---
+    _monitor = nullptr;
+    glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+    
+    // 1. Creamos la ventana PRIMERO
+    // Usamos el tamaño completo del monitor.
+    auto divRetina = 1;
+    if (_isRetinaEnabled)
+    {
+        divRetina = 2;
+    }
+    
+    bool ret = initWithRect(viewName, Rect(0, 0, videoMode->width/divRetina, videoMode->height/divRetina), 1.0f, false);
+    
+    if (ret) {
+        glfwSetWindowPos(_mainWindow, 0, 0);
+        _monitor = monitor;
+
+        // 2. LA MAGIA: Usamos dispatch_async para asegurar que se ejecute
+        // DESPUÉS de que la ventana esté lista y la app haya arrancado.
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [NSApp setPresentationOptions: NSApplicationPresentationHideDock | NSApplicationPresentationHideMenuBar];
+            [NSApp activateIgnoringOtherApps:YES]; // Forzamos el foco por si acaso
+        });
+    }
+    return ret;
+#else
+    _monitor = monitor;
     return initWithRect(viewName, Rect(0, 0, videoMode->width, videoMode->height), 1.0f, false);
+#endif
 }
 
 bool GLViewImpl::initWithFullscreen(const std::string &viewname, const GLFWvidmode &videoMode, GLFWmonitor *monitor)
 {
-    //Create fullscreen on specified monitor at the specified video mode.
-    _monitor = monitor;
-    if (nullptr == _monitor)
+    if (nullptr == monitor)
         return false;
     
-    //These are soft constraints. If the video mode is retrieved at runtime, the resulting window and context should match these exactly. If invalid attribs are passed (eg. from an outdated cache), window creation will NOT fail but the actual window/context may differ.
     glfwWindowHint(GLFW_REFRESH_RATE, videoMode.refreshRate);
     glfwWindowHint(GLFW_RED_BITS, videoMode.redBits);
     glfwWindowHint(GLFW_BLUE_BITS, videoMode.blueBits);
     glfwWindowHint(GLFW_GREEN_BITS, videoMode.greenBits);
     
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+    // --- FIX MACOS STARTUP ---
+    _monitor = nullptr;
+    glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+    
+    float xscale = 1.0f, yscale = 1.0f;
+    glfwGetMonitorContentScale(monitor, &xscale, &yscale);
+
+    // Protección por si la escala devuelve 0
+    if (xscale <= 0) xscale = 1.0f;
+    
+    // 1. Creamos la ventana PRIMERO
+    bool ret = initWithRect(viewname, Rect(0, 0, videoMode.width/xscale, videoMode.height/yscale), 1.0f, false);
+    
+    if (ret) {
+        int xpos, ypos;
+        glfwGetMonitorPos(monitor, &xpos, &ypos);
+        glfwSetWindowPos(_mainWindow, xpos, ypos);
+        _monitor = monitor;
+
+        // 2. Aplicamos el cambio de UI asíncronamente
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [NSApp setPresentationOptions: NSApplicationPresentationHideDock | NSApplicationPresentationHideMenuBar];
+            [NSApp activateIgnoringOtherApps:YES];
+        });
+    }
+    return ret;
+#else
+    _monitor = monitor;
     return initWithRect(viewname, Rect(0, 0, videoMode.width, videoMode.height), 1.0f, false);
+#endif
 }
 
 bool GLViewImpl::isOpenGLReady()
@@ -615,10 +673,86 @@ void GLViewImpl::setFullscreen(int monitorIndex) {
 }
 
 void GLViewImpl::setFullscreen(const GLFWvidmode &videoMode, GLFWmonitor *monitor) {
+    bool isMonitorChange = (_monitor != nullptr && _monitor != monitor);
     _monitor = monitor;
-    glfwSetWindowMonitor(_mainWindow, _monitor, 0, 0, videoMode.width, videoMode.height, videoMode.refreshRate);
-}
+    
+    float xscale = 1.0f, yscale = 1.0f;
+    glfwGetMonitorContentScale(monitor, &xscale, &yscale);
 
+    // Protección por si la escala devuelve 0
+    if (xscale <= 0) xscale = 1.0f;
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+    id nsWindow = glfwGetCocoaWindow(_mainWindow);
+    
+    // Obtenemos la X de GLFW para identificar el monitor
+    int glfwX = 0, glfwY = 0;
+    glfwGetMonitorPos(monitor, &glfwX, &glfwY);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        // 1. Buscar el NSScreen correcto
+        NSArray *screens = [NSScreen screens];
+        NSScreen *targetScreen = nil;
+        
+        for (NSScreen *screen in screens) {
+            NSRect frame = [screen frame];
+            // Tolerancia amplia para encontrar el monitor
+            if (fabs(frame.origin.x - (CGFloat)glfwX) < 100.0) {
+                targetScreen = screen;
+                break;
+            }
+        }
+        // Fallback al principal
+        if (!targetScreen && [screens count] > 0) targetScreen = [screens objectAtIndex:0];
+
+        if (targetScreen) {
+            NSRect targetFrame = [targetScreen frame];
+            
+            // 2. PREPARACIÓN: "DESBLOQUEAR" LA VENTANA
+            // Quitamos el comportamiento "Stationary" momentáneamente para que sea fácil de mover
+            NSWindowCollectionBehavior originalBehavior = [nsWindow collectionBehavior];
+            [nsWindow setCollectionBehavior:NSWindowCollectionBehaviorDefault];
+            
+            [nsWindow setStyleMask:NSWindowStyleMaskBorderless];
+            [NSApp setPresentationOptions: NSApplicationPresentationHideDock | NSApplicationPresentationHideMenuBar];
+
+            // 3. LA SOLUCIÓN: "ACHICAR - MOVER - EXPANDIR"
+            if (isMonitorChange) {
+                // PASO A: Achicamos la ventana drásticamente.
+                // Esto rompe el "anclaje" que tiene macOS con la ventana en el monitor actual.
+                // La movemos al origen del NUEVO monitor siendo muy pequeña (100x100).
+                NSRect tinyFrame = NSMakeRect(targetFrame.origin.x, targetFrame.origin.y, 100, 100);
+                [nsWindow setFrame:tinyFrame display:YES];
+                
+                // Forzamos un pequeño "respiro" al sistema antes de agrandar
+                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                     // PASO B: Ahora que ya está en el monitor correcto (aunque pequeña),
+                     // la expandimos al tamaño completo.
+                     [nsWindow setFrame:targetFrame display:YES];
+                     
+                     // Restauramos comportamiento Fullscreen
+                     [nsWindow setCollectionBehavior: originalBehavior | NSWindowCollectionBehaviorFullScreenAuxiliary | NSWindowCollectionBehaviorCanJoinAllSpaces];
+                     [nsWindow makeKeyAndOrderFront:nil];
+                 });
+            } else {
+                // Si es el mismo monitor, aplicamos directo
+                [nsWindow setFrame:targetFrame display:YES];
+                [nsWindow setCollectionBehavior: originalBehavior | NSWindowCollectionBehaviorFullScreenAuxiliary];
+            }
+            
+            // 4. Actualizar GLFW
+            // Es vital actualizar el tamaño lógico de GLFW para que Cocos recalcule el viewport
+            
+            glfwSetWindowSize(_mainWindow, videoMode.width/xscale, videoMode.height/yscale);
+        }
+    });
+
+#else
+    glfwSetWindowMonitor(_mainWindow, _monitor, 0, 0, videoMode.width, videoMode.height, videoMode.refreshRate);
+#endif
+}
+// ESTA TAMBIEN CAMBIA PARA RESTAURAR BORDES
 void GLViewImpl::setWindowed(int width, int height) {
     if (!this->isFullscreen()) {
         this->setFrameSize(width, height);
@@ -629,9 +763,20 @@ void GLViewImpl::setWindowed(int width, int height) {
         xpos += (videoMode->width - width) * 0.5;
         ypos += (videoMode->height - height) * 0.5;
         _monitor = nullptr;
-        glfwSetWindowMonitor(_mainWindow, nullptr, xpos, ypos, width, height, GLFW_DONT_CARE);
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-        // on mac window will sometimes lose title when windowed
+        // --- FIX MACOS: RESTAURAR TODO ---
+        
+        // 1. Devolver los bordes a la ventana
+        glfwSetWindowAttrib(_mainWindow, GLFW_DECORATED, GLFW_TRUE);
+        
+        // 2. MOSTRAR DE NUEVO LA BARRA DE MENÚ Y EL DOCK
+        [NSApp setPresentationOptions: NSApplicationPresentationDefault];
+#endif
+
+        glfwSetWindowMonitor(_mainWindow, nullptr, xpos, ypos, width, height, GLFW_DONT_CARE);
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
         glfwSetWindowTitle(_mainWindow, _viewName.c_str());
 #endif
     }
