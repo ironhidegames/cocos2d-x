@@ -677,10 +677,10 @@ void GLViewImpl::setFullscreen(const GLFWvidmode &videoMode, GLFWmonitor *monito
     _monitor = monitor;
     
     float xscale = 1.0f, yscale = 1.0f;
-    glfwGetMonitorContentScale(monitor, &xscale, &yscale);
-
-    // Protección por si la escala devuelve 0
-    if (xscale <= 0) xscale = 1.0f;
+//    glfwGetMonitorContentScale(monitor, &xscale, &yscale);
+//
+//    // Protección por si la escala devuelve 0
+//    if (xscale <= 0) xscale = 1.0f;
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     id nsWindow = glfwGetCocoaWindow(_mainWindow);
