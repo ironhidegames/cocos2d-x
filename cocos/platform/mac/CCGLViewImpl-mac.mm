@@ -447,40 +447,37 @@ bool GLViewImpl::initWithFullscreen(const std::string &viewname, const GLFWvidmo
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     // --- FIX MACOS STARTUP ---
-    _monitor = nullptr;
-    glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
-    
-    const GLFWvidmode* currentMode = glfwGetVideoMode(monitor);
-    
-    float xscale = 1.0f, yscale = 1.0f;
-    glfwGetMonitorContentScale(monitor, &xscale, &yscale);
-
-    // Protección por si la escala devuelve 0
-    if (xscale <= 0) xscale = 1.0f;
-    
-    // 1. Creamos la ventana con el tamaño actual de la pantalla
-    bool ret = initWithRect(viewname, Rect(0, 0, currentMode->width/xscale, currentMode->height/yscale), 1.0f, false);
-    
-    if (ret) {
-        int xpos, ypos;
-        glfwGetMonitorPos(monitor, &xpos, &ypos);
-        glfwSetWindowPos(_mainWindow, xpos, ypos);
-        _monitor = monitor;
-
-        // 2. Aplicamos el cambio de UI asíncronamente y obligamos a Cocoa a estirar la ventana
-        dispatch_async(dispatch_get_main_queue(), ^{
-            id nsWindow = glfwGetCocoaWindow(_mainWindow);
-            
-            // Forzamos a que el frame de la ventana coincida exactamente con el de la pantalla
-            if ([nsWindow screen]) {
-                [nsWindow setFrame:[[nsWindow screen] frame] display:YES];
+        _monitor = nullptr;
+        glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+        
+        // 1. Encontramos la pantalla nativa correcta usando Cocoa
+        int glfwX = 0, glfwY = 0;
+        glfwGetMonitorPos(monitor, &glfwX, &glfwY);
+        NSArray *screens = [NSScreen screens];
+        NSScreen *targetScreen = [screens firstObject]; // Fallback al principal
+        for (NSScreen *screen in screens) {
+            if (fabs([screen frame].origin.x - (CGFloat)glfwX) < 100.0) {
+                targetScreen = screen;
+                break;
             }
+        }
+        NSRect screenFrame = [targetScreen frame];
+        
+        // 2. Creamos la ventana DIRECTAMENTE con el tamaño lógico de la pantalla.
+        // Esto evita redimensionarla después y asegura que el Touch nazca con las medidas perfectas.
+        bool ret = initWithRect(viewname, Rect(0, 0, screenFrame.size.width, screenFrame.size.height), 1.0f, false);
+        
+        if (ret) {
+            _monitor = monitor; // Guardamos el monitor para isFullscreen()
+
+            // 3. Posicionamos la ventana de macOS y ocultamos la barra
+            id nsWindow = glfwGetCocoaWindow(_mainWindow);
+            [nsWindow setFrame:screenFrame display:YES];
             
             [NSApp setPresentationOptions: NSApplicationPresentationHideDock | NSApplicationPresentationHideMenuBar];
             [NSApp activateIgnoringOtherApps:YES];
-        });
-    }
-    return ret;
+        }
+        return ret;
 #else
     _monitor = monitor;
     return initWithRect(viewname, Rect(0, 0, videoMode.width, videoMode.height), 1.0f, false);
