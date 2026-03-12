@@ -453,10 +453,17 @@ bool GLViewImpl::initWithFullscreen(const std::string &viewname, const GLFWvidmo
         // 1. Encontramos la pantalla nativa correcta usando Cocoa
         int glfwX = 0, glfwY = 0;
         glfwGetMonitorPos(monitor, &glfwX, &glfwY);
+    
+        // Convertir Y de GLFW (origin top-left) a Cocoa (origin bottom-left)
+        // Necesitamos la altura total del espacio virtual de pantallas
+        NSRect primaryFrame = [[NSScreen screens][0] frame];  // la principal siempre tiene origin (0,0) en Cocoa
+        CGFloat cocoaY = primaryFrame.size.height - (CGFloat)glfwY - (CGFloat)videoMode.height;
+    
         NSArray *screens = [NSScreen screens];
         NSScreen *targetScreen = [screens firstObject]; // Fallback al principal
         for (NSScreen *screen in screens) {
-            if (fabs([screen frame].origin.x - (CGFloat)glfwX) < 100.0) {
+            if (fabs([screen frame].origin.x - (CGFloat)glfwX) < 50.0 &&
+                fabs([screen frame].origin.y - cocoaY) < 50.0) {
                 targetScreen = screen;
                 break;
             }
@@ -695,6 +702,11 @@ void GLViewImpl::setFullscreen(const GLFWvidmode &videoMode, GLFWmonitor *monito
     int glfwX = 0, glfwY = 0;
     glfwGetMonitorPos(monitor, &glfwX, &glfwY);
     
+    // Convertir Y de GLFW (origin top-left) a Cocoa (origin bottom-left)
+    // Necesitamos la altura total del espacio virtual de pantallas
+    NSRect primaryFrame = [[NSScreen screens][0] frame];  // la principal siempre tiene origin (0,0) en Cocoa
+    CGFloat cocoaY = primaryFrame.size.height - (CGFloat)glfwY - (CGFloat)videoMode.height;
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         
         // 1. Buscar el NSScreen correcto
@@ -703,8 +715,8 @@ void GLViewImpl::setFullscreen(const GLFWvidmode &videoMode, GLFWmonitor *monito
         
         for (NSScreen *screen in screens) {
             NSRect frame = [screen frame];
-            // Tolerancia amplia para encontrar el monitor
-            if (fabs(frame.origin.x - (CGFloat)glfwX) < 100.0) {
+            if (fabs(frame.origin.x - (CGFloat)glfwX) < 50.0 &&
+                fabs(frame.origin.y - cocoaY) < 50.0) {  // <-- agregar comparación Y
                 targetScreen = screen;
                 break;
             }
